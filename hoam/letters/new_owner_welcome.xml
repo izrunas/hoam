@@ -1,0 +1,122 @@
+<?xml version="1.0" ?>
+
+<!--
+ * This file is part of HOAM, copyright (C) 2002-2020 Robert Butler
+ *
+ * HOAM is free software; you can redistribute it and/or modify it under the
+ * terms of the GNU Affero General Public License as published by the Free
+ * Software Foundation; either version 3 of the License, or (at your option)
+ * any later version.
+ *
+ * HOAM is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with HOAM; if not, see http://www.gnu.org/licenses or write to the
+ * Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+ * 02110-1301
+ *
+ * Questions specific to HOAM should be directed to ARP Realty. Please see
+ * the HOAM web site at http://hoam.arprs.com/
+ *
+ * Some portions of HOAM incorporate ideas and/or code from other sources, and
+ * those portions are explicitly mentioned and attributed in the relevant
+ * section of HOAM source code. Questions about that code should be directed to
+ * the original authors.
+ *
+ *-->
+
+<ajax-response>
+  <letter>
+    <name>New Owner Welcome Letter</name>
+    <require_delivery_confirmation>0</require_delivery_confirmation>
+    <require_delivery_certified>0</require_delivery_certified>
+    <suggest_delivery_confirmation>0</suggest_delivery_confirmation>
+    <suggest_delivery_certified>0</suggest_delivery_certified>
+    <content><![CDATA[
+<div class="letter-head">{{LETTER_HEAD}}</div>
+
+<div class="letter-date">{{DATE}}</div>
+
+<div class="letter-homeowner-address">{{HOMEOWNER_MAILING}}</div>
+
+<div class="letter-tracking"></div>
+
+<div class="letter-residence-address">Property: {{HOMEOWNER_RESIDENCE}}</div>
+
+<div class="letter-topic">Re: {{LETTER_TOPIC}}</div>
+
+<div class="letter-salutation">Dear {{HOMEOWNER_NAME}},</div>
+
+<div class="letter-body">
+<p>On behalf of the {{ORG_NAME}} (HOA), we would like to welcome you to our community. We hope that you have had a successful move, and invite you to join us in making this a fun and exciting place to live.</p>
+
+<p>Information about upcoming activities, a community message board, community projects, HOA meeting minutes, subdivision maps, etc., are all available on our website, <a href="/">{{WEBSITE_URL}}</a>.</p>
+<p>Please verify that you received a copy of the Bylaws, Covenants, and Rules for Residents &mdash; your Realtor or title company should have provided you copies at closing. Rest assured, if you did not receive them at closing, you can also find them online at the HOA web site. We strongly suggest that all new homeowners read these documents carefully so as to be informed of the requirements of the restrictions their personal responsibility as an owner.</p>
+<p>This information is important because it governs us as a community and should be protected as you would your other personal and private papers and effects. If you should eventually decide to leave our community, however, you may keep your copy of these documents; we will provide a new copy to the new homeowner.</p>
+<p>Be advised that any changes to the exterior of your unit (lighting, fences, landscaping, decorations) must have prior written approval from the Association before construction can begin.</p>
+
+<p>{{ORG_NAME}} and its agents may be contacted in several ways:</p>
+<ul>
+  <li>By emailing the Association directly, at <a href="mailto:{{ORG_EMAIL_OFFICERS}}">{{ORG_EMAIL_OFFICERS}}</a>,</li>
+  <li>By emailing the management company, at <a href="mailto:{{ORG_EMAIL_MANAGEMENT}}">{{ORG_EMAIL_MANAGEMENT}}</a>,</li>
+  <li>By calling or faxing the HOA at {{ORG_PHONE}},</li>
+  <li>Through U.S. postal mail at:<br/>{{ORG_ADDRESS}}</li>
+</ul>
+
+<p>The regular assessment for your Association is paid on a(n)  
+<?php
+switch ($_HOAM_setting['budget']['assessment']['frequency']) {
+	case 'annual' :
+		echo $_HOAM_language ['field_names']['budget']['assessment']['frequency_annual'];
+		break;
+	case 'biannual' :
+		echo $_HOAM_language ['field_names']['budget']['assessment']['frequency_biannual'];
+		break;
+	case 'quarterly' :
+		echo $_HOAM_language ['field_names']['budget']['assessment']['frequency_quarterly'];
+		break;
+	case 'monthly' :
+		echo $_HOAM_language ['field_names']['budget']['assessment']['frequency_monthly'];
+		break;
+	default :
+		break;
+}
+?>
+ basis, and the current amount is 
+<?php 
+switch ($_HOAM_setting['budget']['assessment']['unit']) {
+	case 'single' :
+		echo HOAM_returnCurrency ($_HOAM_setting ['budget']['assessment']['amount']);
+		break;
+	case 'sqft' :
+		$lot_class = new HOAM_lot ('lots');
+		echo 'calculated using a ' . $_HOAM_language ['field_names']['budget']['assessment']['unit_sqft'];
+		echo ' cost of ' . $_HOAM_setting ['budget']['assessment']['amount'];
+		echo ', or ' . HOAM_returnCurrency ($_HOAM_setting ['budget']['assessment']['amount'] * $lot_class -> returnSqft ($trusted_address));
+		echo ' for your unit';
+		break;
+	default :
+		break;
+}
+?>
+. The account for your home currently shows a balance of {{BUDGET_DUE}} due.</p>
+<p>If your Association assessment was included in the closing costs of your home, please keep a copy of your contract for verification. Occasionally title companies neglect to transfer those funds to the Association which can lead to confusion about the status of your account.</p>
+<p>We welcome any questions, comments, or concerns you may have. <strong>Please include your name and address on all correspondence in order to expedite a response.</strong> Although responses are usually same-day, please allow up to two business days for your call or message to be returned.</p>
+
+<p>Once again, welcome to our neighborhood.</p>
+</div>
+
+<div class="letter-signature">{{LETTER_SIGNATURE}}</div>
+
+<div class="letter-approver">{{LETTER_APPROVER}}</div>
+
+<div class="letter-person">{{LETTER_PERSON}}</div>
+
+<div class="letter-footer">{{LETTER_FOOTER}}</div>
+]]></content>
+  </letter>
+</ajax-response>
+

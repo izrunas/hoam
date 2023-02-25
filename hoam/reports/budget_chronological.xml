@@ -1,0 +1,103 @@
+<?xml version='1.0' ?>
+
+<!--
+ * This file is part of HOAM, copyright (C) 2002-2020 Robert Butler
+ *
+ * HOAM is free software; you can redistribute it and/or modify it under the
+ * terms of the GNU Affero General Public License as published by the Free
+ * Software Foundation; either version 3 of the License, or (at your option)
+ * any later version.
+ *
+ * HOAM is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with HOAM; if not, see http://www.gnu.org/licenses or write to the
+ * Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+ * 02110-1301
+ *
+ * Questions specific to HOAM should be directed to ARP Realty. Please see
+ * the HOAM web site at http://hoam.arprs.com/
+ *
+ * Some portions of HOAM incorporate ideas and/or code from other sources, and
+ * those portions are explicitly mentioned and attributed in the relevant
+ * section of HOAM source code. Questions about that code should be directed to
+ * the original authors.
+ *
+ *-->
+
+<ajax-response>
+  <style><![CDATA[
+    #fillme h1 { font-weight: bold; font-variant: small-caps; page-break-before: always; text-align: center; text-transform: capitalize; }
+    #fillme .homeowner { font-size: 90%; }
+    #fillme .street_address { font-size: 90%; text-align: center; }
+    #fillme .signature { border-bottom: 2px solid black; }
+  ]]></style>
+  <report>
+    <name>Chronological List of Budget Entries</name>
+    <php><![CDATA[
+    $budget_class = new HOAM_budget ('budget');
+    $budget_vendor_class = new HOAM_budget_vendor ('budget_vendor');
+    $homeowner_class = new HOAM_homeowner ('homeowners');
+    
+    // Get a list of all vendors so we can compare against later.
+    $vendor_list = $budget_vendor_class -> listAllId ();
+    
+	$HTML = '';
+	$HTML .= '<table class="center">';
+	$HTML .= '<colgroup>';
+	$HTML .= '<col width="10%" />';
+	$HTML .= '<col span="3" width="20%" />';
+	$HTML .= '<col span="3" width="10%" />';
+	$HTML .= '</colgroup>';
+	$thead = '<thead><tr>';
+	$thead .= '<th>' . $_HOAM_language ['tables']['column']['generic']['date'] . '</th>';
+	$thead .= '<th>' . $_HOAM_language ['tables']['column']['budget']['vendor']['name'] . '</th>';
+	$thead .= '<th>' . $_HOAM_language ['tables']['column']['budget']['customer'] . '</th>';
+	$thead .= '<th>' . $_HOAM_language ['tables']['column']['budget']['description'] . '</th>';
+	$thead .= '<th>' . $_HOAM_language ['tables']['column']['budget']['income'] . ' / ' . $_HOAM_language ['tables']['column']['budget']['expense'] . '</th>';
+	$thead .= '<th>' . $_HOAM_language ['tables']['column']['budget']['invoice']['number'] . '/<br />' . $_HOAM_language ['tables']['column']['budget']['check'] . '</th>';
+	$thead .= '<th>' . $_HOAM_language ['tables']['column']['budget']['amount'] . '</th>';
+	$thead .= '</tr></thead>';
+	$HTML .= $thead . preg_replace ('/thead/', 'tfoot', $thead);
+	$HTML .= '<tbody class="budget_list">';
+	$budget_list = $budget_class -> listAllId ();
+	foreach ($budget_list as $budget_item) {
+		$item_data = $budget_class -> listAll ($budget_item);
+		$HTML .= '<tr>';
+		$HTML .= '<td>' . HOAM_date ($_HOAM_country ['date']['format_reports'], strtotime ($item_data [0]['datecreated'])) . '</td>';
+		$HTML .= '<td>';
+		if (in_array ($item_data[0]['vendor_id'], $vendor_list)) {
+			$HTML .= stripslashes (html_encode ($budget_vendor_class -> returnName ($item_data[0]['vendor_id'])));
+		} else {
+			$HTML .= stripslashes (html_encode ($homeowner_class -> returnName ($item_data[0]['vendor_id'])));
+		}
+		$HTML .= '</td>';
+		$HTML .= '<td>';
+		if (in_array ($item_data[0]['customer_id'], $vendor_list)) {
+			$HTML .= stripslashes (html_encode ($budget_vendor_class -> returnName ($item_data[0]['customer_id'])));
+		} else {
+			$HTML .= stripslashes (html_encode ($homeowner_class -> returnName ($item_data[0]['customer_id'])));
+		}
+		$HTML .= '</td>';
+		$HTML .= '<td>' . stripslashes (html_encode ($item_data [0]['memo'])) . '</td>';
+		$HTML .= '<td>';
+		if ($item_data [0]['account_id'] == $_HOAM_setting ['budget']['account']['expense']) {
+			$HTML .= $_HOAM_language ['tables']['column']['budget']['expense'];
+		} else {
+			$HTML .= $_HOAM_language ['tables']['column']['budget']['income'];
+		}
+		$HTML .= '</td>';
+		$HTML .= '<td>' . $item_data [0]['checknum'] . '</td>';
+		$HTML .= '<td style="text-align: right">' . HOAM_returnCurrency ($item_data [0]['amount']) . '</td>';
+		$HTML .= '</tr>';
+	}
+	$HTML .= '</tbody>';
+	$HTML .= '</table>';
+	echo $HTML;
+    ]]></php>
+  </report>
+</ajax-response>
+

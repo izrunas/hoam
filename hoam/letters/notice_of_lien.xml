@@ -1,0 +1,95 @@
+<?xml version="1.0" ?>
+
+<!--
+ * This file is part of HOAM, copyright (C) 2002-2020 Robert Butler
+ *
+ * HOAM is free software; you can redistribute it and/or modify it under the
+ * terms of the GNU Affero General Public License as published by the Free
+ * Software Foundation; either version 3 of the License, or (at your option)
+ * any later version.
+ *
+ * HOAM is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with HOAM; if not, see http://www.gnu.org/licenses or write to the
+ * Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+ * 02110-1301
+ *
+ * Questions specific to HOAM should be directed to ARP Realty. Please see
+ * the HOAM web site at http://hoam.arprs.com/
+ *
+ * Some portions of HOAM incorporate ideas and/or code from other sources, and
+ * those portions are explicitly mentioned and attributed in the relevant
+ * section of HOAM source code. Questions about that code should be directed to
+ * the original authors.
+ *
+ *-->
+
+<ajax-response>
+  <letter>
+    <name>Notice of Lien</name>
+    <require_delivery_confirmation>0</require_delivery_confirmation>
+    <require_delivery_certified>0</require_delivery_certified>
+    <suggest_delivery_confirmation>0</suggest_delivery_confirmation>
+    <suggest_delivery_certified>0</suggest_delivery_certified>
+    <content><![CDATA[
+<h2>{{LETTER_TOPIC}}</h2>
+
+<div style="float: left;text-transform:uppercase">STATE OF {{ORG_STATE}}<br/><br/>COUNTY OF {{ORG_COUNTY}}</div>
+<div style="padding-left: 25%; ">&sect;<br/>&sect;<br/>&sect;</div>
+
+<p>BEFORE ME, a notary public in and for {{ORG_COUNTY}} County, {{ORG_STATE}}, on this day personally appeared, {{LETTER_APPROVER}}, who being by me here and now duly sworn, upon oath says:</p>
+<p>"I, {{LETTER_APPROVER}}, am the {{LETTER_PERSON}} for {{ORG_NAME}}, a {{ORG_STATE}} non-profit corporation (the 'Association'), created and operating in accordance with the Declaration of Covenants, Conditions and Restrictions (the 'Covenants') recorded in the Real Property Records of {{ORG_COUNTY}} County, {{ORG_STATE}}, and the Articles of Incorporation and Bylaws of the Association (the 'Bylaws'). I am of legal age and sound mind, duly authorized by the Association to make this affidavit, and personally acquainted with the facts herein stated. I make this affidavit for the purpose of perfecting a lien on the hereinafter-named property:</p>
+<ol>
+  <li>The property against which a lien is herein claimed is:<br />
+      Lot {{LOT_LOT}} Block {{LOT_BLOCK}} of {{ORG_PROPERTY_NAME}}, an addition to the City of {{ORG_CITY}}, {{ORG_COUNTY}} County, {{ORG_STATE}}. The postal mailing address for this property is {{HOMEOWNER_RESIDENCE}}.</li>
+  <li>The name and address of the owner of the above described property is:<br />
+        {{HOMEOWNER_MAILING}}</li>
+  <li>By virtue of ownership of the above-described property, the above-described owner is contractually bound to abide by the terms, conditions and provisions of the Covenants, and the Articles of Incorporation and Bylaws of the Association, including the obligation to pay assessments.</li>
+  <li>In accordance with the provisions of the Covenants and Bylaws, the Association levied an assessment against each Lot subject to the Covenants for its proportionate share of the estimated costs of promoting the comfort, health, safety and welfare of the owners of the property subject to the Covenants, and for carrying out the purposes of the Association as stated in the Covenants or as otherwise provided in the Articles of Incorporation or Bylaws of the Association. The amount of the assessments authorized by the Covenants and Bylaws to be collected for the subject property is {{BUDGET_ASSESSMENT_AMOUNT}} {{BUDGET_ASSESSMENT_FREQUENCY}}ly. The assessments due and owing against the subject property have not been fully paid, and are delinquent. All required notices have been duly given to the owner of the subject property setting forth the amounts that have become due and remain unpaid.</li>
+  <li>The sum of {{BUDGET_DUE}} is due and owing at this time against the above described property, being the amount of the assessment, together with attorney's fees, and all costs and expenses of collection incurred by the Association, as provided for in the Covenants."</li>
+</ol>
+
+<p>SUBSCRIBED AND SWORN TO before me by {{LETTER_APPROVER}} in their capacity as {{LETTER_PERSON}} for {{ORG_NAME}}, on ____________________, {{CURRENTYEAR}}.</p>
+
+<div style="border-top: 1px solid black; margin: 3em 5em 2em 60%; width: 20em">Notary Public - State of {{ORG_STATE}}</div>
+
+AFTER RECORDING, PLEASE RETURN TO:<br />
+
+{{ORG_ADDRESS}}
+]]></content>
+    <pdf><![CDATA[
+    <h4 style="font-variant: small-caps; text-align: center">{{LETTER_TOPIC}}</h4>
+    <table style="width: 100%">
+      <tr><td style="text-transform:uppercase; width: 35%">STATE OF {{ORG_STATE}}</td><td>&sect;</td></tr>
+      <tr><td>&nbsp;</td><td>&sect;</td></tr>
+      <tr><td style="text-transform:uppercase">COUNTY OF {{ORG_COUNTY}}</td><td>&sect;</td></tr>
+    </table>
+    <p style="text-align: justify">BEFORE ME, a notary public in and for {{ORG_COUNTY}} County, {{ORG_STATE}}, on this day personally appeared, {{LETTER_APPROVER}}, who being by me here and now duly sworn, upon oath says:</p>
+    <p style="text-align: justify">"I, {{LETTER_APPROVER}}, am the {{LETTER_PERSON}} for {{ORG_NAME}}, a {{ORG_STATE}} non-profit corporation (the 'Association'), created and operating in accordance with the Declaration of Covenants, Conditions and Restrictions (the 'Covenants') recorded in the Real Property Records of {{ORG_COUNTY}} County, {{ORG_STATE}}, and the Articles of Incorporation and Bylaws of the Association (the 'Bylaws'). I am of legal age and sound mind, duly authorized by the Association to make this affidavit, and personally acquainted with the facts herein stated. I make this affidavit for the purpose of perfecting a lien on the hereinafter-named property:</p>
+    <ol>
+      <li style="text-align: justify">The property against which a lien is herein claimed is:<br />
+          Lot {{LOT_LOT}} Block {{LOT_BLOCK}} of {{ORG_PROPERTY_NAME}}, an addition to the City of {{ORG_CITY}}, {{ORG_COUNTY}} County, {{ORG_STATE}}. The postal mailing address for this property is {{HOMEOWNER_RESIDENCE}}.</li>
+      <li style="text-align: justify">The name and address of the owner of the above described property is:<br />
+          {{HOMEOWNER_MAILING}}</li>
+      <li style="text-align: justify">By virtue of ownership of the above-described property, the above-described owner is contractually bound to abide by the terms, conditions and provisions of the Covenants, and the Articles of Incorporation and Bylaws of the Association, including the obligation to pay assessments.</li>
+      <li style="text-align: justify">In accordance with the provisions of the Covenants and Bylaws, the Association levied an assessment against each Lot subject to the Covenants for its proportionate share of the estimated costs of promoting the comfort, health, safety and welfare of the owners of the property subject to the Covenants, and for carrying out the purposes of the Association as stated in the Covenants or as otherwise provided in the Articles of Incorporation or Bylaws of the Association. The amount of the assessments authorized by the Covenants and Bylaws to be collected for the subject property is {{BUDGET_ASSESSMENT_AMOUNT}} {{BUDGET_ASSESSMENT_FREQUENCY}}ly. The assessments due and owing against the subject property have not been fully paid, and are delinquent. All required notices have been duly given to the owner of the subject property setting forth the amounts that have become due and remain unpaid.</li>
+      <li style="text-align: justify">The sum of {{BUDGET_DUE}} is due and owing at this time against the above described property, being the amount of the assessment, together with attorney's fees, and all costs and expenses of collection incurred by the Association, as provided for in the Covenants."</li>
+    </ol>
+    <br />
+    <p style="text-align: justify">SUBSCRIBED AND SWORN TO before me by {{LETTER_APPROVER}} in their capacity as {{LETTER_PERSON}} for {{ORG_NAME}}, on ____________________, {{CURRENTYEAR}}.</p>
+    <table style="width: 100%">
+      <tr><td style="width: 50%">&nbsp;</td><td style="text-align: right">&nbsp;</td></tr>
+      <tr><td style="width: 50%">&nbsp;</td><td style="border-top: 1px solid black; text-align: center">Notary Public - State of {{ORG_STATE}}</td></tr>
+    </table>
+    <br />
+    AFTER RECORDING, PLEASE RETURN TO:<br />
+    <br />
+    {{ORG_ADDRESS}}
+    ]]></pdf>
+  </letter>
+</ajax-response>
+

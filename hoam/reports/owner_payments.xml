@@ -1,0 +1,123 @@
+<?xml version='1.0' ?>
+
+<!--
+ * This file is part of HOAM, copyright (C) 2002-2020 Robert Butler
+ *
+ * HOAM is free software; you can redistribute it and/or modify it under the
+ * terms of the GNU Affero General Public License as published by the Free
+ * Software Foundation; either version 3 of the License, or (at your option)
+ * any later version.
+ *
+ * HOAM is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with HOAM; if not, see http://www.gnu.org/licenses or write to the
+ * Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+ * 02110-1301
+ *
+ * Questions specific to HOAM should be directed to ARP Realty. Please see
+ * the HOAM web site at http://hoam.arprs.com/
+ *
+ * Some portions of HOAM incorporate ideas and/or code from other sources, and
+ * those portions are explicitly mentioned and attributed in the relevant
+ * section of HOAM source code. Questions about that code should be directed to
+ * the original authors.
+ *
+ *-->
+
+<ajax-response>
+  <style><![CDATA[
+    #fillme h1 { font-weight: bold; font-variant: small-caps; page-break-before: always; text-align: center; text-transform: capitalize; }
+    #fillme .homeowner { font-size: 90%; }
+    #fillme .street_address { font-size: 90%; text-align: center; }
+    #fillme .signature { border-bottom: 2px solid black; }
+  ]]></style>
+  <report>
+    <name>Homeowner Payments by Date</name>
+    <script><![CDATA[
+function HOAM_reportPaymentInit () {
+	Element.observe ($('report|update'), 'click', HOAM_reportPaymentChange);
+	
+	HOAM_reportPaymentChange ();
+}
+
+function HOAM_reportPaymentChange () {
+	var url = '/hoam/scripts/budget/xml_payment_view.php';
+	var pars = 'start=' + $F('report|start') + '&end=' + $F('report|end');
+	var myAjax = new Ajax.Request (url, { method: 'get', parameters: pars, onComplete: HOAM_reportPaymentUpdate });
+}
+
+function HOAM_reportPaymentUpdate (originalRequest) {
+    var items = originalRequest.responseXML.getElementsByTagName ('ajax-response');
+	$('report_detail').innerHTML = getElementTextNS ('', 'data', items[0], 0);
+	$('report_amount').innerHTML = getElementTextNS ('', 'total_amount', items[0], 0);
+	$('report_count').innerHTML = getElementTextNS ('', 'total_count', items[0], 0);
+	ZebraTable.stripe ($('report|detail'));
+}
+
+HOAM_reportPaymentInit ();
+    ]]></script>
+    <php><![CDATA[
+	if ($group_members_class -> isMember ($_HOAM_setting ['group']['ids']['admin'], $_SESSION['current_user']['id']) OR
+		$group_members_class -> isMember ($_HOAM_setting ['group']['ids']['budget_view'], $_SESSION['current_user']['id']) OR
+		($_HOAM_setting ['user']['ids']['root'] === $_SESSION['current_user']['id'])) {
+	    $budget_class = new HOAM_budget ('budget');
+    	$homeowner_class = new HOAM_homeowner ('homeowners');
+    
+    	if (isset ($_GET['start'])) {
+    		$date_start = date ($_HOAM_country['date']['format_mysql'], strtotime ($budget_class -> superClean ($_GET['start'], $budget_class -> returnColumnSize ('datecreated'))));
+    		if (isset ($_GET['end'])) {
+	    		$date_end = date ($_HOAM_country['date']['format_mysql'], strtotime ($budget_class -> superClean ($_GET['end'], $budget_class -> returnColumnSize ('datecreated'))));
+    		} else {
+				$date_end = date ($_HOAM_country['date']['format_mysql'], mktime (0, 0, 0, date ('n', strtotime ($date_start)) + 1, date ('d', strtotime ($date_start)), date ('Y', strtotime ($date_start))));		
+    		}
+    	} else {
+   			$date_start = date ($_HOAM_country['date']['format_mysql'], mktime (0, 0, 0, date ('n'), 1, date ('Y')));
+			$date_end = date ($_HOAM_country['date']['format_mysql'], mktime (0, 0, 0, date ('n'), date ('t'), date ('Y')));
+   		}
+
+		$HTML = '<br />';
+		$HTML .= '<form class="donotprint" id="report|form" action="">';
+		$HTML .= '<div>';
+		$HTML .= 'First Date <input type="text" id="report|start" value="' . $date_start . '" />';
+		$HTML .= '&nbsp;';
+		$HTML .= 'Last Date <input type="text" id="report|end" value="' . $date_end . '" />';
+		$HTML .= '&nbsp;<button type="button" id="report|update">Update</button>';
+		$HTML .= '</div>';
+		$HTML .= '</form>';
+		$HTML .= '<h3 class="center">' . $date_start . ' ' . $_HOAM_language ['common']['to'] . ' ' . $date_end . '</h3>';
+		$HTML .= '<table style="text-align: right">';
+		$HTML .= '</table>';
+
+		$HTML .= '<table class="center">';
+		$HTML .= '<colgroup>';
+		$HTML .= '<col width="15%" />';
+		$HTML .= '<col width="20%" />';
+		$HTML .= '<col width="35%" />';
+		$HTML .= '<col width="10%" span="3" />';
+		$HTML .= '</colgroup>';
+		$thead = '<thead>';
+		$thead .= '<tr>';
+		$thead .= '<th>' . $_HOAM_language ['tables']['column']['lot']['residence'] . '</th>';
+		$thead .= '<th>' . $_HOAM_language ['tables']['column']['homeowner']['name'] . '</th>';
+		$thead .= '<th>' . $_HOAM_language ['tables']['column']['budget']['memo'] . '</th>';
+		$thead .= '<th>' . $_HOAM_language ['tables']['column']['generic']['date'] . '</th>';
+		$thead .= '<th>' . $_HOAM_language ['tables']['column']['budget']['amount'] . '</th>';
+		$thead .= '<th>' . $_HOAM_language ['tables']['column']['budget']['check'] . '</th>';
+		$thead .= '</tr>';
+		$thead .= '</thead>';
+		$HTML .= $thead . preg_replace ('/thead/', 'tfoot', $thead);
+		$HTML .= '<tbody id="report_detail">';
+		$HTML .= '</tbody>';
+		$HTML .= '</table>';
+		$HTML .= '<br />' . ucfirst ($_HOAM_language ['common']['total']) . ': <span id="report_amount"></span> (<span id="report_count"></span> ' . ucfirst ($_HOAM_language ['common']['entries']) . ')'; 
+	} else {
+		$HTML = $_HOAM_language ['help_pages']['website']['403'];
+	}
+	echo $HTML;
+    ]]></php>
+  </report>
+</ajax-response>

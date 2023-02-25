@@ -1,0 +1,110 @@
+<?xml version='1.0' ?>
+
+<!--
+ * This file is part of HOAM, copyright (C) 2002-2020 Robert Butler
+ *
+ * HOAM is free software; you can redistribute it and/or modify it under the
+ * terms of the GNU Affero General Public License as published by the Free
+ * Software Foundation; either version 3 of the License, or (at your option)
+ * any later version.
+ *
+ * HOAM is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with HOAM; if not, see http://www.gnu.org/licenses or write to the
+ * Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+ * 02110-1301
+ *
+ * Questions specific to HOAM should be directed to ARP Realty. Please see
+ * the HOAM web site at http://hoam.arprs.com/
+ *
+ * Some portions of HOAM incorporate ideas and/or code from other sources, and
+ * those portions are explicitly mentioned and attributed in the relevant
+ * section of HOAM source code. Questions about that code should be directed to
+ * the original authors.
+ *
+ *-->
+
+<ajax-response>
+  <style><![CDATA[
+    #fillme h1 { font-weight: bold; font-variant: small-caps; page-break-before: always; text-align: center; text-transform: capitalize; }
+    #fillme .homeowner { font-size: 90%; }
+    #fillme .street_address { font-size: 90%; text-align: center; }
+    #fillme .signature { border-bottom: 2px solid black; }
+  ]]></style>
+  <report>
+    <name>Unit Ownership History</name>
+    <php><![CDATA[
+	// Show a chart of all property owners based on years of ownership
+
+    $homeowner_class = new HOAM_homeowner ('homeowners');
+    $lot_class = new HOAM_lot ('lots');
+
+	$HTML = '';
+	$HTML .= '<h1>Unit Ownership History</h1>';
+
+	$oldest_purchase = (int) date ('Y', strtotime ($homeowner_class -> returnOldestPurchase ()));
+	$current_year = (int) date ('Y');
+
+	$HTML .= '<table class="center">';
+	$HTML .= '<colgroup>';
+	$HTML .= '<col width="20em" span="1" />';
+	$HTML .= '</colgroup>';
+	$thead = '<thead>';
+	$thead .= '<tr>';
+	$thead .= '<th rowspan="2">Property&nbsp;Address</th>';
+	for ($i = $current_year; $i >= $oldest_purchase; $i--) {
+		$thead .= '<th colspan="12">' . $i . '</th>';
+	}
+	$thead .= '</tr>';
+	$thead .= '<tr>';
+	for ($i = $current_year; $i >= $oldest_purchase; $i--) {
+		$thead .= '<th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th>';
+	}
+	$thead .= '</tr>';
+	$thead .= '</thead>';
+	$HTML .= $thead . preg_replace ('/thead/i', 'tfoot', $thead);
+	$HTML .= '<tbody>';
+
+	$street_list = $lot_class -> listStreets ();
+	foreach ($street_list as $street) {
+		$lot_list = $lot_class -> listByStreet ($street);
+		foreach ($lot_list as $lot) {
+			$HTML .= '<tr>';
+			$HTML .= '<td>' . HOAM_returnAddress ($lot) . '</td>';
+			$owner_list = $homeowner_class -> listResidenceHomeowners ($lot);
+			// Display blank/empty for future months (eg, when it's currently
+			// January and there are 11 other months of the year)
+			if ((int) date ('m') != 12) {
+				$HTML .= '<td colspan="' . (12 - (int) date ('m')) . '">&nbsp;</td>';
+			}
+			if (is_array ($owner_list)) {
+				foreach ($owner_list as $owner) {
+					$saledate = $homeowner_class -> returnSaleDate ($owner);
+					$HTML .= '<td style="background: linear-gradient(to right, rgba(0,0,224,0.70) 0%,rgba(0,0,224,0.1) 100%); text-align: left" ';
+					$d2 = new DateTime ($homeowner_class -> returnPurchaseDate ($owner));
+					if ($saledate != '1970-01-01') {
+						$d1 = new DateTime ($saledate);
+						$HTML .= 'title="' . date ($_HOAM_country ['date']['format_reports'], $d2 -> getTimestamp ()) . ' ' . $_HOAM_language ['common']['to'] . ' ' . date ($_HOAM_country ['date']['format_reports'], $d1 -> getTimestamp ()) . '" ';
+					} else {
+						$d1 = new DateTime ();
+						$HTML .= 'title="' . date ($_HOAM_country ['date']['format_reports'], $d2 -> getTimestamp ()) . ' ' . $_HOAM_language ['common']['to'] . ' ' . ucfirst ($_HOAM_language ['common']['current']) . '" ';
+					}
+					$HTML .= 'colspan="' . (((int) ($d1 -> diff ($d2) -> y) * 12) + $d1 -> diff ($d2) -> m) . '"';
+					$HTML .= '>' . htmlentities (stripslashes ($homeowner_class -> returnName ($owner))) . '</td>';
+				}
+			}
+			$HTML .= '</tr>';
+		}
+	}
+	
+	$HTML .= '</tbody>';
+	$HTML .= '</table>';
+
+	echo $HTML;
+    ]]></php>
+  </report>
+</ajax-response>

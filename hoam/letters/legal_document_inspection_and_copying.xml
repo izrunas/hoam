@@ -1,0 +1,236 @@
+<?xml version="1.0" ?>
+
+<!--
+ * This file is part of HOAM, copyright (C) 2002-2020 Robert Butler
+ *
+ * HOAM is free software; you can redistribute it and/or modify it under the
+ * terms of the GNU Affero General Public License as published by the Free
+ * Software Foundation; either version 3 of the License, or (at your option)
+ * any later version.
+ *
+ * HOAM is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with HOAM; if not, see http://www.gnu.org/licenses or write to the
+ * Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+ * 02110-1301
+ *
+ * Questions specific to HOAM should be directed to ARP Realty. Please see
+ * the HOAM web site at http://hoam.arprs.com/
+ *
+ * Some portions of HOAM incorporate ideas and/or code from other sources, and
+ * those portions are explicitly mentioned and attributed in the relevant
+ * section of HOAM source code. Questions about that code should be directed to
+ * the original authors.
+ *
+ *-->
+
+<ajax-response>
+  <letter>
+    <name>Legal - Document Inspection and Copying Policy</name>
+    <require_delivery_confirmation>0</require_delivery_confirmation>
+    <require_delivery_certified>0</require_delivery_certified>
+    <suggest_delivery_confirmation>0</suggest_delivery_confirmation>
+    <suggest_delivery_certified>0</suggest_delivery_certified>
+	<additional_fields>
+		<field>
+			<description>Effective date of the filing</description>
+			<id>field_effective</id>
+			<required>1</required>
+		</field>
+		<field>
+			<description>Date of associated Board meeting</description>
+			<id>field_meeting</id>
+			<required>1</required>
+		</field>
+	</additional_fields>
+    <content><![CDATA[
+{{LETTER_HEAD}}
+
+<h2>{{LETTER_TOPIC}}</h2>
+
+<p>WHEREAS, pursuant to Section 209.005(i) of the Texas Property Code, the Board of Directors of {{ORG_NAME}} (the <q>Association</q>) is required to adopt a records production and copying policy that prescribes the costs the Association will charge for the compilation, production and reproduction of the Association's books and records.</p>
+
+<p>NOW, THEREFORE, IT IS RESOLVED, in order to comply with the procedures set forth by Chapter 209 of the Texas Residential Property Owners Protection Act, that the following procedures and practices are established for the compilation, production and reproduction of the Association's books and records, and the same are to be known as the <q>{{LETTER_TOPIC}}</q> of the Association (hereinafter the <q>Policy</q>).</p>
+
+<ol>
+	<li>__Purpose__. The purpose of this Policy is to establish orderly procedures for the levying of fees and to notify owners of the costs to be incurred associated with the compilation, production and reproduction of the Association's books and records in response to an Owner's request to inspect the Association's records.</li>
+	<li>__Records Defined__. The Association's books and records available for inspection and copying by owners are those records designated by Section 209.005 of the Texas Property Code. Pursuant to Section 209.005(d) of the Texas Property Code, an attorney's files relating to the Association, excluding invoices, are not records of the Association, are not subject to inspection by owners, or production in a legal proceeding. Further, pursuant to Section 209.005(k), the Association is not required to release or allow inspection of any books and records relating to an employee of the Association, or any books and records that identify the violation history, contact information (other than the address and/or financial information of an individual owner) absent the express written approval of the owner whose information is the subject of the request or a court order requiring disclosure of such information.</li>
+	<li>__Individuals Authorized to Inspect Association's Records__. Every owner of a lot/unit in the Association is entitled to inspect and copy the Association's books and records in compliance with the procedures set forth in this Policy. An owner may submit a designation in writing, signed by the owner, specifying such other individuals who are authorized to inspect the Association's books and records as the owner's agent attorney, or certified public accountant. The owner and/or the owner's designated representative are referred to herein as the <q>Requesting Party</q>.</li>
+	<li>__Requests for Inspection or Copying__. The Requesting Party seeking to inspect or copy the Association's books and records must submit a written request via certified mail to the Association at the mailing address of the Association or its managing agent as reflected on the Association's current management certificate. This address is subject to change upon notice to the owners, but the Association's current mailing address as of the adoption of this policy is:
+	<br /><br />
+	{{ORG_ADDRESS}}
+	<br /><br />
+	The request must contain sufficient detail describing the requested Association's books and records, including pertinent dates, time periods or subjects sought to be inspected. The request must also specify whether the Requesting Party seeks to inspect the books and records before obtaining copies or to have the Association forward copies of the requested books and records to the Requesting Party.</li>
+	<li>__Inspection Response__. If the Requesting Party elects to inspect the Association's books and records, the Association shall notify the Requesting Party within ten (10) business days after receiving the Requesting Party's request of the dates during normal business hours that the Requesting Party may inspect the requested books and records (the <q>Inspection Notice</q>).
+	<br /><br />
+	If the Association is unable to produce the requested books and records by the 10<sup>th</sup> business day after the date the Association receives the request, the Association must provide written notice to the Requesting Party within 10 business days of the owner's request to inspect (the <q>Inspection Delay Letter</q>) that (1) the Association is unable to produce the information by the 10<sup>th</sup> business day after the date the Association received the request, and (2) state a date by which the information will be either sent or available for inspection that is not later than fifteen (15) days after the date of the Inspection Delay Letter.</li>
+	<li>__Inspection Procedure__. Any inspection shall take place at a mutually-agreed upon time during normal business hours. All inspections shall take place at the office of the Association's management company or such other location as the Association designated. No Requesting Party or other individual shall remove original records from the location where the inspection is taking place, nor alter the records in any way. All individuals inspecting or requesting copies of records shall conduct themselves in a businesslike manner and shall not interfere with the operation of the Association's or management company's office or the operation of any other office where the inspection or copying is taking place.
+	<br /><br />
+	At such inspection, the Requesting Party may identify such books and records for the Association to copy and forward to the Requesting Party. The Association may produce all requested books and records in hard copy, electronic, or other format reasonably available to the Association.</li>
+	<li>__Costs Associated with Compilation, Production and Reproduction__. The costs associated with compiling, producing and reproducing the Association's books and records in response to a request to inspect or copy documents shall be as follows:
+		<ol style="list-style: lower-alpha">
+			<li>Copy charges.
+				<ol>
+					<li>Standard paper copy. The charge for standard paper copies reproduced by means of an office machine copier or a computer printer is $0.10 per page or part of a page. Each side that contains recorded information is considered a page.</li>
+					<li>Nonstandard copy. The charges in this subsection are to cover the materials onto which information is copied and do not reflect any additional charges, including labor, that may be associated with a particular request. The charges for nonstandard copies are:
+						<ol style="list-style: upper-alpha">
+							<li>Diskette -- $1.00;</li>
+							<li>Magnetic tape -- actual cost;</li>
+							<li>Data cartridge -- actual cost;</li>
+							<li>Tape cartridge -- actual cost;</li>
+							<li>Rewritable CD (CD-RW) -- $1.00;</li>
+							<li>Non-rewritable CD (CD-R) -- $1.00;</li>
+							<li>Digital video disc (DVD) -- $3.00;</li>
+							<li>JAZ drive -- actual cost;</li>
+							<li>Other electronic media -- actual cost;</li>
+							<li>VHS video cassette -- $2.50;</li>
+							<li>Audio cassette -- $1.00;</li>
+							<li>Oversize paper copy (e.g.: 11 inches by 17 inches, greenbar, bluebar, not including maps and photographs using specialty paper) -- $0.50;</li>
+							<li>Specialty paper (e.g.: Mylar, blueprint, blueline, map, photographic) -- actual cost.
+						</ol>
+				</ol>
+			</li>
+			<li>Labor charge for locating, compiling, manipulating data, and reproducing information.
+				<ol>
+					<li>The charge for labor costs incurred in processing a request for information is $15.00 an hour. The labor charge includes the actual time to locate, compile, manipulate data, and reproduce the requested information.</li>
+					<li>When confidential information is mixed with non-confidential information in the same page, a labor charge may be recovered for time spent to redact, blackout, or otherwise obscure confidential information in order to release the information. A labor charge shall not be made for redacting confidential information for requests of fifty (50) or fewer pages.</li>
+					<li>If the charge for providing a copy of information includes costs of labor, the Requesting Party may require that the Association provide a written statement as to the amount of time that was required to produce and provide the copy, signed by an officer of the Association. A charge may not be imposed for providing the written statement to the requester.</li>
+				</ol>
+			</li>
+			<li>Overhead charge.
+				<ol>
+					<li>Whenever any labor charge is applicable to a request, the Association may include in the charges direct and indirect costs, in addition to the specific labor charge. This overhead charge would cover such costs as depreciation of capital assets, rent, maintenance and repair, utilities, and administrative overhead. If the Association chooses to recover such costs, a charge shall be made in accordance with the methodology described in paragraph (3) of this subsection. Although an exact calculation of costs will vary, the use of a standard charge will avoid complication in calculating such costs and will provide uniformity for charges.</li>
+					<li>An overhead charge shall not be made for requests for copies of fifty (50) or fewer pages of standard paper records.</li>
+					<li>The overheard charge shall be computed at twenty percent (20%) of the charge made to cover any labor costs associated with a particular request (example: if one hour of labor is used in a particular request, the formula would be as follows: Labor charge for locating, compiling, and reproducing, $15.00 x .20 = $3.00).</li>
+				</ol>
+			</li>
+			<li>Postal and shipping charges. The Association may add any related postal or shipping expenses which are necessary to transmit the reproduced information for the Requesting Party.</li>
+		</ol>
+	</li>
+	<li>__Payment__. Upon receipt of a request to inspect and/or copy documents, the Association may require the Requesting Party to pay the estimated costs associated with production and copying in advance. If the estimated cost of compilation, production and reproduction is different from the actual cost, the Association shall submit a final invoice to the owner on or before the 30<sup>th</sup> business day after the Association has produced and/or delivered the requested information. If the actual cost is greater than the estimated amount, the owner must pay the difference to the Association within thirty (30) business days after the date the invoice is sent to the owner, or the Association will add such additional charges as an assessment against the owner's property in the Association. If the actual cost is less than the estimated amount, the Association shall issue a refund to the owner within thirty (30) business days after the date the invoice is sent to the owner.</li>
+	<li>__Definitions__. The definitions contained in the governing documents are hereby incorporated herein by reference.
+</ol>
+
+<p>This policy shall supersede and replace any previously adopted policy to the extent that the terms of such policy are inconsistent with this policy.</p>
+
+<p>IT IS FURTHER RESOLVED that this {{LETTER_TOPIC}} is effective on <span id="field_effective"><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u></span>, to remain in effect until revoked, modified, or amended.</p>
+
+<p>This is to certify that the foregoing resolution was adopted by the Board of Directors at a meeting of same on <span id="field_meeting"><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u></span> and has not been modified, rescinded, or revoked.</p> 
+
+<div style="border-top: 1px solid black; margin: 2em 5em 1em 60%; width: 20em">&nbsp;</div>
+<div style="border-bottom: 1px solid black; margin: 1em 5em 0 60%; text-align: center; width: 20em">{{LETTER_APPROVER}}</div>
+<div style="margin: 0 5em 2em 60%; width: 20em">{{LETTER_PERSON}}, {{ORG_NAME}}</div>
+
+<div style="float: left;text-transform:uppercase">STATE OF {{ORG_STATE}}<br/><br/>COUNTY OF {{ORG_COUNTY}}</div>
+<div style="padding-left: 25%; ">&sect;<br/>&sect;<br/>&sect;</div>
+
+<p>SUBSCRIBED AND SWORN TO before me by {{LETTER_APPROVER}} in their capacity as {{LETTER_PERSON}} for {{ORG_NAME}}, on <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>, {{CURRENTYEAR}}.</p>
+
+<div style="border-top: 1px solid black; margin: 3em 5em 2em 60%; width: 20em">Notary Public - State of {{ORG_STATE}}</div>
+
+AFTER RECORDING, PLEASE RETURN TO:<br />
+
+{{ORG_ADDRESS}}
+]]></content>
+    <pdf><![CDATA[
+    {{LETTER_HEAD}}
+
+    <h4 style="font-variant: small-caps; text-align: center">{{LETTER_TOPIC}}</h4>
+	<br />
+	<p style="text-align: justify">WHEREAS, pursuant to Section 209.005(i) of the Texas Property Code, the Board of Directors of {{ORG_NAME}} (the <q>Association</q>) is required to adopt a records production and copying policy that prescribes the costs the Association will charge for the compilation, production and reproduction of the Association's books and records.</p>
+
+	<p style="text-align: justify">NOW, THEREFORE, IT IS RESOLVED, in order to comply with the procedures set forth by Chapter 209 of the Texas Residential Property Owners Protection Act, that the following procedures and practices are established for the compilation, production and reproduction of the Association's books and records, and the same are to be known as the <q>{{LETTER_TOPIC}}</q> of the Association (hereinafter the <q>Policy</q>).</p>
+
+	<ol>
+		<li>__Purpose__. The purpose of this Policy is to establish orderly procedures for the levying of fees and to notify owners of the costs to be incurred associated with the compilation, production and reproduction of the Association's books and records in response to an Owner's request to inspect the Association's records.</li>
+		<li>__Records Defined__. The Association's books and records available for inspection and copying by owners are those records designated by Section 209.005 of the Texas Property Code. Pursuant to Section 209.005(d) of the Texas Property Code, an attorney's files relating to the Association, excluding invoices, are not records of the Association, are not subject to inspection by owners, or production in a legal proceeding. Further, pursuant to Section 209.005(k), the Association is not required to release or allow inspection of any books and records relating to an employee of the Association, or any books and records that identify the violation history, contact information (other than the address and/or financial information of an individual owner) absent the express written approval of the owner whose information is the subject of the request or a court order requiring disclosure of such information.</li>
+		<li>__Individuals Authorized to Inspect Association's Records__. Every owner of a lot/unit in the Association is entitled to inspect and copy the Association's books and records in compliance with the procedures set forth in this Policy. An owner may submit a designation in writing, signed by the owner, specifying such other individuals who are authorized to inspect the Association's books and records as the owner's agent attorney, or certified public accountant. The owner and/or the owner's designated representative are referred to herein as the <q>Requesting Party</q>.</li>
+		<li>__Requests for Inspection or Copying__. The Requesting Party seeking to inspect or copy the Association's books and records must submit a written request via certified mail to the Association at the mailing address of the Association or its managing agent as reflected on the Association's current management certificate. This address is subject to change upon notice to the owners, but the Association's current mailing address as of the adoption of this policy is:
+		<br /><br />
+		{{ORG_ADDRESS}}
+		<br /><br />
+		The request must contain sufficient detail describing the requested Association's books and records, including pertinent dates, time periods or subjects sought to be inspected. The request must also specify whether the Requesting Party seeks to inspect the books and records before obtaining copies or to have the Association forward copies of the requested books and records to the Requesting Party.</li>
+		<li>__Inspection Response__. If the Requesting Party elects to inspect the Association's books and records, the Association shall notify the Requesting Party within ten (10) business days after receiving the Requesting Party's request of the dates during normal business hours that the Requesting Party may inspect the requested books and records (the <q>Inspection Notice</q>).
+		<br /><br />
+		If the Association is unable to produce the requested books and records by the 10<sup>th</sup> business day after the date the Association receives the request, the Association must provide written notice to the Requesting Party within 10 business days of the owner's request to inspect (the <q>Inspection Delay Letter</q>) that (1) the Association is unable to produce the information by the 10<sup>th</sup> business day after the date the Association received the request, and (2) state a date by which the information will be either sent or available for inspection that is not later than fifteen (15) days after the date of the Inspection Delay Letter.</li>
+		<li>__Inspection Procedure__. Any inspection shall take place at a mutually-agreed upon time during normal business hours. All inspections shall take place at the office of the Association's management company or such other location as the Association designated. No Requesting Party or other individual shall remove original records from the location where the inspection is taking place, nor alter the records in any way. All individuals inspecting or requesting copies of records shall conduct themselves in a businesslike manner and shall not interfere with the operation of the Association's or management company's office or the operation of any other office where the inspection or copying is taking place.
+		<br /><br />
+		At such inspection, the Requesting Party may identify such books and records for the Association to copy and forward to the Requesting Party. The Association may produce all requested books and records in hard copy, electronic, or other format reasonably available to the Association.</li>
+		<li>__Costs Associated with Compilation, Production and Reproduction__. The costs associated with compiling, producing and reproducing the Association's books and records in response to a request to inspect or copy documents shall be as follows:
+			<ol style="list-style: lower-alpha">
+				<li>Copy charges.
+					<ol>
+						<li>Standard paper copy. The charge for standard paper copies reproduced by means of an office machine copier or a computer printer is $0.10 per page or part of a page. Each side that contains recorded information is considered a page.</li>
+						<li>Nonstandard copy. The charges in this subsection are to cover the materials onto which information is copied and do not reflect any additional charges, including labor, that may be associated with a particular request. The charges for nonstandard copies are:
+							<ol style="list-style: upper-alpha">
+								<li>Diskette -- $1.00;</li>
+								<li>Magnetic tape -- actual cost;</li>
+								<li>Data cartridge -- actual cost;</li>
+								<li>Tape cartridge -- actual cost;</li>
+								<li>Rewritable CD (CD-RW) -- $1.00;</li>
+								<li>Non-rewritable CD (CD-R) -- $1.00;</li>
+								<li>Digital video disc (DVD) -- $3.00;</li>
+								<li>JAZ drive -- actual cost;</li>
+								<li>Other electronic media -- actual cost;</li>
+								<li>VHS video cassette -- $2.50;</li>
+								<li>Audio cassette -- $1.00;</li>
+								<li>Oversize paper copy (e.g.: 11 inches by 17 inches, greenbar, bluebar, not including maps and photographs using specialty paper) -- $0.50;</li>
+								<li>Specialty paper (e.g.: Mylar, blueprint, blueline, map, photographic) -- actual cost.
+							</ol>
+					</ol>
+				</li>
+				<li>Labor charge for locating, compiling, manipulating data, and reproducing information.
+					<ol>
+						<li>The charge for labor costs incurred in processing a request for information is $15.00 an hour. The labor charge includes the actual time to locate, compile, manipulate data, and reproduce the requested information.</li>
+						<li>When confidential information is mixed with non-confidential information in the same page, a labor charge may be recovered for time spent to redact, blackout, or otherwise obscure confidential information in order to release the information. A labor charge shall not be made for redacting confidential information for requests of fifty (50) or fewer pages.</li>
+						<li>If the charge for providing a copy of information includes costs of labor, the Requesting Party may require that the Association provide a written statement as to the amount of time that was required to produce and provide the copy, signed by an officer of the Association. A charge may not be imposed for providing the written statement to the requester.</li>
+					</ol>
+				</li>
+				<li>Overhead charge.
+					<ol>
+						<li>Whenever any labor charge is applicable to a request, the Association may include in the charges direct and indirect costs, in addition to the specific labor charge. This overhead charge would cover such costs as depreciation of capital assets, rent, maintenance and repair, utilities, and administrative overhead. If the Association chooses to recover such costs, a charge shall be made in accordance with the methodology described in paragraph (3) of this subsection. Although an exact calculation of costs will vary, the use of a standard charge will avoid complication in calculating such costs and will provide uniformity for charges.</li>
+						<li>An overhead charge shall not be made for requests for copies of fifty (50) or fewer pages of standard paper records.</li>
+						<li>The overheard charge shall be computed at twenty percent (20%) of the charge made to cover any labor costs associated with a particular request (example: if one hour of labor is used in a particular request, the formula would be as follows: Labor charge for locating, compiling, and reproducing, $15.00 x .20 = $3.00).</li>
+					</ol>
+				</li>
+				<li>Postal and shipping charges. The Association may add any related postal or shipping expenses which are necessary to transmit the reproduced information for the Requesting Party.</li>
+			</ol>
+		</li>
+		<li>__Payment__. Upon receipt of a request to inspect and/or copy documents, the Association may require the Requesting Party to pay the estimated costs associated with production and copying in advance. If the estimated cost of compilation, production and reproduction is different from the actual cost, the Association shall submit a final invoice to the owner on or before the 30<sup>th</sup> business day after the Association has produced and/or delivered the requested information. If the actual cost is greater than the estimated amount, the owner must pay the difference to the Association within thirty (30) business days after the date the invoice is sent to the owner, or the Association will add such additional charges as an assessment against the owner's property in the Association. If the actual cost is less than the estimated amount, the Association shall issue a refund to the owner within thirty (30) business days after the date the invoice is sent to the owner.</li>
+		<li>__Definitions__. The definitions contained in the governing documents are hereby incorporated herein by reference.
+	</ol>
+
+    <p style="text-align: justify">This policy shall supersede and replace any previously adopted policy to the extent that the terms of such policy are inconsistent with this policy.</p>
+
+    <p style="text-align: justify">IT IS FURTHER RESOLVED that this {{LETTER_TOPIC}} is effective on {{FIELD_EFFECTIVE}}, to remain in effect until revoked, modified, or amended.</p>
+
+    <p style="text-align: justify">This is to certify that the foregoing resolution was adopted by the Board of Directors at a meeting of same on {{FIELD_MEETING}} and has not been modified, rescinded, or revoked.</p> 
+
+    <table style="width: 100%">
+      <tr><td style="width: 50%">&nbsp;</td><td style="border-bottom: 1px solid black">&nbsp;</td></tr>
+      <tr><td style="width: 50%">&nbsp;</td><td style="border-bottom: 1px solid black; text-align: center">{{LETTER_APPROVER}}</td></tr>
+      <tr><td style="width: 50%">&nbsp;</td><td style="text-align: right">{{LETTER_PERSON}}, {{ORG_NAME}}</td></tr>
+    <table>
+    <br />
+    <table style="width: 100%">
+      <tr><td style="text-transform:uppercase; width: 35%">STATE OF {{ORG_STATE}}</td><td>&sect;</td></tr>
+      <tr><td>&nbsp;</td><td>&sect;</td></tr>
+      <tr><td style="text-transform:uppercase">COUNTY OF {{ORG_COUNTY}}</td><td>&sect;</td></tr>
+    </table>
+    <p style="text-align: justify">SUBSCRIBED AND SWORN TO before me by {{LETTER_APPROVER}} in their capacity as {{LETTER_PERSON}} for {{ORG_NAME}}, on <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>, {{CURRENTYEAR}}.</p>
+    <table style="width: 100%">
+      <tr><td style="width: 50%">&nbsp;</td><td style="text-align: right">&nbsp;</td></tr>
+      <tr><td style="width: 50%">&nbsp;</td><td style="border-top: 1px solid black; text-align: center">Notary Public - State of {{ORG_STATE}}</td></tr>
+    </table>
+    <br />
+    AFTER RECORDING, PLEASE RETURN TO:<br />
+    <br />
+    {{ORG_ADDRESS}}
+    ]]></pdf>
+  </letter>
+</ajax-response>
+

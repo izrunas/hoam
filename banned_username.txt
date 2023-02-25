@@ -1,0 +1,87 @@
+# This list is not case-sensitive, so checks for "theHoa" and "TheHOA" are
+# identical.
+#
+# By default, the minimum account name length is 5 characters, so some of these
+# will not be tested unless that default has been lowered.
+
+# A general list of profanities
+ass
+asshat
+asshole
+bastard
+bastards
+bitch
+biteme
+cock
+cocksucker
+cocksuckers
+cunt
+douche
+douchebag
+douchebags
+fuck
+fucker
+fuckers
+fucking
+fuckoff
+fuckyou
+penis
+piss
+pissoff
+pussy
+queef
+screwyou
+shit
+shithead
+shitheads
+suck
+suckers
+suckme
+
+# Some more names that are HOA specific, or could cause confusion if they were
+# used / selected by the wrong people
+admin
+administrator
+hoa
+hoa-admin
+hoam
+hoamanagement
+hoa-management
+hoasuck
+hoassuck
+management
+ManagementCompany
+Mgmt
+Mgmnt
+myhoa
+officers
+president
+root
+secretary
+security
+the-hoa
+the_hoa
+thehoa
+TheManagementCompany
+thepresident
+treasurer
+vice-president
+vicepresident
+webmaster
+
+# A few 'special' terms in the database that should be protected against, but
+# just in case.
+alter
+delete
+drop
+grant
+insert
+null
+select
+update
+
+# You may want to enter names or accounts specific to your organization, such as
+# the name of the Association, management company, neighborhood, etc.
+mwchoa
+maxwellcreek
+MaxwellCreekHOA

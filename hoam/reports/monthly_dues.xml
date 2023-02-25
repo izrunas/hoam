@@ -1,0 +1,91 @@
+<?xml version='1.0' ?>
+
+<!--
+ * This file is part of HOAM, copyright (C) 2002-2020 Robert Butler
+ *
+ * HOAM is free software; you can redistribute it and/or modify it under the
+ * terms of the GNU Affero General Public License as published by the Free
+ * Software Foundation; either version 3 of the License, or (at your option)
+ * any later version.
+ *
+ * HOAM is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with HOAM; if not, see http://www.gnu.org/licenses or write to the
+ * Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+ * 02110-1301
+ *
+ * Questions specific to HOAM should be directed to ARP Realty. Please see
+ * the HOAM web site at http://hoam.arprs.com/
+ *
+ * Some portions of HOAM incorporate ideas and/or code from other sources, and
+ * those portions are explicitly mentioned and attributed in the relevant
+ * section of HOAM source code. Questions about that code should be directed to
+ * the original authors.
+ *
+ *-->
+
+<ajax-response>
+  <style><![CDATA[
+    #fillme h1 { font-weight: bold; font-variant: small-caps; page-break-before: always; text-align: center; text-transform: capitalize; }
+    #fillme .homeowner { font-size: 90%; }
+    #fillme .street_address { font-size: 90%; text-align: center; }
+    #fillme .signature { border-bottom: 2px solid black; }
+  ]]></style>
+  <report>
+    <name>Payments for Current Month Assessments</name>
+    <php><![CDATA[
+    $budget_class = new HOAM_budget ('budget');
+    $homeowner_class = new HOAM_homeowner ('homeowners');
+    
+	$HTML = '';
+	$HTML .= '<table>';
+	$HTML .= '<colgroup>';
+	$HTML .= '<col width="30%" />';
+	$HTML .= '<col width="40%" />';
+	$HTML .= '<col width="15%" />';
+	$HTML .= '<col width="15%" />';
+	$HTML .= '</colgroup>';
+	$thead = '<thead>';
+	$thead .= '<tr><th>' . $_HOAM_language ['field_names']['homeowner']['address'] . '</th>';
+	$thead .= '<th>' . $_HOAM_language ['field_names']['homeowner']['name'] . '</th>';
+	$thead .= '<th>' . $_HOAM_language ['tables']['column']['budget']['balance'] . '</th>';
+	$thead .= '<th>' . $_HOAM_language ['tables']['column']['budget']['last_payment'] . '</th>';
+	$thead .= '</tr>';
+	$thead .= '</thead>';
+	$tfoot = preg_replace ('/thead/', 'tfoot', $thead);
+	$HTML .= $thead . $tfoot;
+	$HTML .= '<tbody class="homeowner_list">';
+	$current_month = date ('Y-m-d', mktime (0, 0, 0, date ('m'), 1, date ('Y')));
+	$dues_category = 'a9c7d52cc6263d7a54b1e9020ac576d0';
+	$homeowner_list = $homeowner_class -> listCurrentHomeowners ();
+	foreach ($homeowner_list as $homeowner) {
+		$query = "SELECT id FROM budget WHERE customer_id = '$homeowner'
+				AND category_id = '$dues_category'
+				AND dateposted IS NULL
+				AND datedue >= '$current_month'";
+		$charges = $budget_class -> listSimpleQuery ($query);
+		$dues_owed = 0;
+		if (is_array ($charges)) {
+			foreach ($charges as $charge) {
+				$dues_owed += $budget_class -> returnAmount ($charge);
+			}
+		}
+		$HTML .= '<tr>';
+		$HTML .= '<td class="center">' . HOAM_returnAddress ($homeowner_class -> returnLotId ($homeowner)) . '</td>';
+		$HTML .= '<td class="center">' . $homeowner_class -> returnName ($homeowner) . '</td>';
+		$HTML .= '<td class="center">' . HOAM_returnCurrency ($dues_owed) . '</td>';
+		$last_payment = $budget_class -> returnLastPayment ($homeowner);		
+		$HTML .= '<td class="center">' . HOAM_date ($_HOAM_country ['date']['format_reports'], strtotime ($budget_class -> returnDatePosted ($last_payment))) . '</td>';
+		$HTML .= '</tr>';
+	}
+	$HTML .= '</tbody>';
+	$HTML .= '</table>';
+	echo $HTML;
+    ]]></php>
+  </report>
+</ajax-response>
+

@@ -1,0 +1,180 @@
+<?xml version="1.0" ?>
+
+<!--
+ * This file is part of HOAM, copyright (C) 2002-2020 Robert Butler
+ *
+ * HOAM is free software; you can redistribute it and/or modify it under the
+ * terms of the GNU Affero General Public License as published by the Free
+ * Software Foundation; either version 3 of the License, or (at your option)
+ * any later version.
+ *
+ * HOAM is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with HOAM; if not, see http://www.gnu.org/licenses or write to the
+ * Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+ * 02110-1301
+ *
+ * Questions specific to HOAM should be directed to ARP Realty. Please see
+ * the HOAM web site at http://hoam.arprs.com/
+ *
+ * Some portions of HOAM incorporate ideas and/or code from other sources, and
+ * those portions are explicitly mentioned and attributed in the relevant
+ * section of HOAM source code. Questions about that code should be directed to
+ * the original authors.
+ *
+ *-->
+
+<ajax-response>
+  <letter>
+    <name>Legal - Rainwater Collection Device Guidelines</name>
+    <require_delivery_confirmation>0</require_delivery_confirmation>
+    <require_delivery_certified>0</require_delivery_certified>
+    <suggest_delivery_confirmation>0</suggest_delivery_confirmation>
+    <suggest_delivery_certified>0</suggest_delivery_certified>
+	<additional_fields>
+		<field>
+			<description>Effective date of the filing</description>
+			<id>field_effective</id>
+			<required>1</required>
+		</field>
+		<field>
+			<description>Date of associated Board meeting</description>
+			<id>field_meeting</id>
+			<required>1</required>
+		</field>
+	</additional_fields>
+    <content><![CDATA[
+{{LETTER_HEAD}}
+
+<h2>{{LETTER_TOPIC}}</h2>
+
+<p>WHEREAS, the Texas Legislature passed House Bill 3391 which amends Section 202.007(d) of the Texas Property Code which precludes associations from adopting or enforcing certain prohibitions or restrictions on rain barrels and rainwater harvesting systems; and</p>
+
+<p>WHEREAS, pursuant to Section 202.007(d) of the Texas Property Code, the Board of Directors of {{ORG_NAME}} (the <q>Association</q>) is permitted to adopt specific limitations on rain barrels and rainwater harvesting systems.</p>
+
+<p>NOW, THEREFORE, IT IS RESOLVED, in order to comply with Section 202.007(d) of the Texas Property Code, the Board of Directors of the Association adopts the following guidelines for rain barrels and rainwater harvesting systems.</p>
+
+<ol style="list-style: upper-alpha">
+	<li>An owner may not install a rain barrel or rainwater harvesting system if:
+		<ol>
+			<li>such device is to be installed in or on property:
+				<ol style="list-style: lower-alpha">
+					<li>owned by the Association;</li>
+					<li>owned in common by the members of the Association; or</li>
+					<li>located between the front of the owner's home and an adjoining or adjacent street; or</li>
+				</ol>
+			</li>
+			<li>the barrel or system:
+				<ol style="list-style: lower-alpha">
+					<li>is of a color other than a color consistent with the color scheme of the owner's home; or</li>
+					<li>displays any language or other content that is not typically displayed by such a barrel or system as it is manufactured.</li>
+				</ol>
+			</li>
+		</ol>
+	</li>
+	<li>The Association may regulate the size, type, and shielding of, and the materials used in the construction of a rain barrel, rainwater harvesting device, or other appurtenance that is located on the side of a house or at any other location that is visible from a street, another log, or a common area if:
+		<ol>
+			<li>the restriction does not prohibit the economic installation of the device or appurtenance on the owner's property; and</li>
+			<li>there is a reasonably sufficient area on the owner's property in which to install the device or appurtenance.</li>
+		</ol>
+	</li>
+	<li>In order to enforce these regulations, an owner must receive written approval fomr the Board or the architectural control or review committee (if one exists) prior to installing any rain barrel or rainwater harvesting system. Accordingly, prior to installation, an owner must submit plans and specifications to and receive the written approval of the Board or architectural control/review committee. The plans and specifications must show the proposed location, color, material, shielding devices, size and type of such system or device (and all parts thereof). The plans should also identify whether the device or any part thereof will be visible from any street, other lot or common area.</li>
+	<li>The definitions contained in the Association's dedicatory instruments are hereby incorporated herein by reference.</li>
+	<li>In the event of any conflict between the new law cited above and any restrictions contained in the governing document of the Association, including design guidelines, policies and the Declaration, the new law and this Rainwater Collection Device Policy control.</li>
+</ol>
+
+<p>This policy shall supersede and replace any previously adopted policy to the extent that the terms of such policy are inconsistent with this policy.</p>
+
+<p>IT IS FURTHER RESOLVED that this {{LETTER_TOPIC}} is effective on <span id="field_effective"><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u></span>, to remain in effect until revoked, modified, or amended.</p>
+
+<p>This is to certify that the foregoing resolution was adopted by the Board of Directors at a meeting of same on <span id="field_meeting"><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u></span> and has not been modified, rescinded, or revoked.</p> 
+
+<div style="border-top: 1px solid black; margin: 2em 5em 1em 60%; width: 20em">&nbsp;</div>
+<div style="border-bottom: 1px solid black; margin: 1em 5em 0 60%; text-align: center; width: 20em">{{LETTER_APPROVER}}</div>
+<div style="margin: 0 5em 2em 60%; width: 20em">{{LETTER_PERSON}}, {{ORG_NAME}}</div>
+
+<div style="float: left;text-transform:uppercase">STATE OF {{ORG_STATE}}<br/><br/>COUNTY OF {{ORG_COUNTY}}</div>
+<div style="padding-left: 25%; ">&sect;<br/>&sect;<br/>&sect;</div>
+
+<p>SUBSCRIBED AND SWORN TO before me by {{LETTER_APPROVER}} in their capacity as {{LETTER_PERSON}} for {{ORG_NAME}}, on <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>, {{CURRENTYEAR}}.</p>
+
+<div style="border-top: 1px solid black; margin: 3em 5em 2em 60%; width: 20em">Notary Public - State of {{ORG_STATE}}</div>
+
+AFTER RECORDING, PLEASE RETURN TO:<br />
+
+{{ORG_ADDRESS}}
+]]></content>
+    <pdf><![CDATA[
+    {{LETTER_HEAD}}
+
+    <h4 style="font-variant: small-caps; text-align: center">{{LETTER_TOPIC}}</h4>
+	<br />
+	<p style="text-align: justify">WHEREAS, the Texas Legislature passed House Bill 3391 which amends Section 202.007(d) of the Texas Property Code which precludes associations from adopting or enforcing certain prohibitions or restrictions on rain barrels and rainwater harvesting systems; and</p>
+
+	<p style="text-align: justify">WHEREAS, pursuant to Section 202.007(d) of the Texas Property Code, the Board of Directors of {{ORG_NAME}} (the <q>Association</q>) is permitted to adopt specific limitations on rain barrels and rainwater harvesting systems.</p>
+
+	<p style="text-align: justify">NOW, THEREFORE, IT IS RESOLVED, in order to comply with Section 202.007(d) of the Texas Property Code, the Board of Directors of the Association adopts the following guidelines for rain barrels and rainwater harvesting systems.</p>
+
+	<ol style="list-style: upper-alpha">
+		<li>An owner may not install a rain barrel or rainwater harvesting system if:
+			<ol>
+				<li>such device is to be installed in or on property:
+					<ol style="list-style: lower-alpha">
+						<li>owned by the Association;</li>
+						<li>owned in common by the members of the Association; or</li>
+						<li>located between the front of the owner's home and an adjoining or adjacent street; or</li>
+					</ol>
+				</li>
+				<li>the barrel or system:
+					<ol style="list-style: lower-alpha">
+						<li>is of a color other than a color consistent with the color scheme of the owner's home; or</li>
+						<li>displays any language or other content that is not typically displayed by such a barrel or system as it is manufactured.</li>
+					</ol>
+				</li>
+			</ol>
+		</li>
+		<li>The Association may regulate the size, type, and shielding of, and the materials used in the construction of a rain barrel, rainwater harvesting device, or other appurtenance that is located on the side of a house or at any other location that is visible from a street, another log, or a common area if:
+			<ol>
+				<li>the restriction does not prohibit the economic installation of the device or appurtenance on the owner's property; and</li>
+				<li>there is a reasonably sufficient area on the owner's property in which to install the device or appurtenance.</li>
+			</ol>
+		</li>
+		<li>In order to enforce these regulations, an owner must receive written approval fomr the Board or the architectural control or review committee (if one exists) prior to installing any rain barrel or rainwater harvesting system. Accordingly, prior to installation, an owner must submit plans and specifications to and receive the written approval of the Board or architectural control/review committee. The plans and specifications must show the proposed location, color, material, shielding devices, size and type of such system or device (and all parts thereof). The plans should also identify whether the device or any part thereof will be visible from any street, other lot or common area.</li>
+		<li>The definitions contained in the Association's dedicatory instruments are hereby incorporated herein by reference.</li>
+		<li>In the event of any conflict between the new law cited above and any restrictions contained in the governing document of the Association, including design guidelines, policies and the Declaration, the new law and this Rainwater Collection Device Policy control.</li>
+	</ol>
+
+    <p style="text-align: justify">This policy shall supersede and replace any previously adopted policy to the extent that the terms of such policy are inconsistent with this policy.</p>
+
+    <p style="text-align: justify">IT IS FURTHER RESOLVED that this {{LETTER_TOPIC}} is effective on {{FIELD_EFFECTIVE}}, to remain in effect until revoked, modified, or amended.</p>
+
+    <p style="text-align: justify">This is to certify that the foregoing resolution was adopted by the Board of Directors at a meeting of same on {{FIELD_MEETING}} and has not been modified, rescinded, or revoked.</p> 
+
+    <table style="width: 100%">
+      <tr><td style="width: 50%">&nbsp;</td><td style="border-bottom: 1px solid black">&nbsp;</td></tr>
+      <tr><td style="width: 50%">&nbsp;</td><td style="border-bottom: 1px solid black; text-align: center">{{LETTER_APPROVER}}</td></tr>
+      <tr><td style="width: 50%">&nbsp;</td><td style="text-align: right">{{LETTER_PERSON}}, {{ORG_NAME}}</td></tr>
+    <table>
+    <br />
+    <table style="width: 100%">
+      <tr><td style="text-transform:uppercase; width: 35%">STATE OF {{ORG_STATE}}</td><td>&sect;</td></tr>
+      <tr><td>&nbsp;</td><td>&sect;</td></tr>
+      <tr><td style="text-transform:uppercase">COUNTY OF {{ORG_COUNTY}}</td><td>&sect;</td></tr>
+    </table>
+    <p style="text-align: justify">SUBSCRIBED AND SWORN TO before me by {{LETTER_APPROVER}} in their capacity as {{LETTER_PERSON}} for {{ORG_NAME}}, on <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>, {{CURRENTYEAR}}.</p>
+    <table style="width: 100%">
+      <tr><td style="width: 50%">&nbsp;</td><td style="text-align: right">&nbsp;</td></tr>
+      <tr><td style="width: 50%">&nbsp;</td><td style="border-top: 1px solid black; text-align: center">Notary Public - State of {{ORG_STATE}}</td></tr>
+    </table>
+    <br />
+    AFTER RECORDING, PLEASE RETURN TO:<br />
+    <br />
+    {{ORG_ADDRESS}}
+    ]]></pdf>
+  </letter>
+</ajax-response>
+

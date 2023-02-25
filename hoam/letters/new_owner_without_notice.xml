@@ -1,0 +1,103 @@
+<?xml version="1.0" ?>
+
+<!--
+ * This file is part of HOAM, copyright (C) 2002-2020 Robert Butler
+ *
+ * HOAM is free software; you can redistribute it and/or modify it under the
+ * terms of the GNU Affero General Public License as published by the Free
+ * Software Foundation; either version 3 of the License, or (at your option)
+ * any later version.
+ *
+ * HOAM is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with HOAM; if not, see http://www.gnu.org/licenses or write to the
+ * Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+ * 02110-1301
+ *
+ * Questions specific to HOAM should be directed to ARP Realty. Please see
+ * the HOAM web site at http://hoam.arprs.com/
+ *
+ * Some portions of HOAM incorporate ideas and/or code from other sources, and
+ * those portions are explicitly mentioned and attributed in the relevant
+ * section of HOAM source code. Questions about that code should be directed to
+ * the original authors.
+ *
+ *-->
+
+<ajax-response>
+  <letter>
+    <name>New Owner w/o Notice to Association</name>
+    <require_delivery_confirmation>0</require_delivery_confirmation>
+    <require_delivery_certified>0</require_delivery_certified>
+    <suggest_delivery_confirmation>1</suggest_delivery_confirmation>
+    <suggest_delivery_certified>0</suggest_delivery_certified>
+    <content><![CDATA[
+      <table>
+        <tr>
+          <td>{{ORG_ADDRESS}}<br />{{ORG_PHONE}}</td>
+          <td style="text-align: right">{{DATE}}</td>
+        </tr>
+      </table>
+      <br />
+      <br />
+      Property: {{HOMEOWNER_RESIDENCE}}<br />
+      Re: {{LETTER_TOPIC}}<br />
+      <br />
+      <br />
+      {{HOMEOWNER_MAILING}}<br />
+      <br />
+      <br />
+      Dear {{HOMEOWNER_NAME}},<br />
+
+      <p style="text-align: justify">{{ORG_NAME}}, of which you are a member, has just recently received information that you purchased the property located at {{HOMEOWNER_RESIDENCE}}. Normally when a property is sold, the Association is given notice by the Realtor and title company, but in certain circumstances, such as when resold by the federal government (i.e. HUD or VA), no such notification is provided.</p>
+      <p style="text-align: justify">Because the Association was unaware of the ownership change, you have likely not received copies of the governing documents for the Association, which are normally provided at close. If you have not received your copy of the governing documents, please inform us so a copy can be mailed to you.</p>
+      <p style="text-align: justify">Additionally, because of the late discovery of this ownership change, you have likely not received notices sent by the Association. As such, assessments for Association dues have accumulated, as well as fees related to the collection of those dues.</p>
+      <p style="text-align: justify">The Association is willing to write off all fees related to collection once payment is received for the delinquent dues. As such, we have included with this letter an invoice for the Association dues assessments. Please send payment for the delinquent dues no later than {{DATE+45}}</p>
+      <p style="text-align: justify">If you have any questions about this letter, the Association, or the delinquent Association dues assessments, please contact us at {{ORG_PHONE}} or {{ORG_EMAIL_MANAGEMENT}}.</p>
+
+      <br />
+      <br />
+      {{LETTER_SIGNATURE}}<br />
+      <br />
+      <br />
+      {{LETTER_APPROVER}}<br />
+      {{LETTER_PERSON}}
+ ]]></content>
+    <pdf><![CDATA[
+      <table>
+        <tr>
+          <td>{{ORG_ADDRESS}}<br />{{ORG_PHONE}}</td>
+          <td style="text-align: right">{{DATE}}</td>
+        </tr>
+      </table>
+      <br />
+      <br />
+      Property: {{HOMEOWNER_RESIDENCE}}<br />
+      Re: {{LETTER_TOPIC}}<br />
+      <br />
+      <br />
+      {{HOMEOWNER_MAILING}}<br />
+      <br />
+      <br />
+      Dear {{HOMEOWNER_NAME}},<br />
+
+      <p style="text-align: justify">{{ORG_NAME}}, of which you are a member, has just recently received information that you purchased the property located at {{HOMEOWNER_RESIDENCE}}. Normally when a property is sold, the Association is given notice by the Realtor and title company, but in certain circumstances, such as when resold by the federal government (i.e. HUD or VA), no such notification is provided.</p>
+      <p style="text-align: justify">Because the Association was unaware of the ownership change, you have likely not received copies of the governing documents for the Association, which are normally provided at close. If you have not received your copy of the governing documents, please inform us so a copy can be mailed to you.</p>
+      <p style="text-align: justify">Additionally, because of the late discovery of this ownership change, you have likely not received notices sent by the Association. As such, assessments for Association dues have accumulated, as well as fees related to the collection of those dues.</p>
+      <p style="text-align: justify">The Association is willing to write off all fees related to collection once payment is received for the delinquent dues. As such, we have included with this letter an invoice for the Association dues assessments. Please send payment for the delinquent dues no later than {{DATE+45}}</p>
+      <p style="text-align: justify">If you have any questions about this letter, the Association, or the delinquent Association dues assessments, please contact us at {{ORG_PHONE}} or {{ORG_EMAIL_MANAGEMENT}}.</p>
+
+      <br />
+      <br />
+      {{LETTER_SIGNATURE}}<br />
+      <br />
+      <br />
+      {{LETTER_APPROVER}}<br />
+      {{LETTER_PERSON}}
+    ]]></pdf>
+  </letter>
+</ajax-response>

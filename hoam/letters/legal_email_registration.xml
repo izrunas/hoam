@@ -1,0 +1,138 @@
+<?xml version="1.0" ?>
+
+<!--
+ * This file is part of HOAM, copyright (C) 2002-2020 Robert Butler
+ *
+ * HOAM is free software; you can redistribute it and/or modify it under the
+ * terms of the GNU Affero General Public License as published by the Free
+ * Software Foundation; either version 3 of the License, or (at your option)
+ * any later version.
+ *
+ * HOAM is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with HOAM; if not, see http://www.gnu.org/licenses or write to the
+ * Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+ * 02110-1301
+ *
+ * Questions specific to HOAM should be directed to ARP Realty. Please see
+ * the HOAM web site at http://hoam.arprs.com/
+ *
+ * Some portions of HOAM incorporate ideas and/or code from other sources, and
+ * those portions are explicitly mentioned and attributed in the relevant
+ * section of HOAM source code. Questions about that code should be directed to
+ * the original authors.
+ *
+ *-->
+
+<ajax-response>
+  <letter>
+    <name>Legal - Email Registration Policy</name>
+    <require_delivery_confirmation>0</require_delivery_confirmation>
+    <require_delivery_certified>0</require_delivery_certified>
+    <suggest_delivery_confirmation>0</suggest_delivery_confirmation>
+    <suggest_delivery_certified>0</suggest_delivery_certified>
+	<additional_fields>
+		<field>
+			<description>Effective date of the filing</description>
+			<id>field_effective</id>
+			<required>1</required>
+		</field>
+		<field>
+			<description>Date of associated Board meeting</description>
+			<id>field_meeting</id>
+			<required>1</required>
+		</field>
+	</additional_fields>
+    <content><![CDATA[
+{{LETTER_HEAD}}
+
+<h2>{{LETTER_TOPIC}}</h2>
+
+<p>WHEREAS, pursuant to Section 209.0051(e) of the Texas Property Code, the Board of Directors of {{ORG_NAME}} (the <q>Association</q>) is permitted to send notice of Board meetings to the members via e-mail to each owner who has registered an e-mail address with the Association; and</p>
+
+<p>WHEREAS, pursuant to Section 209.0051(f) of the Texas Property Code, it is an owner's duty to keep an updated e-mail address registered with the Association.</p>
+
+<p>NOW, THEREFORE, IT IS RESOLVED, the following procedures and practices are established for the registration of e-mail addresses with the Association, and the same are to be known as the <q>{{LETTER_TOPIC}}</q> of the Association.</p>
+
+<ol>
+	<li>__Purpose__. The purpose of this {{LETTER_TOPIC}} is to facilitate proper notice of regular and special Board meetings of the Association pursuant to Section 209.0051(e) of the Texas Property Code.</li>
+	<li>__Registration__. Each owner is responsible to register his or her e-mail address with the Association if he/she desires to receive email notifications of meetings, and it is the owner's responsibility to keep his or her registered e-mail address up-to-date and accurate. In order to register his/her email address, the owner must access the website for the Association which is located at {{WEBSITE_URL}}, and properly fill out the registration form on that website. Please allow seven (7) business days from submission of an e-mail address for the Association to update its records. Please note, correspondence to the Association and/or its property manager from an email address or by any method other than the above-designated website is not sufficient to register such email address with the Association.</li>
+	<li>__Failure to Register__. In the event an owner fails to register and/or maintain an accurate e-mail address with the Association, the owner may not receive e-mail notification of regular and special Board meetings. The Association has no obligation to actively seek out a current e-mail address for each owner. In addition, the Association has no obligation to investigate or obtain an updated e-mail address for owners whose current registered e-mail address is returning an e-mail delivery failure message/undeliverable message.</li>
+	<li>__Definitions__. The definitions contained in the Association's dedicatory instruments are hereby incorporated herein by reference.</li>
+	<li>__Other Uses__. The Association may optionally use the registered e-mail address for communication with owners regarding other Association business, notices, events or other purposes related to fulfillment of the duties of the Association.</li> 
+</ol>
+
+<p>This policy shall supersede and replace any previously adopted policy to the extent that the terms of such policy are inconsistent with this policy.</p>
+
+<p>IT IS FURTHER RESOLVED that this {{LETTER_TOPIC}} is effective on <span id="field_effective"><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u></span>, to remain in effect until revoked, modified, or amended.</p>
+
+<p>This is to certify that the foregoing resolution was adopted by the Board of Directors at a meeting of same on <span id="field_meeting"><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u></span> and has not been modified, rescinded, or revoked.</p> 
+
+<div style="border-top: 1px solid black; margin: 2em 5em 1em 60%; width: 20em">&nbsp;</div>
+<div style="border-bottom: 1px solid black; margin: 1em 5em 0 60%; text-align: center; width: 20em">{{LETTER_APPROVER}}</div>
+<div style="margin: 0 5em 2em 60%; width: 20em">{{LETTER_PERSON}}, {{ORG_NAME}}</div>
+
+<div style="float: left;text-transform:uppercase">STATE OF {{ORG_STATE}}<br/><br/>COUNTY OF {{ORG_COUNTY}}</div>
+<div style="padding-left: 25%; ">&sect;<br/>&sect;<br/>&sect;</div>
+
+<p>SUBSCRIBED AND SWORN TO before me by {{LETTER_APPROVER}} in their capacity as {{LETTER_PERSON}} for {{ORG_NAME}}, on <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>, {{CURRENTYEAR}}.</p>
+
+<div style="border-top: 1px solid black; margin: 3em 5em 2em 60%; width: 20em">Notary Public - State of {{ORG_STATE}}</div>
+
+AFTER RECORDING, PLEASE RETURN TO:<br />
+
+{{ORG_ADDRESS}}
+]]></content>
+    <pdf><![CDATA[
+    {{LETTER_HEAD}}
+
+    <h4 style="font-variant: small-caps; text-align: center">{{LETTER_TOPIC}}</h4>
+	<br />
+	<p style="text-align: justify">WHEREAS, pursuant to Section 209.0051(e) of the Texas Property Code, the Board of Directors of {{ORG_NAME}} (the <q>Association</q>) is permitted to send notice of Board meetings to the members via e-mail to each owner who has registered an e-mail address with the Association; and</p>
+
+	<p style="text-align: justify">WHEREAS, pursuant to Section 209.0051(f) of the Texas Property Code, it is an owner's duty to keep an updated e-mail address registered with the Association.</p>
+
+	<p style="text-align: justify">NOW, THEREFORE, IT IS RESOLVED, the following procedures and practices are established for the registration of e-mail addresses with the Association, and the same are to be known as the <q>{{LETTER_TOPIC}}</q> of the Association.</p>
+
+	<ol>
+		<li>__Purpose__. The purpose of this {{LETTER_TOPIC}} is to facilitate proper notice of regular and special Board meetings of the Association pursuant to Section 209.0051(e) of the Texas Property Code.</li>
+		<li>__Registration__. Each owner is responsible to register his or her e-mail address with the Association if he/she desires to receive email notifications of meetings, and it is the owner's responsibility to keep his or her registered e-mail address up-to-date and accurate. In order to register his/her email address, the owner must access the website for the Association which is located at {{WEBSITE_URL}}, and properly fill out the registration form on that website. Please allow seven (7) business days from submission of an e-mail address for the Association to update its records. Please note, correspondence to the Association and/or its property manager from an email address or by any method other than the above-designated website is not sufficient to register such email address with the Association.</li>
+		<li>__Failure to Register__. In the event an owner fails to register and/or maintain an accurate e-mail address with the Association, the owner may not receive e-mail notification of regular and special Board meetings. The Association has no obligation to actively seek out a current e-mail address for each owner. In addition, the Association has no obligation to investigate or obtain an updated e-mail address for owners whose current registered e-mail address is returning an e-mail delivery failure message/undeliverable message.</li>
+		<li>__Definitions__. The definitions contained in the Association's dedicatory instruments are hereby incorporated herein by reference.</li>
+		<li>__Other Uses__. The Association may optionally use the registered e-mail address for communication with owners regarding other Association business, notices, events or other purposes related to fulfillment of the duties of the Association.</li> 
+	</ol>
+
+    <p style="text-align: justify">This policy shall supersede and replace any previously adopted policy to the extent that the terms of such policy are inconsistent with this policy.</p>
+
+    <p style="text-align: justify">IT IS FURTHER RESOLVED that this {{LETTER_TOPIC}} is effective on {{FIELD_EFFECTIVE}}, to remain in effect until revoked, modified, or amended.</p>
+
+    <p style="text-align: justify">This is to certify that the foregoing resolution was adopted by the Board of Directors at a meeting of same on {{FIELD_MEETING}} and has not been modified, rescinded, or revoked.</p> 
+
+    <table style="width: 100%">
+      <tr><td style="width: 50%">&nbsp;</td><td style="border-bottom: 1px solid black">&nbsp;</td></tr>
+      <tr><td style="width: 50%">&nbsp;</td><td style="border-bottom: 1px solid black; text-align: center">{{LETTER_APPROVER}}</td></tr>
+      <tr><td style="width: 50%">&nbsp;</td><td style="text-align: right">{{LETTER_PERSON}}, {{ORG_NAME}}</td></tr>
+    <table>
+    <br />
+    <table style="width: 100%">
+      <tr><td style="text-transform:uppercase; width: 35%">STATE OF {{ORG_STATE}}</td><td>&sect;</td></tr>
+      <tr><td>&nbsp;</td><td>&sect;</td></tr>
+      <tr><td style="text-transform:uppercase">COUNTY OF {{ORG_COUNTY}}</td><td>&sect;</td></tr>
+    </table>
+    <p style="text-align: justify">SUBSCRIBED AND SWORN TO before me by {{LETTER_APPROVER}} in their capacity as {{LETTER_PERSON}} for {{ORG_NAME}}, on <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>, {{CURRENTYEAR}}.</p>
+    <table style="width: 100%">
+      <tr><td style="width: 50%">&nbsp;</td><td style="text-align: right">&nbsp;</td></tr>
+      <tr><td style="width: 50%">&nbsp;</td><td style="border-top: 1px solid black; text-align: center">Notary Public - State of {{ORG_STATE}}</td></tr>
+    </table>
+    <br />
+    AFTER RECORDING, PLEASE RETURN TO:<br />
+    <br />
+    {{ORG_ADDRESS}}
+    ]]></pdf>
+  </letter>
+</ajax-response>
+

@@ -1,0 +1,102 @@
+<?xml version='1.0' ?>
+
+<!--
+ * This file is part of HOAM, copyright (C) 2002-2020 Robert Butler
+ *
+ * HOAM is free software; you can redistribute it and/or modify it under the
+ * terms of the GNU Affero General Public License as published by the Free
+ * Software Foundation; either version 3 of the License, or (at your option)
+ * any later version.
+ *
+ * HOAM is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with HOAM; if not, see http://www.gnu.org/licenses or write to the
+ * Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+ * 02110-1301
+ *
+ * Questions specific to HOAM should be directed to ARP Realty. Please see
+ * the HOAM web site at http://hoam.arprs.com/
+ *
+ * Some portions of HOAM incorporate ideas and/or code from other sources, and
+ * those portions are explicitly mentioned and attributed in the relevant
+ * section of HOAM source code. Questions about that code should be directed to
+ * the original authors.
+ *
+ *-->
+
+<ajax-response>
+  <style><![CDATA[
+    #fillme h1 { font-weight: bold; font-variant: small-caps; page-break-before: always; text-align: center; text-transform: capitalize; }
+    #fillme .homeowner { font-size: 90%; }
+    #fillme .street_address { font-size: 90%; text-align: center; }
+    #fillme .signature { border-bottom: 2px solid black; }
+  ]]></style>
+  <report>
+    <name>Regular Assessment Amounts for Each Owner</name>
+    <php><![CDATA[
+//    global $_HOAM_setting;
+    include (HOAM_PATH_FUNCTION . 'homeowner.php');
+    
+    $homeowner_class = new HOAM_homeowner ('homeowners');
+    $lot_class = new HOAM_lot ('lots');
+    $property_class = new HOAM_property ('misc_property');
+    
+	$street_list = $lot_class -> listStreets ();
+	$HTML = '';
+	foreach ($street_list as $street) {
+	$HTML .= '<h1>' . $street . '</h1>';
+	$HTML .= '<table>';
+	$HTML .= '<colgroup>';
+	$HTML .= '<col width="35%" />';
+	$HTML .= '<col width="35%" />';
+	$HTML .= '<col width="30%" />';
+	$HTML .= '</colgroup>';
+	$HTML .= '<thead>';
+	$HTML .= '<tr><th>Street Address</th><th>Homeowner</th><th>Assessment Amount</th></tr>';
+	$HTML .= '</thead>';
+	$HTML .= '<tfoot>';
+	$HTML .= '<tr><th>Street Address</th><th>Homeowner</th><th>Assessment Amount</th></tr>';
+	$HTML .= '</tfoot>';
+	$HTML .= '<tbody class="lot_list">';
+	if ($_HOAM_setting ['lot']['property']) {
+		$property_list = $property_class -> listAll ();
+	}
+	$lot_list = $lot_class -> listByStreet ($street);
+	foreach ($lot_list as $lot) {
+		$current_owner = $homeowner_class -> returnCurrentOwner ($lot);
+		$HTML .= '<td class="street_address">' . HOAM_returnAddress ($lot) . '</td>';
+		$HTML .= '<td class="homeowner">' . HOAM_homeownerReturnMailingAddress ($current_owner) . '</td>';
+		switch ($_HOAM_setting ['budget']['assessment']['unit']) {
+			case 'single' :
+				$assessment_amount = $_HOAM_setting ['budget']['assessment']['amount'];
+				break;
+			case 'sqft' :
+				$assessment_amount = $_HOAM_setting ['budget']['assessment']['amount'] * $lot_class -> returnSqft ($homeowner_class -> returnLotId ($current_owner));
+				break;
+		}
+		// Also need to add to the assessment amount any miscellaneous property
+		// the homeowner is renting.
+		if ($_HOAM_setting ['lot']['property']) {
+			foreach ($property_list as $property) {
+				if ((int) $property['flags'] & (int) $_HOAM_setting ['property']['flags']['rented']) {
+					if ($property['owner_id'] == $current_owner) {
+						$assessment_amount += $property['rental_amount'];
+					}
+				}
+			}
+		}
+		$HTML .= '<td class="center">' . HOAM_returnCurrency ($assessment_amount) . '</td>';
+		$HTML .= '</tr>';
+	}
+	$HTML .= '</tbody>';
+	$HTML .= '</table>';
+	}
+	echo $HTML;
+    ]]></php>
+  </report>
+</ajax-response>
+

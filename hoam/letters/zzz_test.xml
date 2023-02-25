@@ -1,0 +1,652 @@
+<?xml version="1.0" ?>
+
+<!--
+ * This file is part of HOAM, copyright (C) 2002-2020 Robert Butler
+ *
+ * HOAM is free software; you can redistribute it and/or modify it under the
+ * terms of the GNU Affero General Public License as published by the Free
+ * Software Foundation; either version 3 of the License, or (at your option)
+ * any later version.
+ *
+ * HOAM is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with HOAM; if not, see http://www.gnu.org/licenses or write to the
+ * Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+ * 02110-1301
+ *
+ * Questions specific to HOAM should be directed to ARP Realty. Please see
+ * the HOAM web site at http://hoam.arprs.com/
+ *
+ * Some portions of HOAM incorporate ideas and/or code from other sources, and
+ * those portions are explicitly mentioned and attributed in the relevant
+ * section of HOAM source code. Questions about that code should be directed to
+ * the original authors.
+ *
+ *-->
+
+<ajax-response>
+  <letter>
+    <name>ZZZ Test Letter</name>
+    <require_delivery_confirmation>0</require_delivery_confirmation>
+    <require_delivery_signature>0</require_delivery_signature>
+    <require_delivery_certified>0</require_delivery_certified>
+    <suggest_delivery_confirmation>0</suggest_delivery_confirmation>
+    <suggest_delivery_signature>0</suggest_delivery_signature>
+    <suggest_delivery_certified>0</suggest_delivery_certified>
+	<!-- Additional fields are optional extra information that is required for a
+	particular letter, above and beyond the default fields and tags available
+	to letters. There is little validation done on data input into these fields.
+	
+	Please note! In the letter content, changes are reflected by modifying an
+	HTML element with a matching ID. In the PDF generation, the field id should
+	be specified in braces ({{}}) like other elements. -->
+	<additional_fields>
+		<field>
+			<description>Additional Field One</description>
+			<id>field_one</id>
+			<required>1</required>
+		</field>
+		<field>
+			<description>Additional Field Two</description>
+			<id>field_two</id>
+			<required>0</required>
+		</field>
+	</additional_fields>
+	<!-- Prerequisites are conditions that must exist before the system will allow
+	a new letter to be created for the selected homeowner. For instance, the
+	2nd delinquincy notice requires
+		a) there be a balance on the account, and
+		b) a first notice to have been sent previously.
+	
+	Prerequisites are PHP code that will be executed when the letter is
+	submitted. --> 
+	<prerequisites><![CDATA[
+	]]></prerequisites>
+	<!-- Finish is for specific instructions to be executed after a letter has
+	been successfully validated (all prerequisites met and no other form
+	errors). For example, after entering a 1st delinquency notice, the homeowner
+	record will be updated accordingly.
+	 
+	Prerequisites are PHP code that will be executed when the letter is
+	submitted. --> 
+	<finish><![CDATA[
+	]]></finish>
+    <content><![CDATA[
+	
+<h1>Test Letter</h1>
+<p>This letter is used for testing and validation of wiki formatting and the available substituitions. Please contact your support personnel for assistance.</p>
+
+<h2>Wiki Formatting</h2>
+<dl>
+
+<dt>&#95;&#95;Underlined Text&#95;&#95;</dt>
+<dd>__Underlined Text__</dd>
+
+<dt>&#45;&#45;Line-Through Text&#45;&#45;</dt>
+<dd>--Line-Through Text--</dd>
+
+<dt>&#39;&#39;Italic Text&#39;&#39;</dt>
+<dd>''Italic Text''</dd>
+
+<dt>&#39;&#39;&#39;Bold Text&#39;&#39;&#39;</dt>
+<dd>'''Bold Text'''</dd>
+
+<dt>&#39;&#39;&#39;&#39;&#39;Bold and Italic Text&#39;&#39;&#39;&#39;&#39;</dt>
+<dd>'''''Bold and Italic Text'''''</dd>
+
+<dt>&#95;&#95;&#45;&#45;&#39;&#39;&#39;&#39;&#39;Underlined, Line-Through, Bold and Italic Text&#39;&#39;&#39;&#39;&#39;&#45;&#45;&#95;&#95;</dt>
+<dd>__--'''''Underlined, Line-Through, Bold and Italic Text'''''--__</dd>
+
+<dt>&#37;&#37;&#37;Random Colored Text&#37;&#37;&#37;</dt>
+<dd>%%%Random Colored Text%%%</dd>
+
+<dt><br />
+&#123;&#123;&#123;<br />
+Pre<br />
+&nbsp;&nbsp;&nbsp;&nbsp;formatted<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;text<br />
+test.<br />
+&#125;&#125;&#125;</dt>
+<dd>
+{{{
+Pre
+    formatted
+        text
+test.
+}}}</dd>
+
+<dt>&#45;&#45;&#45;&#45; (Horizontal Line)</dt>
+<dd>----</dd>
+
+<dt>&#91;&#91;email:sales@arprs.com&#93;&#93;</dt>
+<dd>[[email:sales@arprs.com]]</dd>
+
+<dt>&#91;&#91;email:sales@arprs.com|Email the sales department&#93;&#93;</dt>
+<dd>[[email:sales@arprs.com|Email the sales department]]</dd>
+
+<dt>&#91;&#91;email:&#123;&#123;ORG_EMAIL_MANAGEMENT&#125;&#125;&#93;&#93;</dt>
+<dd>[[email:{{ORG_EMAIL_MANAGEMENT}}]]</dd>
+
+<dt>&#91;&#91;email:&#123;&#123;ORG_EMAIL_MANAGEMENT&#125;&#125;|Email the management company &#93;&#93;</dt>
+<dd>[[email:{{ORG_EMAIL_MANAGEMENT}}|Email the management company]]</dd>
+
+<dt>&#91;&#91;http://arprs.com/&#93;&#93;</dt>
+<dd>[[http://arprs.com/]]</dd>
+
+<dt>&#91;&#91;http://arprs.com/|ARP Realty Services, Inc.&#93;&#93;</dt>
+<dd>[[http://arprs.com/|ARP Realty Services, Inc.]]</dd>
+
+<dt>&#91;http:privacy|Privacy Policy&#93;</dt>
+<dd>[http:privacy|Privacy Policy]</dd>
+
+<dt>&#91;http:privacy&#93;</dt>
+<dd>[http:privacy]</dd>
+
+</dl>
+
+<h2>Wiki Vars</h2>
+<dl>
+
+<dt>&#123;&#123;FIELD_ONE&#125;&#125; Additional Field One</dt>
+<dd><span id="field_one"></span></dd>
+<dd>''This option is only available on letters that include additional fields.''</dd>
+
+<dt>&#123;&#123;FIELD_TWO&#125;&#125; Additional Field Two</dt>
+<dd><span id="field_two"></span></dd>
+<dd>''This option is only available on letters that include additional fields.''</dd>
+
+<dt>&#123;&#123;BUDGET_ASSESSMENT_AMOUNT&#125;&#125;</dt>
+<dd>{{BUDGET_ASSESSMENT_AMOUNT}}</dd>
+
+<dt>&#123;&#123;BUDGET_FEE_COLLECTION&#125;&#125;</dt>
+<dd>{{BUDGET_FEE_COLLECTION}}</dd>
+
+<dt>&#123;&#123;BUDGET_FEE_LATE&#125;&#125;</dt>
+<dd>{{BUDGET_FEE_LATE}}</dd>
+
+<dt>&#123;&#123;BUDGET_FEE_RETURNED&#125;&#125;</dt>
+<dd>{{BUDGET_FEE_RETURNED}}</dd>
+
+<dt>&#123;&#123;BUDGET_DUE&#125;&#125;</dt>
+<dd>{{BUDGET_DUE}}</dd>
+<dd>''This option is only available in letters (not standard wiki pages).''</dd>
+
+<dt>&#123;&#123;BUDGET_DUE+175&#125;&#125;</dt>
+<dd>{{BUDGET_DUE+175}}</dd>
+<dd>''This option is only available in letters (not standard wiki pages).''</dd>
+
+<dt>&#123;&#123;BUDGET_DUE-10&#125;&#125;</dt>
+<dd>{{BUDGET_DUE-10}}</dd>
+<dd>''This option is only available in letters (not standard wiki pages).''</dd>
+
+<dt>&#123;&#123;BUDGET_INTEREST_RATE&#125;&#125;</dt>
+<dd>{{BUDGET_INTEREST_RATE}}</dd>
+
+<dt>&#123;&#123;BUDGET_LAST_PAYMENT&#125;&#125;</dt>
+<dd>{{BUDGET_LAST_PAYMENT}}</dd>
+<dd>''This option is only available in letters (not standard wiki pages).''</dd>
+
+<dt>&#123;&#123;CURRENTDAY&#125;&#125;</dt>
+<dd>{{CURRENTDAY}}</dd>
+
+<dt>&#123;&#123;CURRENTDAY2&#125;&#125; (With Leading Zeros)</dt>
+<dd>{{CURRENTDAY2}}</dd>
+
+<dt>&#123;&#123;CURRENTDAY3&#125;&#125;</dt>
+<dd>{{CURRENTDAY3}}</dd>
+
+<dt>&#123;&#123;CURRENTDAYNAME&#125;&#125;</dt>
+<dd>{{CURRENTDAYNAME}}</dd>
+
+<dt>&#123;&#123;CURRENTDOW&#125;&#125;</dt>
+<dd>{{CURRENTDOW}}</dd>
+
+<dt>&#123;&#123;CURRENTMONTH&#125;&#125;</dt>
+<dd>{{CURRENTMONTH}}</dd>
+
+<dt>&#123;&#123;CURRENTMONTH2&#125;&#125; (With Leading Zeros)</dt>
+<dd>{{CURRENTMONTH2}}</dd>
+
+<dt>&#123;&#123;CURRENTMONTHABBR&#125;&#125;</dt>
+<dd>{{CURRENTMONTHABBR}}</dd>
+
+<dt>&#123;&#123;CURRENTMONTHNAME&#125;&#125;</dt>
+<dd>{{CURRENTMONTHNAME}}</dd>
+
+<dt>&#123;&#123;CURRENTTIME&#125;&#125;</dt>
+<dd>{{CURRENTTIME}}</dd>
+
+<dt>&#123;&#123;CURRENTHOUR&#125;&#125;</dt>
+<dd>{{CURRENTHOUR}}</dd>
+
+<dt>&#123;&#123;CURRENTMINUTE&#125;&#125;</dt>
+<dd>{{CURRENTMINUTE}}</dd>
+
+<dt>&#123;&#123;CURRENTWEEK&#125;&#125;</dt>
+<dd>{{CURRENTWEEK}}</dd>
+
+<dt>&#123;&#123;CURRENTYEAR&#125;&#125;</dt>
+<dd>{{CURRENTYEAR}}</dd>
+
+<dt>&#123;&#123;CURRENTTIMESTAMP&#125;&#125;</dt>
+<dd>{{CURRENTTIMESTAMP}}</dd>
+
+<dt>&#123;&#123;DATE&#125;&#125;</dt>
+<dd>{{DATE}}</dd>
+
+<dt>&#123;&#123;DATE+10&#125;&#125;</dt>
+<dd>{{DATE+10}}</dd>
+
+<dt>&#123;&#123;DATE-2&#125;&#125;</dt>
+<dd>{{DATE-2}}</dd>
+
+<dt>&#123;&#123;HOAM&#125;&#125;</dt>
+<dd>{{HOAM}}</dd>
+
+<dt>&#123;&#123;HOMEOWNER_MAILING&#125;&#125;</dt>
+<dd>{{HOMEOWNER_MAILING}}</dd>
+<dd>''This option is only available in letters (not standard wiki pages).''</dd>
+
+<dt>&#123;&#123;HOMEOWNER_NAME&#125;&#125;</dt>
+<dd>{{HOMEOWNER_NAME}}</dd>
+<dd>''This option is only available in letters (not standard wiki pages).''</dd>
+
+<dt>&#123;&#123;HOMEOWNER_RESIDENCE&#125;&#125;</dt>
+<dd>{{HOMEOWNER_RESIDENCE}}</dd>
+<dd>''This option is only available in letters (not standard wiki pages).''</dd>
+
+<dt>&#123;&#123;LETTER_APPROVER&#125;&#125;</dt>
+<dd>{{LETTER_APPROVER}}</dd>
+<dd>''This option is only available in letters (not standard wiki pages).''</dd>
+
+<dt>&#123;&#123;LETTER_ASSESSMENT_AMOUNT&#125;&#125;</dt>
+<dd>{{LETTER_ASSESSMENT_AMOUNT}}</dd>
+<dd>''This option is only available in letters (not standard wiki pages). This is subtly differet from &#123;&#123;BUDGET_ASSESSMENT_AMOUNT&#125;&#125; in that it is the assessment amount for a specfic unit rather than generically; also, &#123;&#123;BUDGET_ASSESSMENT_AMOUNT&#125;&#125; does not take into account whether assessments are a flat rate or by sqft.''</dd>
+
+<dt>&#123;&#123;LETTER_FOOTER&#125;&#125;</dt>
+<dd>{{LETTER_FOOTER}}</dd>
+
+<dt>&#123;&#123;LETTER_HEAD&#125;&#125;</dt>
+<dd>{{LETTER_HEAD}}</dd>
+
+<dt>&#123;&#123;LETTER_PERSON&#125;&#125;</dt>
+<dd>{{LETTER_PERSON}}</dd>
+<dd>''This option is only available in letters (not standard wiki pages).''</dd>
+
+<dt>&#123;&#123;LETTER_SIGNATURE&#125;&#125;</dt>
+<dd>{{LETTER_SIGNATURE}}</dd>
+
+<dt>&#123;&#123;LETTER_TOPIC&#125;&#125;</dt>
+<dd>{{LETTER_TOPIC}}</dd>
+<dd>''This option is only available in letters (not standard wiki pages).''</dd>
+
+<dt>&#123;&#123;LOT_BLOCK&#125;&#125;</dt>
+<dd>{{LOT_BLOCK}}</dd>
+<dd>''This option is only available in letters (not standard wiki pages).''</dd>
+
+<dt>&#123;&#123;LOT_LOT&#125;&#125;</dt>
+<dd>{{LOT_LOT}}</dd>
+<dd>''This option is only available in letters (not standard wiki pages).''</dd>
+
+<dt>&#123;&#123;LOT_PLAT&#125;&#125;</dt>
+<dd>{{LOT_PLAT}}</dd>
+<dd>''This option is only available in letters (not standard wiki pages).''</dd>
+
+<dt>&#123;&#123;ORG_ADDRESS&#125;&#125;</dt>
+<dd>{{ORG_ADDRESS}}</dd>
+
+<dt>&#123;&#123;ORG_CITY&#125;&#125;</dt>
+<dd>{{ORG_CITY}}</dd>
+
+<dt>&#123;&#123;ORG_COUNTY&#125;&#125;</dt>
+<dd>{{ORG_COUNTY}}</dd>
+
+<dt>&#123;&#123;ORG_DOC_EXPEDITE&#125;&#125;</dt>
+<dd>{{ORG_DOC_EXPEDITE}}</dd>
+
+<dt>&#123;&#123;ORG_DOC_REFINACE&#125;&#125;</dt>
+<dd>{{ORG_DOC_REFINANCE}}</dd>
+
+<dt>&#123;&#123;ORG_DOC_RESALE&#125;&#125;</dt>
+<dd>{{ORG_DOC_RESALE}}</dd>
+
+<dt>&#123;&#123;ORG_EMAIL_BOARD&#125;&#125;</dt>
+<dd>{{ORG_EMAIL_BOARD}}</dd>
+
+<dt>&#123;&#123;ORG_EMAIL_OFFICERS&#125;&#125;</dt>
+<dd>{{ORG_EMAIL_OFFICERS}}</dd>
+
+<dt>&#123;&#123;ORG_EMAIL_MANAGEMENT&#125;&#125;</dt>
+<dd>{{ORG_EMAIL_MANAGEMENT}}</dd>
+
+<dt>&#123;&#123;ORG_NAME&#125;&#125;</dt>
+<dd>{{ORG_NAME}}</dd>
+
+<dt>&#123;&#123;ORG_PROPERTY_NAME&#125;&#125;</dt>
+<dd>{{ORG_PROPERTY_NAME}}</dd>
+
+<dt>&#123;&#123;ORG_PHONE&#125;&#125;</dt>
+<dd>{{ORG_PHONE}}</dd>
+
+<dt>&#123;&#123;ORG_PHONE_FAX&#125;&#125;</dt>
+<dd>{{ORG_PHONE_FAX}}</dd>
+
+<dt>&#123;&#123;ORG_STATE&#125;&#125;</dt>
+<dd>{{ORG_STATE}}</dd>
+
+<dt>&#123;&#123;ORG_UNITS&#125;&#125;</dt>
+<dd>{{ORG_UNITS}}</dd>
+
+<dt>&#123;&#123;PAYPAL_EMAIL&#125;&#125;</dt>
+<dd>{{PAYPAL_EMAIL}}</dd>
+
+<dt>&#123;&#123;PAYPAL_SURCHARGE_AMOUNT&#125;&#125;</dt>
+<dd>{{PAYPAL_SURCHARGE_AMOUNT}}</dd>
+
+<dt>&#123;&#123;PAYPAL_SURCHARGE_PERCENT&#125;&#125;</dt>
+<dd>{{PAYPAL_SURCHARGE_PERCENT}}</dd>
+
+<dt>&#123;&#123;WEBSITE_BLURB&#125;&#125;</dt>
+<dd>{{WEBSITE_BLURB}}</dd>
+
+<dt>&#123;&#123;WEBSITE_DOMAIN&#125;&#125;</dt>
+<dd>{{WEBSITE_DOMAIN}}</dd>
+
+<dt>&#123;&#123;WEBSITE_URL&#125;&#125;</dt>
+<dd>{{WEBSITE_URL}}</dd>
+
+</dl>
+]]></content>
+	<!-- Because of current limitations in the PDF library HTML parsing, PDF is
+	an optional field for including a pdf-specific rendering of the letter. If
+	this field is present in the letter, HOAM will generate a PDF file based on
+	these contents. --> 
+	<pdf><![CDATA[
+<h1>Test Letter</h1>
+<p>This letter is used for testing and validation of wiki formatting and the available substituitions. Please contact your support personnel for assistance.</p>
+
+<h2>Wiki Formatting</h2>
+<dl>
+
+<dt>&#95;&#95;Underlined Text&#95;&#95;</dt>
+<dd>__Underlined Text__</dd>
+
+<dt>&#45;&#45;Line-Through Text&#45;&#45;</dt>
+<dd>--Line-Through Text--</dd>
+
+<dt>&#39;&#39;Italic Text&#39;&#39;</dt>
+<dd>''Italic Text''</dd>
+
+<dt>&#39;&#39;&#39;Bold Text&#39;&#39;&#39;</dt>
+<dd>'''Bold Text'''</dd>
+
+<dt>&#39;&#39;&#39;&#39;&#39;Bold and Italic Text&#39;&#39;&#39;&#39;&#39;</dt>
+<dd>'''''Bold and Italic Text'''''</dd>
+
+<dt>&#95;&#95;&#45;&#45;&#39;&#39;&#39;&#39;&#39;Underlined, Line-Through, Bold and Italic Text&#39;&#39;&#39;&#39;&#39;&#45;&#45;&#95;&#95;</dt>
+<dd>__--'''''Underlined, Line-Through, Bold and Italic Text'''''--__</dd>
+
+<dt>&#37;&#37;&#37;Random Colored Text&#37;&#37;&#37;</dt>
+<dd>%%%Random Colored Text%%%</dd>
+
+<dt><br />
+&#123;&#123;&#123;<br />
+Pre<br />
+&nbsp;&nbsp;&nbsp;&nbsp;formatted<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;text<br />
+test.<br />
+&#125;&#125;&#125;</dt>
+<dd>
+{{{
+Pre
+    formatted
+        text
+test.
+}}}</dd>
+
+<dt>&#45;&#45;&#45;&#45; (Horizontal Line)</dt>
+<dd>----</dd>
+
+<dt>&#91;&#91;email:sales@arprs.com&#93;&#93;</dt>
+<dd>[[email:sales@arprs.com]]</dd>
+
+<dt>&#91;&#91;email:sales@arprs.com|Email the sales department&#93;&#93;</dt>
+<dd>[[email:sales@arprs.com|Email the sales department]]</dd>
+
+<dt>&#91;&#91;email:&#123;&#123;ORG_EMAIL_MANAGEMENT&#125;&#125;&#93;&#93;</dt>
+<dd>[[email:{{ORG_EMAIL_MANAGEMENT}}]]</dd>
+
+<dt>&#91;&#91;email:&#123;&#123;ORG_EMAIL_MANAGEMENT&#125;&#125;|Email the management company &#93;&#93;</dt>
+<dd>[[email:{{ORG_EMAIL_MANAGEMENT}}|Email the management company]]</dd>
+
+<dt>&#91;&#91;http://arprs.com/&#93;&#93;</dt>
+<dd>[[http://arprs.com/]]</dd>
+
+<dt>&#91;&#91;http://arprs.com/|ARP Realty Services, Inc.&#93;&#93;</dt>
+<dd>[[http://arprs.com/|ARP Realty Services, Inc.]]</dd>
+
+<dt>&#91;http:privacy|Privacy Policy&#93;</dt>
+<dd>[http:privacy|Privacy Policy]</dd>
+
+<dt>&#91;http:privacy&#93;</dt>
+<dd>[http:privacy]</dd>
+
+</dl>
+
+<h2>Wiki Vars</h2>
+<dl>
+
+<dt>&#123;&#123;FIELD_ONE&#125;&#125; Additional Field One</dt>
+<dd><span id="field_one"></span></dd>
+<dd>''This option is only available on letters that include additional fields.''</dd>
+
+<dt>&#123;&#123;FIELD_TWO&#125;&#125; Additional Field Two</dt>
+<dd><span id="field_two"></span></dd>
+<dd>''This option is only available on letters that include additional fields.''</dd>
+
+<dt>&#123;&#123;BUDGET_ASSESSMENT_AMOUNT&#125;&#125;</dt>
+<dd>{{BUDGET_ASSESSMENT_AMOUNT}}</dd>
+
+<dt>&#123;&#123;BUDGET_FEE_COLLECTION&#125;&#125;</dt>
+<dd>{{BUDGET_FEE_COLLECTION}}</dd>
+
+<dt>&#123;&#123;BUDGET_FEE_LATE&#125;&#125;</dt>
+<dd>{{BUDGET_FEE_LATE}}</dd>
+
+<dt>&#123;&#123;BUDGET_DUE&#125;&#125;</dt>
+<dd>{{BUDGET_DUE}}</dd>
+<dd>''This option is only available in letters (not standard wiki pages).''</dd>
+
+<dt>&#123;&#123;BUDGET_DUE+175&#125;&#125;</dt>
+<dd>{{BUDGET_DUE+175}}</dd>
+<dd>''This option is only available in letters (not standard wiki pages).''</dd>
+
+<dt>&#123;&#123;BUDGET_DUE-10&#125;&#125;</dt>
+<dd>{{BUDGET_DUE-10}}</dd>
+<dd>''This option is only available in letters (not standard wiki pages).''</dd>
+
+<dt>&#123;&#123;BUDGET_INTEREST_RATE&#125;&#125;</dt>
+<dd>{{BUDGET_INTEREST_RATE}}</dd>
+
+<dt>&#123;&#123;BUDGET_LAST_PAYMENT&#125;&#125;</dt>
+<dd>{{BUDGET_LAST_PAYMENT}}</dd>
+<dd>''This option is only available in letters (not standard wiki pages).''</dd>
+
+<dt>&#123;&#123;CURRENTDAY&#125;&#125;</dt>
+<dd>{{CURRENTDAY}}</dd>
+
+<dt>&#123;&#123;CURRENTDAY2&#125;&#125; (With Leading Zeros)</dt>
+<dd>{{CURRENTDAY2}}</dd>
+
+<dt>&#123;&#123;CURRENTDAY3&#125;&#125;</dt>
+<dd>{{CURRENTDAY3}}</dd>
+
+<dt>&#123;&#123;CURRENTDAYNAME&#125;&#125;</dt>
+<dd>{{CURRENTDAYNAME}}</dd>
+
+<dt>&#123;&#123;CURRENTDOW&#125;&#125;</dt>
+<dd>{{CURRENTDOW}}</dd>
+
+<dt>&#123;&#123;CURRENTMONTH&#125;&#125;</dt>
+<dd>{{CURRENTMONTH}}</dd>
+
+<dt>&#123;&#123;CURRENTMONTH2&#125;&#125; (With Leading Zeros)</dt>
+<dd>{{CURRENTMONTH2}}</dd>
+
+<dt>&#123;&#123;CURRENTMONTHABBR&#125;&#125;</dt>
+<dd>{{CURRENTMONTHABBR}}</dd>
+
+<dt>&#123;&#123;CURRENTMONTHNAME&#125;&#125;</dt>
+<dd>{{CURRENTMONTHNAME}}</dd>
+
+<dt>&#123;&#123;CURRENTTIME&#125;&#125;</dt>
+<dd>{{CURRENTTIME}}</dd>
+
+<dt>&#123;&#123;CURRENTHOUR&#125;&#125;</dt>
+<dd>{{CURRENTHOUR}}</dd>
+
+<dt>&#123;&#123;CURRENTMINUTE&#125;&#125;</dt>
+<dd>{{CURRENTMINUTE}}</dd>
+
+<dt>&#123;&#123;CURRENTWEEK&#125;&#125;</dt>
+<dd>{{CURRENTWEEK}}</dd>
+
+<dt>&#123;&#123;CURRENTYEAR&#125;&#125;</dt>
+<dd>{{CURRENTYEAR}}</dd>
+
+<dt>&#123;&#123;CURRENTTIMESTAMP&#125;&#125;</dt>
+<dd>{{CURRENTTIMESTAMP}}</dd>
+
+<dt>&#123;&#123;DATE&#125;&#125;</dt>
+<dd>{{DATE}}</dd>
+
+<dt>&#123;&#123;DATE+10&#125;&#125;</dt>
+<dd>{{DATE+10}}</dd>
+
+<dt>&#123;&#123;DATE-2&#125;&#125;</dt>
+<dd>{{DATE-2}}</dd>
+
+<dt>&#123;&#123;HOAM&#125;&#125;</dt>
+<dd>{{HOAM}}</dd>
+
+<dt>&#123;&#123;HOMEOWNER_MAILING&#125;&#125;</dt>
+<dd>{{HOMEOWNER_MAILING}}</dd>
+<dd>''This option is only available in letters (not standard wiki pages).''</dd>
+
+<dt>&#123;&#123;HOMEOWNER_NAME&#125;&#125;</dt>
+<dd>{{HOMEOWNER_NAME}}</dd>
+<dd>''This option is only available in letters (not standard wiki pages).''</dd>
+
+<dt>&#123;&#123;HOMEOWNER_RESIDENCE&#125;&#125;</dt>
+<dd>{{HOMEOWNER_RESIDENCE}}</dd>
+<dd>''This option is only available in letters (not standard wiki pages).''</dd>
+
+<dt>&#123;&#123;LETTER_APPROVER&#125;&#125;</dt>
+<dd>{{LETTER_APPROVER}}</dd>
+<dd>''This option is only available in letters (not standard wiki pages).''</dd>
+
+<dt>&#123;&#123;LETTER_ASSESSMENT_AMOUNT&#125;&#125;</dt>
+<dd>{{LETTER_ASSESSMENT_AMOUNT}}</dd>
+<dd>''This option is only available in letters (not standard wiki pages). This is subtly differet from &#123;&#123;BUDGET_ASSESSMENT_AMOUNT&#125;&#125; in that it is the assessment amount for a specfic unit rather than generically; also, &#123;&#123;BUDGET_ASSESSMENT_AMOUNT&#125;&#125; does not take into account whether assessments are a flat rate or by sqft.''</dd>
+
+<dt>&#123;&#123;LETTER_FOOTER&#125;&#125;</dt>
+<dd>{{LETTER_FOOTER}}</dd>
+
+<dt>&#123;&#123;LETTER_HEAD&#125;&#125;</dt>
+<dd>{{LETTER_HEAD}}</dd>
+
+<dt>&#123;&#123;LETTER_PERSON&#125;&#125;</dt>
+<dd>{{LETTER_PERSON}}</dd>
+<dd>''This option is only available in letters (not standard wiki pages).''</dd>
+
+<dt>&#123;&#123;LETTER_SIGNATURE&#125;&#125;</dt>
+<dd>{{LETTER_SIGNATURE}}</dd>
+
+<dt>&#123;&#123;LETTER_TOPIC&#125;&#125;</dt>
+<dd>{{LETTER_TOPIC}}</dd>
+<dd>''This option is only available in letters (not standard wiki pages).''</dd>
+
+<dt>&#123;&#123;LOT_BLOCK&#125;&#125;</dt>
+<dd>{{LOT_BLOCK}}</dd>
+<dd>''This option is only available in letters (not standard wiki pages).''</dd>
+
+<dt>&#123;&#123;LOT_LOT&#125;&#125;</dt>
+<dd>{{LOT_LOT}}</dd>
+<dd>''This option is only available in letters (not standard wiki pages).''</dd>
+
+<dt>&#123;&#123;LOT_PLAT&#125;&#125;</dt>
+<dd>{{LOT_PLAT}}</dd>
+<dd>''This option is only available in letters (not standard wiki pages).''</dd>
+
+<dt>&#123;&#123;ORG_ADDRESS&#125;&#125;</dt>
+<dd>{{ORG_ADDRESS}}</dd>
+
+<dt>&#123;&#123;ORG_CITY&#125;&#125;</dt>
+<dd>{{ORG_CITY}}</dd>
+
+<dt>&#123;&#123;ORG_COUNTY&#125;&#125;</dt>
+<dd>{{ORG_COUNTY}}</dd>
+
+<dt>&#123;&#123;ORG_DOC_EXPEDITE&#125;&#125;</dt>
+<dd>{{ORG_DOC_EXPEDITE}}</dd>
+
+<dt>&#123;&#123;ORG_DOC_REFINACE&#125;&#125;</dt>
+<dd>{{ORG_DOC_REFINANCE}}</dd>
+
+<dt>&#123;&#123;ORG_DOC_RESALE&#125;&#125;</dt>
+<dd>{{ORG_DOC_RESALE}}</dd>
+
+<dt>&#123;&#123;ORG_EMAIL_BOARD&#125;&#125;</dt>
+<dd>{{ORG_EMAIL_BOARD}}</dd>
+
+<dt>&#123;&#123;ORG_EMAIL_OFFICERS&#125;&#125;</dt>
+<dd>{{ORG_EMAIL_OFFICERS}}</dd>
+
+<dt>&#123;&#123;ORG_EMAIL_MANAGEMENT&#125;&#125;</dt>
+<dd>{{ORG_EMAIL_MANAGEMENT}}</dd>
+
+<dt>&#123;&#123;ORG_NAME&#125;&#125;</dt>
+<dd>{{ORG_NAME}}</dd>
+
+<dt>&#123;&#123;ORG_PROPERTY_NAME&#125;&#125;</dt>
+<dd>{{ORG_PROPERTY_NAME}}</dd>
+
+<dt>&#123;&#123;ORG_PHONE&#125;&#125;</dt>
+<dd>{{ORG_PHONE}}</dd>
+
+<dt>&#123;&#123;ORG_PHONE_FAX&#125;&#125;</dt>
+<dd>{{ORG_PHONE_FAX}}</dd>
+
+<dt>&#123;&#123;ORG_STATE&#125;&#125;</dt>
+<dd>{{ORG_STATE}}</dd>
+
+<dt>&#123;&#123;ORG_UNITS&#125;&#125;</dt>
+<dd>{{ORG_UNITS}}</dd>
+
+<dt>&#123;&#123;PAYPAL_EMAIL&#125;&#125;</dt>
+<dd>{{PAYPAL_EMAIL}}</dd>
+
+<dt>&#123;&#123;PAYPAL_SURCHARGE_AMOUNT&#125;&#125;</dt>
+<dd>{{PAYPAL_SURCHARGE_AMOUNT}}</dd>
+
+<dt>&#123;&#123;PAYPAL_SURCHARGE_PERCENT&#125;&#125;</dt>
+<dd>{{PAYPAL_SURCHARGE_PERCENT}}</dd>
+
+<dt>&#123;&#123;WEBSITE_BLURB&#125;&#125;</dt>
+<dd>{{WEBSITE_BLURB}}</dd>
+
+<dt>&#123;&#123;WEBSITE_DOMAIN&#125;&#125;</dt>
+<dd>{{WEBSITE_DOMAIN}}</dd>
+
+<dt>&#123;&#123;WEBSITE_URL&#125;&#125;</dt>
+<dd>{{WEBSITE_URL}}</dd>
+
+</dl>
+]]>
+	</pdf>
+  </letter>
+</ajax-response>

@@ -1,0 +1,94 @@
+<?xml version="1.0" ?>
+
+<!--
+ * This file is part of HOAM, copyright (C) 2002-2020 Robert Butler
+ *
+ * HOAM is free software; you can redistribute it and/or modify it under the
+ * terms of the GNU Affero General Public License as published by the Free
+ * Software Foundation; either version 3 of the License, or (at your option)
+ * any later version.
+ *
+ * HOAM is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with HOAM; if not, see http://www.gnu.org/licenses or write to the
+ * Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+ * 02110-1301
+ *
+ * Questions specific to HOAM should be directed to ARP Realty. Please see
+ * the HOAM web site at http://hoam.arprs.com/
+ *
+ * Some portions of HOAM incorporate ideas and/or code from other sources, and
+ * those portions are explicitly mentioned and attributed in the relevant
+ * section of HOAM source code. Questions about that code should be directed to
+ * the original authors.
+ *
+ *-->
+
+<ajax-response>
+  <letter>
+    <name>Architecture Change Request - Accepted</name>
+    <require_delivery_confirmation>0</require_delivery_confirmation>
+    <require_delivery_certified>0</require_delivery_certified>
+    <suggest_delivery_confirmation>0</suggest_delivery_confirmation>
+    <suggest_delivery_certified>0</suggest_delivery_certified>
+    <content><![CDATA[
+      <div class="letter">
+      <div class="letter-head">{{LETTER_HEAD}}</div>
+
+      <div class="letter-date">{{DATE}}</div>
+
+      <div class="letter-homeowner-address">{{HOMEOWNER_MAILING}}</div>
+      <div class="letter-tracking"></div>
+
+      <div class="letter-residence-address">Property: {{HOMEOWNER_RESIDENCE}}</div>
+
+      <div class="letter-topic">Re: {{LETTER_TOPIC}}</div>
+
+      <div class="letter-salutation">Dear {{HOMEOWNER_NAME}},</div>
+
+      <p style="text-align: justify">The Association has reviewed your Architecture Change Request Form. After reviewing, your changes have been accepted as submitted without any changes necessary. Please consider this formal approval from the Association for you to complete the work submitted. Please note, you may still need to receive approval from the City or County depending on the nature of the work being performed.</p>
+      <p style="text-align: justify">If you have any questions concerning your account or this request, please contact an agent of the Association.</p>
+
+      <br />
+      <br />
+      {{LETTER_SIGNATURE}}<br />
+      <br />
+      <br />
+      {{LETTER_APPROVER}}<br />
+      {{LETTER_PERSON}}
+      </div>
+ ]]></content>
+    <pdf><![CDATA[
+      <div class="letter">
+      <div class="letter-head">{{LETTER_HEAD}}</div>
+
+      <div class="letter-date">{{DATE}}</div>
+
+      <div class="letter-homeowner-address">{{HOMEOWNER_MAILING}}</div>
+      <div class="letter-tracking"></div>
+
+      <div class="letter-residence-address">Property: {{HOMEOWNER_RESIDENCE}}</div>
+
+      <div class="letter-topic">Re: {{LETTER_TOPIC}}</div>
+
+      <div class="letter-salutation">Dear {{HOMEOWNER_NAME}},</div>
+      
+      <p style="text-align: justify">The Association has reviewed your Architecture Change Request Form. After reviewing, your changes have been accepted as submitted without any changes necessary. Please consider this formal approval from the Association for you to complete the work submitted. Please note, you may still need to receive approval from the City or County depending on the nature of the work being performed.</p>
+      <p style="text-align: justify">If you have any questions concerning your account or this request, please contact an agent of the Association.</p>
+
+      <br />
+      <br />
+      {{LETTER_SIGNATURE}}<br />
+      <br />
+      <br />
+      {{LETTER_APPROVER}}<br />
+      {{LETTER_PERSON}}
+      </div>
+    ]]></pdf>
+  </letter>
+</ajax-response>
+

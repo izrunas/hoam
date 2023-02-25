@@ -1,0 +1,126 @@
+<?xml version='1.0' ?>
+
+<!--
+ * This file is part of HOAM, copyright (C) 2002-2020 Robert Butler
+ *
+ * HOAM is free software; you can redistribute it and/or modify it under the
+ * terms of the GNU Affero General Public License as published by the Free
+ * Software Foundation; either version 3 of the License, or (at your option)
+ * any later version.
+ *
+ * HOAM is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with HOAM; if not, see http://www.gnu.org/licenses or write to the
+ * Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+ * 02110-1301
+ *
+ * Questions specific to HOAM should be directed to ARP Realty. Please see
+ * the HOAM web site at http://hoam.arprs.com/
+ *
+ * Some portions of HOAM incorporate ideas and/or code from other sources, and
+ * those portions are explicitly mentioned and attributed in the relevant
+ * section of HOAM source code. Questions about that code should be directed to
+ * the original authors.
+ *
+ *-->
+
+<ajax-response>
+  <style><![CDATA[
+    #fillme h1 { font-weight: bold; font-variant: small-caps; page-break-before: always; text-align: center; text-transform: capitalize; }
+    #fillme .homeowner { font-size: 90%; }
+    #fillme .street_address { font-size: 90%; text-align: center; }
+    #fillme .signature { border-bottom: 2px solid black; }
+    #fillme tbody { page-break-before: always; }
+  ]]></style>
+  <report>
+    <name>Homeowner Information Verification</name>
+    <php><![CDATA[
+    include (HOAM_PATH_FUNCTION . 'homeowner.php');
+    $homeowner_class = new HOAM_homeowner ('homeowners');
+	$lot_class = new HOAM_lot ('lots');
+	
+	$street_list = $lot_class -> listStreets ();
+	$HTML = '';
+	foreach ($street_list as $street) {
+	$HTML .= '<h1>' . $street . '</h1>';
+	$HTML .= '<p>Please review the information we have on file for you, and make any corrections necessary. The information we have obtained comes from several different sources including the previous records of the Association, public records from the county, and any interactions we have had previously.</p>';
+	$HTML .= '<p>Please note, this information is considered confidential and is not disclosed to anyone other than Board Members and Officers of the Association, the management company, or as required by law.</p>';
+	$HTML .= '<table>';
+	$HTML .= '<caption>Please locate your property address and verify the information we have on file for you.<br />If you need to make changes to the information listed, please cross out the incorrect portion and write your updates.</caption>';
+	$HTML .= '<colgroup>';
+	$HTML .= '<col width="20%" />';
+	$HTML .= '<col width="15%" />';
+	$HTML .= '<col width="25%" />';
+	$HTML .= '<col width="40%" />';
+	$HTML .= '</colgroup>';
+	$HTML .= '<thead>';
+	$HTML .= '<tr><th>Street Address</th><th>Category</th><th>Information on File</th><th>Update</th></tr>';
+	$HTML .= '</thead>';
+	$HTML .= '<tfoot>';
+	$HTML .= '<tr><th>Street Address</th><th>Category</th><th>Information on File</th><th>Update</th></tr>';
+	$HTML .= '</tfoot>';
+	$HTML .= '<tbody class="homeowner_information_list">';
+	$lot_list = $lot_class -> listByStreet ($street);
+	foreach ($lot_list as $lot) {
+		$HTML .= '<tr>';
+		$HTML .= '<td class="street_address" rowspan="10">' . HOAM_returnAddress ($lot) . '</td>';
+        	$current_owner = $homeowner_class -> returnCurrentOwner ($lot);
+		$HTML .= '<td class="center">Homeowner Name</td>';
+		$HTML .= '<td class="center">' . $homeowner_class -> returnName ($current_owner) . '</td>';
+		$HTML .= '<td>&nbsp;</td>';
+		$HTML .= '</tr><tr>';
+		$HTML .= '<td class="center">Mailing Address</td>';
+		$HTML .= '<td class="center">' . HOAM_homeownerReturnMailingAddress ($current_owner) . '</td>';
+		$HTML .= '<td>&nbsp;</td>';
+		$HTML .= '</tr><tr>';
+		$HTML .= '<td class="center">Purchase Date</td>';
+		$HTML .= '<td class="center">' . date ($_HOAM_country ['date']['format_long'], strtotime ($homeowner_class -> returnPurchaseDate ($current_owner))) . '</td>';
+		$HTML .= '<td>&nbsp;</td>';
+		$HTML .= '</tr><tr>';
+		$HTML .= '<td class="center">Living at the residence?</td>';
+		$HTML .= '<td class="center">';
+		if ((int) $homeowner_class -> returnFlags ($current_owner) & (int) $_HOAM_setting ['homeowner']['flags']['resident']) {
+			$HTML .= 'Yes';
+		} else {
+			$HTML .= '<span class="caution">No</span>';
+		}
+		$HTML .= '</td>';
+		$HTML .= '<td>&nbsp;</td>';
+		$HTML .= '</tr><tr>';
+		$HTML .= '<td class="center">Home Telephone</td>';
+		$HTML .= '<td class="center">' . preg_replace ($_HOAM_country ['telephone']['match'], $_HOAM_country ['telephone']['format'], $homeowner_class -> returnTelephoneHome ($current_owner), 1) . '</td>';
+		$HTML .= '<td>&nbsp;</td>';
+		$HTML .= '</tr><tr>';
+		$HTML .= '<td class="center">Mobile Telephone</td>';
+		$HTML .= '<td class="center">' . preg_replace ($_HOAM_country ['telephone']['match'], $_HOAM_country ['telephone']['format'], $homeowner_class -> returnTelephoneMobile ($current_owner), 1) . '</td>';
+		$HTML .= '<td>&nbsp;</td>';
+		$HTML .= '</tr><tr>';
+		$HTML .= '<td class="center">Work Telephone</td>';
+		$HTML .= '<td class="center">' . preg_replace ($_HOAM_country ['telephone']['match'], $_HOAM_country ['telephone']['format'], $homeowner_class -> returnTelephoneWork ($current_owner), 1) . '</td>';
+		$HTML .= '<td>&nbsp;</td>';
+		$HTML .= '</tr><tr>';
+		$HTML .= '<td class="center">Fax Telephone</td>';
+		$HTML .= '<td class="center">' . preg_replace ($_HOAM_country ['telephone']['match'], $_HOAM_country ['telephone']['format'], $homeowner_class -> returnTelephoneFax ($current_owner), 1) . '</td>';
+		$HTML .= '<td>&nbsp;</td>';
+		$HTML .= '</tr><tr>';
+		$HTML .= '<td class="center">Email Address</td>';
+		$HTML .= '<td class="center">' . $homeowner_class -> returnEmail ($current_owner) . '</td>';
+		$HTML .= '<td>&nbsp;</td>';
+		$HTML .= '</tr><tr>';
+		$HTML .= '<td class="center warning" colspan="2">Signature Approving Changes &rArr;</td>';
+		$HTML .= '<td class="signature">&nbsp;</td>';
+		$HTML .= '</tr>';
+		$HTML .= '</tr>';
+		$HTML .= '</tbody><tbody>';
+	}
+	$HTML .= '</tbody>';
+	$HTML .= '</table>';
+	}
+	echo $HTML;
+    ]]></php>
+  </report>
+</ajax-response>

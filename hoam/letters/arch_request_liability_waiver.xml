@@ -1,0 +1,78 @@
+<?xml version="1.0" ?>
+
+<!--
+ * This file is part of HOAM, copyright (C) 2002-2020 Robert Butler
+ *
+ * HOAM is free software; you can redistribute it and/or modify it under the
+ * terms of the GNU Affero General Public License as published by the Free
+ * Software Foundation; either version 3 of the License, or (at your option)
+ * any later version.
+ *
+ * HOAM is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with HOAM; if not, see http://www.gnu.org/licenses or write to the
+ * Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+ * 02110-1301
+ *
+ * Questions specific to HOAM should be directed to ARP Realty. Please see
+ * the HOAM web site at http://hoam.arprs.com/
+ *
+ * Some portions of HOAM incorporate ideas and/or code from other sources, and
+ * those portions are explicitly mentioned and attributed in the relevant
+ * section of HOAM source code. Questions about that code should be directed to
+ * the original authors.
+ *
+ *-->
+
+<ajax-response>
+  <letter>
+    <name>Architecture Change Request - Liability Waiver</name>
+    <require_delivery_confirmation>1</require_delivery_confirmation>
+    <require_delivery_certified>0</require_delivery_certified>
+    <suggest_delivery_confirmation>0</suggest_delivery_confirmation>
+    <suggest_delivery_certified>0</suggest_delivery_certified>
+    <content><![CDATA[
+      <p style="text-align: center">__'''Waiver of Liability, Release<br />Assumption of Risk & Indemnity Agreement'''__</p>
+
+      <p style="text-align: justify">IN CONSIDERATION for being permitted to leave unchanged the unapproved modifications to the Limited Common Area of {{HOMEOWNER_RESIDENCE}} of {{ORG_NAME}} performed by the owner of said Unit, the undersigned, for himself/herself, his/her personal representatives, guests, children, heirs, and next of kin, acknowledges, agrees, and represents that he/she has, and will continuously thereafter, thoroughly inspect such areas and his/her continued presence constitutes an acknowledgment that he/she has inspected house, deck and entire property and he/she finds and accepts such areas as being safe and reasonably suited for the purposes of his/her use, and he/she further agrees and warrants that if, at any time, he/she feels anything to be unsafe, he/she and all guests will immediately leave the area and take measures to repair and resolve the concern.</path> 
+
+      <p style="text-align: justify">THE UNDERSIGNED hereby RELEASES, WAIVES, DISCHARGES AND COVENANTS NOT TO SUE {{ORG_NAME}}, its Assigns, Agents, Directors, Officers, or any other designated representatives personally and as company or corporate representatives, their members, managers, operators, officials, officers, directors, employees, owners and lessees of the premises, all for the purposes herein referred to as “releasees”, from all liability to the undersigned, guests, representatives, assigns, heirs and next of kin for any and all loss or damage, and any claim or demand thereof on account of INJURY to the person(s) or property or resulting in DEATH of the undersigned or guests, whether caused by negligence of the releasees or otherwise while in or upon the area.</p> 
+
+      <p style="text-align: justify">THE UNDERSIGNED hereby AGREES TO INDEMNIFY AND SAVE AND HOLD HARMLESS the releasees and each of them from any loss, liability, damage, or cost they may occur due to their presence in or upon the area and whether caused by the negligence of the releasees or otherwise. The undersigned also agrees that any future owner(s) of the Unit must also agree to sign this waiver or one substantially similar, and that it should any future owner(s) fail to sign this waiver or one substantially similar that all future liability relating to the unapproved modification is the sole responsibility of the undersigned.</p>
+
+      <p style="text-align: justify">THE UNDERSIGNED hereby ASSUMES FULL RESPONSIBILITY FOR RISK OF BODILY INJURY, DEATH OR PROPERTY DAMAGE due to the negligence of the releasees or otherwise while in or upon area.</p> 
+
+      <p style="text-align: justify">THE UNDERSIGNED hereby certifies that he/she and guests (they) have adequate insurance to cover any injury, illness or damage that may be caused or suffered while in or upon area, or else agrees to bear the costs of such damage or injury. The undersigned further expressly agrees that the foregoing release, waiver and indemnity agreement is intended to be as broad and inclusive as is permitted by law and that if any provision is held invalid, it is agreed that the balance shall, notwithstanding, continue in full legal force and effect. Any dispute, controversy or claim arising out of or related to this Agreement or the interpretation of this Agreement shall be settled by arbitration in accordance to the rules of the American Arbitration Association, with all costs of filing, administration, arbitrator and all other fees for all parties will be paid by the undersigned.</p>
+
+      <p style="text-align: justify">THE UNDERSIGNED HAS READ, UNDERSTANDS THE RISKS, AND VOLUNTARILY SIGNS THIS RELEASE AND WAIVER OF LIABILITY AND INDEMNITY AGREEMENT, and further agrees that no oral representations, statements, or inducements apart from the foregoing written agreement have been made.</p> 
+
+      <div style="border-top: 1px solid black; margin: 2em 5em 1em 60%; width: 20em">Signature</div>
+      <div style="border-top: 1px solid black; margin: 2em 5em 1em 60%; width: 20em">Date</div>
+ ]]></content>
+    <pdf><![CDATA[
+      <p style="text-align: center">__'''Waiver of Liability, Release<br />Assumption of Risk & Indemnity Agreement'''__</p>
+
+      <p style="text-align: justify">IN CONSIDERATION for being permitted to leave unchanged the unapproved modifications to the Limited Common Area of {{HOMEOWNER_RESIDENCE}} of {{ORG_NAME}} performed by the owner of said Unit, the undersigned, for himself/herself, his/her personal representatives, guests, children, heirs, and next of kin, acknowledges, agrees, and represents that he/she has, and will continuously thereafter, thoroughly inspect such areas and his/her continued presence constitutes an acknowledgment that he/she has inspected house, deck and entire property and he/she finds and accepts such areas as being safe and reasonably suited for the purposes of his/her use, and he/she further agrees and warrants that if, at any time, he/she feels anything to be unsafe, he/she and all guests will immediately leave the area and take measures to repair and resolve the concern.</path> 
+
+      <p style="text-align: justify">THE UNDERSIGNED hereby RELEASES, WAIVES, DISCHARGES AND COVENANTS NOT TO SUE {{ORG_NAME}}, its Assigns, Agents, Directors, Officers, or any other designated representatives personally and as company or corporate representatives, their members, managers, operators, officials, officers, directors, employees, owners and lessees of the premises, all for the purposes herein referred to as “releasees”, from all liability to the undersigned, guests, representatives, assigns, heirs and next of kin for any and all loss or damage, and any claim or demand thereof on account of INJURY to the person(s) or property or resulting in DEATH of the undersigned or guests, whether caused by negligence of the releasees or otherwise while in or upon the area.</p> 
+
+      <p style="text-align: justify">THE UNDERSIGNED hereby AGREES TO INDEMNIFY AND SAVE AND HOLD HARMLESS the releasees and each of them from any loss, liability, damage, or cost they may occur due to their presence in or upon the area and whether caused by the negligence of the releasees or otherwise. The undersigned also agrees that any future owner(s) of the Unit must also agree to sign this waiver or one substantially similar, and that it should any future owner(s) fail to sign this waiver or one substantially similar that all future liability relating to the unapproved modification is the sole responsibility of the undersigned.</p>
+
+      <p style="text-align: justify">THE UNDERSIGNED hereby ASSUMES FULL RESPONSIBILITY FOR RISK OF BODILY INJURY, DEATH OR PROPERTY DAMAGE due to the negligence of the releasees or otherwise while in or upon area.</p> 
+
+      <p style="text-align: justify">THE UNDERSIGNED hereby certifies that he/she and guests (they) have adequate insurance to cover any injury, illness or damage that may be caused or suffered while in or upon area, or else agrees to bear the costs of such damage or injury. The undersigned further expressly agrees that the foregoing release, waiver and indemnity agreement is intended to be as broad and inclusive as is permitted by law and that if any provision is held invalid, it is agreed that the balance shall, notwithstanding, continue in full legal force and effect. Any dispute, controversy or claim arising out of or related to this Agreement or the interpretation of this Agreement shall be settled by arbitration in accordance to the rules of the American Arbitration Association, with all costs of filing, administration, arbitrator and all other fees for all parties will be paid by the undersigned.</p>
+
+      <p style="text-align: justify">THE UNDERSIGNED HAS READ, UNDERSTANDS THE RISKS, AND VOLUNTARILY SIGNS THIS RELEASE AND WAIVER OF LIABILITY AND INDEMNITY AGREEMENT, and further agrees that no oral representations, statements, or inducements apart from the foregoing written agreement have been made.</p> 
+
+      <br />
+      <br />
+      <div style="border-top: 1px solid black; margin: 2em 5em 1em 60%; width: 20em">Signature</div>
+      <br />
+      <div style="border-top: 1px solid black; margin: 2em 5em 1em 60%; width: 20em">Date</div>
+    ]]></pdf>
+  </letter>
+</ajax-response>

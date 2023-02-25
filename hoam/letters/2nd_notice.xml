@@ -1,0 +1,97 @@
+<?xml version="1.0" ?>
+
+<!--
+ * This file is part of HOAM, copyright (C) 2002-2020 Robert Butler
+ *
+ * HOAM is free software; you can redistribute it and/or modify it under the
+ * terms of the GNU Affero General Public License as published by the Free
+ * Software Foundation; either version 3 of the License, or (at your option)
+ * any later version.
+ *
+ * HOAM is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with HOAM; if not, see http://www.gnu.org/licenses or write to the
+ * Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+ * 02110-1301
+ *
+ * Questions specific to HOAM should be directed to ARP Realty. Please see
+ * the HOAM web site at http://hoam.arprs.com/
+ *
+ * Some portions of HOAM incorporate ideas and/or code from other sources, and
+ * those portions are explicitly mentioned and attributed in the relevant
+ * section of HOAM source code. Questions about that code should be directed to
+ * the original authors.
+ *
+ *-->
+
+<ajax-response>
+  <letter>
+    <name>Late Letter - 2nd Notice</name>
+    <require_delivery_confirmation>0</require_delivery_confirmation>
+    <require_delivery_certified>0</require_delivery_certified>
+    <suggest_delivery_confirmation>1</suggest_delivery_confirmation>
+    <suggest_delivery_certified>0</suggest_delivery_certified>
+	<prerequisites><![CDATA[
+	$budget_class = new HOAM_budget ('budget');
+	$homeowner_class = new HOAM_homeowner ('homeowners');
+
+	// Make sure that the homeowner specified actually owes something.
+	$current_homeowner = $homeowner_class -> returnCurrentOwner ($_SESSION['letter_information']['trusted_letter|address']);
+	$current_due = $budget_class -> returnTotalAmountDue ($current_homeowner);
+	if ($current_due > 0) {
+		if ($homeowner_class -> isBitSet ($current_homeowner, $_HOAM_setting ['budget']['flags']['late_notice'], 'budget_flags')) {
+			return TRUE;
+		} else {
+			$_SESSION ['error_class_item'] -> addError ('letter|name', $_HOAM_language ['errors']['budget']['no_previous_letter']);
+		} 
+	} else {
+		$_SESSION ['error_class_item'] -> addError ('letter|name', $_HOAM_language ['errors']['budget']['nothing_owed']);
+		return FALSE;
+	}
+	]]></prerequisites>
+	<finish><![CDATA[
+	$homeowner_class = new HOAM_homeowner ('homeowners');
+
+	$homeowner_class -> setBit ($current_homeowner, $_HOAM_setting ['budget']['flags']['late_delinquent'], 'budget_flags');
+	]]></finish>
+    <content><![CDATA[
+<div class="letter-head">{{LETTER_HEAD}}</div>
+
+<div class="letter-date">{{DATE}}</div>
+
+<div class="letter-homeowner-address">{{HOMEOWNER_MAILING}}</div>
+
+<div class="letter-tracking"></div>
+
+<div class="letter-residence-address">Property: {{HOMEOWNER_RESIDENCE}}</div>
+
+<div class="letter-topic">Re: {{LETTER_TOPIC}}</div>
+
+<div class="letter-salutation">Dear {{HOMEOWNER_NAME}},</div>
+
+<div class="letter-body">
+
+<p>According to our records, you are now thirty days or more delinquent in the payment of the Assessments owed to {{ORG_NAME}}. The total amount due, as of today, is {{BUDGET_DUE}}.
+<p>A Late Notice was sent to you previously in case you had overlooked making payment to the Community. Now we must request that you make immediate payment of the above amount.</p>
+<p>The following paragraph is required by the Fair Debt Collection Practices Act to be printed on all late notice letters:</p>
+<blockquote>This management company has been employed to collect the debt referenced above and all information obtained will be used for that purpose. The name of the creditor is {{ORG_NAME}}. Unless you dispute the validity of the debt or any portion thereof within thirty (30) days after the day you receive this notice, this debt will be assumed to be valid by this management company. If, within thirty (30) days after the day you receive this notice, you notify this management company IN WRITING that you dispute the debt or any part thereof, we will obtain verification of this debt, and a copy of such verification will be mailed to you immediately. If you wish to make any such written request, please address your letter to the address above.</blockquote>
+<p>If you have any questions concerning your account, please contact an agent of the Association at {{ORG_PHONE}} or {{ORG_EMAIL_MANAGEMENT}}. If you are currently unable to pay this debt, the Board of Directors has authorized us to offer you a payment plan. Please see the Payment Plan document available on the Association's web site ({{WEBSITE_DOMAIN}}). Additionally, if you or your spouse is an active military service member you may have additional rights under the Servicemember's Civil Relief Act.</p>
+<p>Please do not ignore this notice; doing so will cause additional fees to accrue on your account.</p>
+
+</div>
+
+<div class="letter-signature">{{LETTER_SIGNATURE}}</div>
+
+<div class="letter-approver">{{LETTER_APPROVER}}</div>
+
+<div class="letter-person">{{LETTER_PERSON}}</div>
+
+<div class="letter-footer">{{LETTER_FOOTER}}</div>
+]]></content>
+  </letter>
+</ajax-response>
+

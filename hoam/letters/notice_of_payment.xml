@@ -1,0 +1,112 @@
+<?xml version="1.0" ?>
+
+<!--
+ * This file is part of HOAM, copyright (C) 2002-2020 Robert Butler
+ *
+ * HOAM is free software; you can redistribute it and/or modify it under the
+ * terms of the GNU Affero General Public License as published by the Free
+ * Software Foundation; either version 3 of the License, or (at your option)
+ * any later version.
+ *
+ * HOAM is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with HOAM; if not, see http://www.gnu.org/licenses or write to the
+ * Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+ * 02110-1301
+ *
+ * Questions specific to HOAM should be directed to ARP Realty. Please see
+ * the HOAM web site at http://hoam.arprs.com/
+ *
+ * Some portions of HOAM incorporate ideas and/or code from other sources, and
+ * those portions are explicitly mentioned and attributed in the relevant
+ * section of HOAM source code. Questions about that code should be directed to
+ * the original authors.
+ *
+ *-->
+
+<ajax-response>
+  <letter>
+    <name>Notice of Payment</name>
+    <require_delivery_confirmation>0</require_delivery_confirmation>
+    <require_delivery_certified>0</require_delivery_certified>
+    <suggest_delivery_confirmation>0</suggest_delivery_confirmation>
+    <suggest_delivery_certified>0</suggest_delivery_certified>
+	<additional_fields>
+		<field>
+			<description>Date of the lien being cured</description>
+			<id>field_date</id>
+			<required>1</required>
+		</field>
+		<field>
+			<description>Document number of the filed lien</description>
+			<id>field_document</id>
+			<required>1</required>
+		</field>
+	</additional_fields>
+    <content><![CDATA[
+<h2>{{LETTER_TOPIC}}</h2>
+
+<div style="float: left;text-transform:uppercase">STATE OF {{ORG_STATE}}<br/><br/>COUNTY OF {{ORG_COUNTY}}</div>
+<div style="float: right"><br/>KNOW ALL MEN BY THESE PRESENTS:</div>
+<div style="padding-left: 25%; ">&sect;<br/>&sect;<br/>&sect;</div>
+
+<p>WHEREAS, on <span id="field_date"><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u></span> there was filed of record Doc # <span id="field_document"><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u></span> of the Deed Records of {{ORG_COUNTY}} County, {{ORG_STATE}}, that certain Notice of Lien covering property located in {{ORG_PROPERTY_NAME}}, known as Lot {{LOT_LOT}} Block {{LOT_BLOCK}} of {{ORG_PROPERTY_NAME}}, an addition to the City of {{ORG_CITY}}, {{ORG_COUNTY}} County, {{ORG_STATE}}. The postal mailing address for this property is {{HOMEOWNER_RESIDENCE}}.</p>
+
+<p>WHEREAS, the default by {{HOMEOWNER_NAME}}, the owner(s) of the property as specified in said Notice of Lien, has been cured;</p>
+
+<p>NOW, THEREFORE, {{ORG_NAME}} acting by and through its duly authorized officer or agent, does hereby file the Notice of Payment superseding and rendering null and void the aforesaid Notice of Lien.</p>
+ 
+<div style="border-top: 1px solid black; margin: 2em 5em 1em 60%; width: 20em">&nbsp;</div>
+<div style="border-bottom: 1px solid black; margin: 1em 5em 0 60%; text-align: center; width: 20em">{{LETTER_APPROVER}}</div>
+<div style="margin: 0 5em 2em 60%; width: 20em">{{LETTER_PERSON}}, {{ORG_NAME}}</div>
+
+<div style="float: left;text-transform:uppercase">STATE OF {{ORG_STATE}}<br/><br/>COUNTY OF {{ORG_COUNTY}}</div>
+<div style="padding-left: 25%; ">&sect;<br/>&sect;<br/>&sect;</div>
+
+<p>SUBSCRIBED AND SWORN TO before me by {{LETTER_APPROVER}} in their capacity as {{LETTER_PERSON}} for {{ORG_NAME}}, on <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>, {{CURRENTYEAR}}.</p>
+
+<div style="border-top: 1px solid black; margin: 3em 5em 2em 60%; width: 20em">Notary Public - State of {{ORG_STATE}}</div>
+
+AFTER RECORDING, PLEASE RETURN TO:<br />
+
+{{ORG_ADDRESS}}
+]]></content>
+    <pdf><![CDATA[
+    <h4 style="font-variant: small-caps; text-align: center">{{LETTER_TOPIC}}</h4>
+    <table style="width: 100%">
+      <tr><td style="text-transform:uppercase; width: 35%">STATE OF {{ORG_STATE}}</td><td style="width: 10%">&sect;</td><td style="text-align: right; width=55%">KNOW ALL MEN BY THESE PRESENTS:</td></tr>
+      <tr><td>&nbsp;</td><td>&sect;</td><td>&nbsp;</td></tr>
+      <tr><td style="text-transform:uppercase">COUNTY OF {{ORG_COUNTY}}</td><td>&sect;</td><td>&nbsp;</td></tr>
+    </table>
+	<br />
+    <p style="text-align: justify">WHEREAS, on {{FIELD_DATE}} there was filed of record Doc # {{FIELD_DOCUMENT}} of the Deed Records of {{ORG_COUNTY}} County, {{ORG_STATE}}, that certain Notice of Lien covering property located in {{ORG_PROPERTY_NAME}}, known as Lot {{LOT_LOT}} Block {{LOT_BLOCK}} of {{ORG_NAME}}, an addition to the City of Allen, {{ORG_COUNTY}} County, {{ORG_STATE}}. The postal mailing address for this property is {{HOMEOWNER_RESIDENCE}}.</p>
+    <p style="text-align: justify">WHEREAS, the default by {{HOMEOWNER_NAME}}, the owner(s) of the property as specified in said Notice of Lien, has been cured;</p>
+    <p style="text-align: justify">NOW, THEREFORE, {{ORG_NAME}} acting by and through its duly authorized officer or agent, does hereby file the Notice of Payment superseding and rendering null and void the aforesaid Notice of Lien.</p>
+    <table style="width: 100%">
+      <tr><td style="width: 50%">&nbsp;</td><td style="border-bottom: 1px solid black">&nbsp;</td></tr>
+      <tr><td style="width: 50%">&nbsp;</td><td style="border-bottom: 1px solid black; text-align: center">{{LETTER_APPROVER}}</td></tr>
+      <tr><td style="width: 50%">&nbsp;</td><td style="text-align: right">{{LETTER_PERSON}}, {{ORG_NAME}}</td></tr>
+    <table>
+    <br />
+    <table style="width: 100%">
+      <tr><td style="text-transform:uppercase; width: 35%">STATE OF {{ORG_STATE}}</td><td>&sect;</td></tr>
+      <tr><td>&nbsp;</td><td>&sect;</td></tr>
+      <tr><td style="text-transform:uppercase">COUNTY OF {{ORG_COUNTY}}</td><td>&sect;</td></tr>
+    </table>
+    <p style="text-align: justify">SUBSCRIBED AND SWORN TO before me by {{LETTER_APPROVER}} in their capacity as {{LETTER_PERSON}} for {{ORG_NAME}}, on <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>, {{CURRENTYEAR}}.</p>
+    <table style="width: 100%">
+      <tr><td style="width: 50%">&nbsp;</td><td style="text-align: right">&nbsp;</td></tr>
+      <tr><td style="width: 50%">&nbsp;</td><td style="border-top: 1px solid black; text-align: center">Notary Public - State of {{ORG_STATE}}</td></tr>
+    </table>
+    <br />
+    AFTER RECORDING, PLEASE RETURN TO:<br />
+    <br />
+    {{ORG_ADDRESS}}
+    ]]></pdf>
+  </letter>
+</ajax-response>
+

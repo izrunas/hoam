@@ -1,0 +1,104 @@
+<?xml version="1.0" ?>
+
+<!--
+ * This file is part of HOAM, copyright (C) 2002-2020 Robert Butler
+ *
+ * HOAM is free software; you can redistribute it and/or modify it under the
+ * terms of the GNU Affero General Public License as published by the Free
+ * Software Foundation; either version 3 of the License, or (at your option)
+ * any later version.
+ *
+ * HOAM is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with HOAM; if not, see http://www.gnu.org/licenses or write to the
+ * Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+ * 02110-1301
+ *
+ * Questions specific to HOAM should be directed to ARP Realty. Please see
+ * the HOAM web site at http://hoam.arprs.com/
+ *
+ * Some portions of HOAM incorporate ideas and/or code from other sources, and
+ * those portions are explicitly mentioned and attributed in the relevant
+ * section of HOAM source code. Questions about that code should be directed to
+ * the original authors.
+ *
+ *-->
+
+<ajax-response>
+  <letter>
+    <name>Late Letter - 1st Notice</name>
+    <require_delivery_confirmation>0</require_delivery_confirmation>
+    <require_delivery_certified>0</require_delivery_certified>
+    <suggest_delivery_confirmation>1</suggest_delivery_confirmation>
+    <suggest_delivery_certified>0</suggest_delivery_certified>
+	<prerequisites><![CDATA[
+	$budget_class = new HOAM_budget ('budget');
+	$homeowner_class = new HOAM_homeowner ('homeowners');
+	// Make sure that the homeowner specified actually owes something.
+	$current_homeowner = $homeowner_class -> returnCurrentOwner ($_SESSION['letter_information']['trusted_letter|address']);
+	$current_due = $budget_class -> returnTotalAmountDue ($current_homeowner);
+	if ($current_due > 0) {
+		return TRUE;
+	} else {
+		$_SESSION ['error_class_item'] -> addError ('letter|name', $_HOAM_language ['errors']['budget']['nothing_owed']);
+		return FALSE;
+	}
+	]]></prerequisites>
+	<finish><![CDATA[
+	$homeowner_class = new HOAM_homeowner ('homeowners');
+	$homeowner_class -> setBit ($current_homeowner, $_HOAM_setting ['budget']['flags']['late_notice'], 'budget_flags');
+	]]></finish>
+    <content><![CDATA[
+<table>
+  <tbody class="nostripe">
+    <tr>
+      <td rowspan="3" style="vertical-align: center; width: 35%"><small>{{ORG_ADDRESS}}</small></td>
+      <td style="vertical-align: center; width: 15%"><small>Customer Name:</small></td>
+      <td>{{HOMEOWNER_NAME}}</td>
+      <td class="center" rowspan="3" style="vertical-align: center; width: 30%"><small><strong>Pay Your Bill Online</strong><br />It's Quick, Easy, and Secure.<br />{{WEBSITE_URL}}help/onlinepay/</small></td>
+    </tr>
+    <tr>
+      <td style="vertical-align: center"><small>Address:</small></td>
+      <td>{{HOMEOWNER_RESIDENCE}}</td>
+    </tr>
+    <tr>
+      <td style="vertical-align: center"><small>Invoice Date:</small></td>
+      <td>{{CURRENTMONTH}}/{{CURRENTDAY}}/{{CURRENTYEAR}}</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="letter-homeowner-address">{{HOMEOWNER_MAILING}}</div>
+
+<div class="letter-tracking"></div>
+
+<div class="letter-topic">Re: {{LETTER_TOPIC}}</div>
+
+<div class="letter-salutation">Dear {{HOMEOWNER_NAME}},</div>
+
+<div class="letter-body">
+
+<p>We have not received payment for the current Assessments for the property located at {{HOMEOWNER_RESIDENCE}}. Perhaps it was overlooked or is on its way to us now. If payment has already been made, please note the new balance on the account due to the lateness of payment.</p>
+<p>The following paragraph is required by the Fair Debt Collection Practices Act to be printed on all late notice letters:</p>
+<blockquote>This management company has been employed to collect the debt referenced below and all information obtained will be used for that purpose. The name of the creditor is {{ORG_NAME}}.</blockquote>
+<p>Our records show an unpaid balance on your account of {{BUDGET_DUE}}. {{ORG_NAME}} relies on your prompt payment of assessments so that it may meet its obligations in a timely manner. Please forward your payment immediately.</p>
+<p>If you have any questions about the amount you owe, please call us at {{ORG_PHONE}} or send an email to {{ORG_EMAIL_MANAGEMENT}}. If you are currently unable to pay this debt, the Board of Directors has authorized us to offer you a payment plan. Please see the Payment Plan document available on the Association's web site ({{WEBSITE_DOMAIN}}). Additionally, if you or your spouse is an active military service member you may have additional rights under the Servicemember's Civil Relief Act.</p>
+<p>Please do not ignore this notice; doing so will cause additional fees to accrue on your account.</p>
+
+</div>
+
+<div class="letter-signature">{{LETTER_SIGNATURE}}</div>
+
+<div class="letter-approver">{{LETTER_APPROVER}}</div>
+
+<div class="letter-person">{{LETTER_PERSON}}</div>
+
+<div class="letter-footer">{{LETTER_FOOTER}}</div>
+]]></content>
+  </letter>
+</ajax-response>
+

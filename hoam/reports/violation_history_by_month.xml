@@ -1,0 +1,90 @@
+<?xml version='1.0' ?>
+
+<!--
+ * This file is part of HOAM, copyright (C) 2002-2020 Robert Butler
+ *
+ * HOAM is free software; you can redistribute it and/or modify it under the
+ * terms of the GNU Affero General Public License as published by the Free
+ * Software Foundation; either version 3 of the License, or (at your option)
+ * any later version.
+ *
+ * HOAM is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with HOAM; if not, see http://www.gnu.org/licenses or write to the
+ * Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+ * 02110-1301
+ *
+ * Questions specific to HOAM should be directed to ARP Realty. Please see
+ * the HOAM web site at http://hoam.arprs.com/
+ *
+ * Some portions of HOAM incorporate ideas and/or code from other sources, and
+ * those portions are explicitly mentioned and attributed in the relevant
+ * section of HOAM source code. Questions about that code should be directed to
+ * the original authors.
+ *
+ *-->
+
+<ajax-response>
+  <style><![CDATA[
+    #fillme h1 { font-weight: bold; font-variant: small-caps; page-break-before: always; text-align: center; text-transform: capitalize; }
+  ]]></style>
+  <report>
+    <name><![CDATA[Violation History By Month]]></name>
+    <php><![CDATA[
+    $violation_class = new HOAM_violation ('violations');
+    
+	$colgroup = '<colgroup>';
+	$colgroup .= '<col width="7.6%" span="14" />';
+	$colgroup .= '</colgroup>';
+	$thead = '<thead>';
+	$thead .= '<tr>';
+	$thead .= '<th>' . $_HOAM_language ['common']['year'] . '</th>';
+	for ($i = 0; $i < 12; $i++) {
+		$thead .= '<th>' . $_HOAM_country ['month'][$i]['abbr'] . '</th>';
+	}
+	$thead .= '<th>' . $_HOAM_language ['common']['average'] . '<br />' . $_HOAM_language ['common']['total'] . '</th>';
+	$thead .= '</tr>';
+	$thead .= '</thead>';
+	$violation_years = $violation_class -> listYears ();
+	$count_month = array ();
+	$count_total = 0;
+	if (is_array ($violation_years)) {
+		$tbody = '';
+		foreach ($violation_years as $year) {
+			$count_year = 0;
+			$tbody .= '<tr><td class="center">' . $year . '</td>';
+			for ($i = 1; $i < 13; $i++) {
+				$date = new dateTime ($year . '-' . $i . '-01');
+				$date -> modify ('+1 month');
+				// Need to switch this to a more proper range, using mktime or similar.
+				$violations_month = $violation_class -> listRange ($year . '-' . $i . '-01', $date -> format ($_HOAM_country ['date']['format_mysql']));
+				if (is_array ($violations_month)) {
+					$tbody .= '<td class="center">' . count ($violations_month) . '</td>';
+					$count_month [$i] += count ($violations_month);
+					$count_year += count ($violations_month);
+				} else {
+					$tbody .= '<td>&nbsp;</td>';
+				}
+			}
+			$tbody .= '<td class="center">' . number_format ($count_year / 12, 1) . '<br />' . $count_year . '</td></tr>';
+			$count_total += $count_year;
+		}
+	} else {
+		$tbody .= '<tr><td class="center" colspan="14">' . $_HOAM_language ['errors']['violation']['history_none'] . '</td></tr>';
+	}
+	$tfoot = '<tfoot><tr><th>' . $_HOAM_language ['common']['average'] . '<br />' . $_HOAM_language ['common']['total'] . '</th>';
+	for ($i = 1; $i < 13; $i++) {
+		$tfoot .= '<th>' . number_format ($count_month[$i] / count ($violation_years), 1) . '<br />' . $count_month[$i] . '</th>';
+	}
+	$tfoot .= '<th>' . number_format ($count_total / count ($violation_years), 1) . '<br />' . $count_total . '</th>';
+	$tfoot .= '</tr></tfoot>';
+	$HTML = sprintf ($_HOAM_language ['tables']['generic']['default'], $colgroup, $thead . $tfoot, sprintf ($_HOAM_language ['tables']['generic']['tbody'], $tbody));
+	echo $HTML;
+    ]]></php>
+  </report>
+</ajax-response>
+

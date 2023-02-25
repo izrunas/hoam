@@ -1,0 +1,220 @@
+<?xml version="1.0" ?>
+
+<!--
+ * This file is part of HOAM, copyright (C) 2002-2020 Robert Butler
+ *
+ * HOAM is free software; you can redistribute it and/or modify it under the
+ * terms of the GNU Affero General Public License as published by the Free
+ * Software Foundation; either version 3 of the License, or (at your option)
+ * any later version.
+ *
+ * HOAM is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with HOAM; if not, see http://www.gnu.org/licenses or write to the
+ * Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+ * 02110-1301
+ *
+ * Questions specific to HOAM should be directed to ARP Realty. Please see
+ * the HOAM web site at http://hoam.arprs.com/
+ *
+ * Some portions of HOAM incorporate ideas and/or code from other sources, and
+ * those portions are explicitly mentioned and attributed in the relevant
+ * section of HOAM source code. Questions about that code should be directed to
+ * the original authors.
+ *
+ *-->
+
+<ajax-response>
+  <letter>
+    <name>Legal - Document Retention Policy</name>
+    <require_delivery_confirmation>0</require_delivery_confirmation>
+    <require_delivery_certified>0</require_delivery_certified>
+    <suggest_delivery_confirmation>0</suggest_delivery_confirmation>
+    <suggest_delivery_certified>0</suggest_delivery_certified>
+	<additional_fields>
+		<field>
+			<description>Effective date of the filing</description>
+			<id>field_effective</id>
+			<required>1</required>
+		</field>
+		<field>
+			<description>Date of associated Board meeting</description>
+			<id>field_meeting</id>
+			<required>1</required>
+		</field>
+	</additional_fields>
+    <content><![CDATA[
+{{LETTER_HEAD}}
+
+<h2>{{LETTER_TOPIC}}</h2>
+
+<p>WHEREAS, pursuant to Section 209.005(m) of the Texas Property Code, the Board of Directors of {{ORG_NAME}} (the <q>Association</q>) is required to adopt a document retention policy for the Association's books and records.</p>
+
+<p>NOW, THEREFORE, IT IS RESOLVED, in order to comply with the procedures set forth by Chapter 209 fo the Texas Residential Property Owners Protection Act, that the following procedures and practices are established for the maintenance and retention of the Association's books, records and related documents, and the same are to be known as <q>{{LETTER_TOPIC}}</q> of the Association.</p>
+
+<ol>
+	<li>__Purpose__. The purpose of this {{LETTER_TOPIC}} is to ensure that the necessary records and documents of the Association are adequately protected and maintained.</li>
+	<li>__Administration__. The Association is in charge of the administration of this {{LETTER_TOPIC}} and the implementation of processes and procedures to ensure that the Records Retention Schedule attached as __Exhibit <q>A</q>__ is followed. The Board is authorized to make modifications fo this Records Retention Schedule from time to time to ensure that it is in compliance with local, state and federal laws and that the schedule includes the appropriate document and record categories for the Association.</li>
+	<li>__Suspention of Record Disposal in Event of Litigation or Claims__. In the event the Association is served with any subpoena or request for documents or the Association becomes aware of a governmental investigation or audit concerning the Association or the commencement of any litigation against of concerning the Association, all documents relating or pertaining to such investigation, claim or litigation shall be retained indefinetly, and any further disposal of documents shall be suspended and shall not be reinstated until conclusion of the investigation or lawsuit, or until such time as the Board, with the advise of legal counsel, determines otherwise.</li>
+	<li>__Applicability__. This Document Retention Policy applies to all physical records generated in the course of the Association's operation, including both original documents and reproductions. It also applies to electronic copies of documents. Any electronic files that fall under the scope of one of the document types on the Records Retention Schedule below will be maintained for the appropriate amount of time. Documents that are not listed on __Exhibit <q>A</q>__, but are substantially similar to those listed in the Records Retention Schedule, should be retained for a similar length of time.</li>
+</ol>
+
+<p>This policy shall supersede and replace any previously adopted policy to the extent that the terms of such policy are inconsistent with this policy.</p>
+
+<p>IT IS FURTHER RESOLVED that this {{LETTER_TOPIC}} is effective on <span id="field_effective"><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u></span>, to remain in effect until revoked, modified, or amended.</p>
+
+<p>This is to certify that the foregoing resolution was adopted by the Board of Directors at a meeting of same on <span id="field_meeting"><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u></span> and has not been modified, rescinded, or revoked.</p> 
+
+<div style="border-top: 1px solid black; margin: 2em 5em 1em 60%; width: 20em">&nbsp;</div>
+<div style="border-bottom: 1px solid black; margin: 1em 5em 0 60%; text-align: center; width: 20em">{{LETTER_APPROVER}}</div>
+<div style="margin: 0 5em 2em 60%; width: 20em">{{LETTER_PERSON}}, {{ORG_NAME}}</div>
+
+<div style="float: left;text-transform:uppercase">STATE OF {{ORG_STATE}}<br/><br/>COUNTY OF {{ORG_COUNTY}}</div>
+<div style="padding-left: 25%; ">&sect;<br/>&sect;<br/>&sect;</div>
+
+<p>SUBSCRIBED AND SWORN TO before me by {{LETTER_APPROVER}} in their capacity as {{LETTER_PERSON}} for {{ORG_NAME}}, on <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>, {{CURRENTYEAR}}.</p>
+
+<div style="border-top: 1px solid black; margin: 3em 5em 2em 60%; width: 20em">Notary Public - State of {{ORG_STATE}}</div>
+
+AFTER RECORDING, PLEASE RETURN TO:<br />
+
+{{ORG_ADDRESS}}
+<br style="page-break-before: always" />
+<h2>Exhibit A - Record Retention Schedule</h2>
+<ol style="list-style: upper-alpha">
+	<li>Governing Documents
+		<table>
+			<tr>
+				<td width="60%">All copies of governing documents including but not Permanently limited to the Declaration of Covenants, Conditions, and Restrictions for {{ORG_NAME}} (the <q>Declaration</q>), the Bylaws of {{ORG_NAME}} (the <q>Bylaws</q>), the Articles of Incorporation of {{ORG_NAME}} (the <q>Articles</q>), Design Guidelines, any rules, regulations or resolutions of the Board of Directors and any amendments and supplements thereto</td>
+				<td>Permanently</td> 
+			</tr>
+		</table>
+	</li>
+	<li>Financial Records
+		<table>
+			<tr>
+				<td width="60%">Financial records, including each year's budget, tax returns, audits of the Association's financial books and records, copies of all bills paid by the Association or to be paid, the Association's checkbooks and check regsters</td>
+				<td>7 Years</td>
+			</tr>
+		</table>
+	</li>
+	<li>Records of Owners' Accounts
+		<table>
+			<tr>
+				<td width="60%">Owners' account records, including assessment account ledgers, architectural review records, violation records, records of fines and any disputes from the owner</td>
+				<td>5 Years</td>
+			</tr>
+		</table>
+	</li>
+	<li>Contracts
+		<table>
+			<tr>
+				<td width="60%">Copies of the final, executed contracts with a term of one (1) year or more entered into by the Association (and any related correspondence, including any proposal that resulted in the contract and all other supportive documentation)</td>
+				<td>4 Years after expiration or termination</td>
+			</tr>
+		</table>
+	</li>
+	<li>Meeting Minutes
+		<table>
+			<tr>
+				<td width="60%">Minutes of Annual and Special Meetings of the Members, minutes of Board meetings, and minutes of committee meetings (if any)</td>
+				<td>7 Years</td>
+			</tr>
+		</table>
+	</li>
+</ol>
+]]></content>
+    <pdf><![CDATA[
+    {{LETTER_HEAD}}
+
+    <h4 style="font-variant: small-caps; text-align: center">{{LETTER_TOPIC}}</h4>
+	<br />
+	<p style="text-align: justify">WHEREAS, pursuant to Section 209.005(m) of the Texas Property Code, the Board of Directors of {{ORG_NAME}} (the <q>Association</q>) is required to adopt a document retention policy for the Association's books and records.</p>
+
+	<p style="text-align: justify">NOW, THEREFORE, IT IS RESOLVED, in order to comply with the procedures set forth by Chapter 209 fo the Texas Residential Property Owners Protection Act, that the following procedures and practices are established for the maintenance and retention of the Association's books, records and related documents, and the same are to be known as <q>{{LETTER_TOPIC}}</q> of the Association.</p>
+
+	<ol>
+		<li>__Purpose__. The purpose of this {{LETTER_TOPIC}} is to ensure that the necessary records and documents of the Association are adequately protected and maintained.</li>
+		<li>__Administration__. The Association is in charge of the administration of this {{LETTER_TOPIC}} and the implementation of processes and procedures to ensure that the Records Retention Schedule attached as __Exhibit <q>A</q>__ is followed. The Board is authorized to make modifications fo this Records Retention Schedule from time to time to ensure that it is in compliance with local, state and federal laws and that the schedule includes the appropriate document and record categories for the Association.</li>
+		<li>__Suspention of Record Disposal in Event of Litigation or Claims__. In the event the Association is served with any subpoena or request for documents or the Association becomes aware of a governmental investigation or audit concerning the Association or the commencement of any litigation against of concerning the Association, all documents relating or pertaining to such investigation, claim or litigation shall be retained indefinetly, and any further disposal of documents shall be suspended and shall not be reinstated until conclusion of the investigation or lawsuit, or until such time as the Board, with the advise of legal counsel, determines otherwise.</li>
+		<li>__Applicability__. This Document Retention Policy applies to all physical records generated in the course of the Association's operation, including both original documents and reproductions. It also applies to electronic copies of documents. Any electronic files that fall under the scope of one of the document types on the Records Retention Schedule below will be maintained for the appropriate amount of time. Documents that are not listed on __Exhibit <q>A</q>__, but are substantially similar to those listed in the Records Retention Schedule, should be retained for a similar length of time.</li>
+	</ol>
+
+    <p style="text-align: justify">This policy shall supersede and replace any previously adopted policy to the extent that the terms of such policy are inconsistent with this policy.</p>
+
+    <p style="text-align: justify">IT IS FURTHER RESOLVED that this {{LETTER_TOPIC}} is effective on {{FIELD_EFFECTIVE}}, to remain in effect until revoked, modified, or amended.</p>
+
+    <p style="text-align: justify">This is to certify that the foregoing resolution was adopted by the Board of Directors at a meeting of same on {{FIELD_MEETING}} and has not been modified, rescinded, or revoked.</p> 
+
+    <table style="width: 100%">
+      <tr><td style="width: 50%">&nbsp;</td><td style="border-bottom: 1px solid black">&nbsp;</td></tr>
+      <tr><td style="width: 50%">&nbsp;</td><td style="border-bottom: 1px solid black; text-align: center">{{LETTER_APPROVER}}</td></tr>
+      <tr><td style="width: 50%">&nbsp;</td><td style="text-align: right">{{LETTER_PERSON}}, {{ORG_NAME}}</td></tr>
+    <table>
+    <br />
+    <table style="width: 100%">
+      <tr><td style="text-transform:uppercase; width: 35%">STATE OF {{ORG_STATE}}</td><td>&sect;</td></tr>
+      <tr><td>&nbsp;</td><td>&sect;</td></tr>
+      <tr><td style="text-transform:uppercase">COUNTY OF {{ORG_COUNTY}}</td><td>&sect;</td></tr>
+    </table>
+    <p style="text-align: justify">SUBSCRIBED AND SWORN TO before me by {{LETTER_APPROVER}} in their capacity as {{LETTER_PERSON}} for {{ORG_NAME}}, on <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>, {{CURRENTYEAR}}.</p>
+    <table style="width: 100%">
+      <tr><td style="width: 50%">&nbsp;</td><td style="text-align: right">&nbsp;</td></tr>
+      <tr><td style="width: 50%">&nbsp;</td><td style="border-top: 1px solid black; text-align: center">Notary Public - State of {{ORG_STATE}}</td></tr>
+    </table>
+    <br />
+    AFTER RECORDING, PLEASE RETURN TO:<br />
+    <br />
+    {{ORG_ADDRESS}}
+	<br style="page-break-before: always" />
+	<h2>Exhibit A - Record Retention Schedule</h2>
+	<ol style="list-style: upper-alpha">
+		<li>Governing Documents
+			<table>
+				<tr>
+					<td width="60%">All copies of governing documents including but not Permanently limited to the Declaration of Covenants, Conditions, and Restrictions for {{ORG_NAME}} (the <q>Declaration</q>), the Bylaws of {{ORG_NAME}} (the <q>Bylaws</q>), the Articles of Incorporation of {{ORG_NAME}} (the <q>Articles</q>), Design Guidelines, any rules, regulations or resolutions of the Board of Directors and any amendments and supplements thereto</td>
+					<td>Permanently</td> 
+				</tr>
+			</table>
+		</li>
+		<li>Financial Records
+			<table>
+				<tr>
+					<td width="60%">Financial records, including each year's budget, tax returns, audits of the Association's financial books and records, copies of all bills paid by the Association or to be paid, the Association's checkbooks and check regsters</td>
+					<td>7 Years</td>
+				</tr>
+			</table>
+		</li>
+		<li>Records of Owners' Accounts
+			<table>
+				<tr>
+					<td width="60%">Owners' account records, including assessment account ledgers, architectural review records, violation records, records of fines and any disputes from the owner</td>
+					<td>5 Years</td>
+				</tr>
+			</table>
+		</li>
+		<li>Contracts
+			<table>
+				<tr>
+					<td width="60%">Copies of the final, executed contracts with a term of one (1) year or more entered into by the Association (and any related correspondence, including any proposal that resulted in the contract and all other supportive documentation)</td>
+					<td>4 Years after expiration or termination</td>
+				</tr>
+			</table>
+		</li>
+		<li>Meeting Minutes
+			<table>
+				<tr>
+					<td width="60%">Minutes of Annual and Special Meetings of the Members, minutes of Board meetings, and minutes of committee meetings (if any)</td>
+					<td>7 Years</td>
+				</tr>
+			</table>
+		</li>
+	</ol>
+    ]]></pdf>
+  </letter>
+</ajax-response>
+

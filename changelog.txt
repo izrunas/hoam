@@ -1,0 +1,723 @@
+2020/05/05 v0.886 release 2
+============================
+
+Fixes:
+  Fixed minor issues with upgrade functions.
+
+
+2020/05/05 v0.886
+===================
+! Please see the below change to invoice attachments -- if not using the new
+! upgrade routine, you will need manually update your install.
+
+Fixes:
+  Fixed issues with date records from older releases that was set to
+    '0000-00-00' originally but should now use '1970-01-01' (resulting from
+    MySQL NO_ZERO_DATE changes).
+  Fixed more PHP notices and warnings.
+
+Additions:
+  Added checkbox option on export to include attachments in backup.
+  Added log class functions findMessage() and returnSequence().
+  Added xml_version_check.php.
+  Added check to daly maintenance script to make sure the system is not in
+    maintenance mode when running.
+  Added housekeeping checks for homeowner sale date and violation resolution
+    date to update them to 1970-01-01 so they'll work correctly with new code.
+
+Changes:
+! Changed adding of vendor invoice attachments from reporting each charge as
+    the owner to the invoice itself. This will cause a system previously in
+    production to no longer find previously entered attachments. The upgrade
+    routine will automatically update your database accordingly. If manually
+    upgrading, you'll need to run save and manually run the PHP migration
+    script in the upgrade.
+  Changed backup process to overwrite zip archive contents if a backup file
+    already exists.
+  Moved Insurance maintenance routine into separate function.
+  Minor documentation updates.
+  Tidied up maintenance routine report slightly.
+  Converted report.js, residenceBudgetView.js, residence_detail_user.js to use
+    only JQuery.
+	
+
+2020/05/05 v0.885
+===================
+  This release includes the initial version of an automated upgrade process;
+with any luck, v0.885 should be the last version requiring any manual changes
+(however, there are a few below).
+
+! Added new log flag for system upgrade messages, please set a value in the
+! system configuration.
+
+! A change must be made to the Apache RewriteRule on your system. Documentation
+! has been updated accordingly. This will solve a problems with attachments not
+! being downloaded correctly.
+! Old:
+!     RewriteRule !\.(css|gif|jpg|js|pdf|php|png)$ /index.php
+! New:
+!     RewriteRule /$ /index.php
+
+! The cURL and Zip modules are now required by HOAM, you'll need to install it
+! during the upgrade by running:
+!
+! sudo apt-get install php-zip php-curl
+! sudo service apache2 restart
+!
+! or the equivilent commands for your Linux distribution or operating system.
+
+Fixes:
+  Found and fixed two more errors caused by MySQL ONLY_FULL_GROUP_BY mode.
+  Fixed empty HTML string displaying attachment list for properties for sale.
+  Fixed links for php_info and hoam_info.
+  Fixed violation edit_script allowing violations to be created without any
+    selected categories.
+  Fixed typos in xml_severity.php
+  Fixed popup warning when entering a violation with no categories selected
+    (believe this is due to the recent removal of windows_js).
+  Fixed javascript form error messages that were broken when windows_js was
+    removed.
+  Fixed removal of multiple form error messages that could be left behind after
+    an error was corrected
+  Fixed several references to budget/flags/ignore_budget that should be
+    homeowner/flags/ignore_budget.
+  Fixed typo in HOAM_homeownerRentalStreet.
+  Fixed typo in budget_invoice class listInvoicesForCustomer function.
+  Fixed lack of wiki parsing on maintenance report.
+  Fixed owner display for work requests in xml_attachment_list.php
+  Fixed add/edit/delete properties for sale to load the correct javascript
+    file.
+  Fixed CSS display on homeowner account statement.
+  Fixed additional PHP notices and warnings.
+  Fixed issue with trying to display advertisement during installation that
+    causes a fatal error.
+  Fixed attachment list to stripe the table immediately and not wait for the
+    page to be scrolled.
+
+Additions:
+  Added php_com_dotnet.dll extension as requirement under Windows systems.
+  Added function checkOwnership.
+  Added new log flag for system upgrade messages.
+  Added option to toggle maintenance mode to diag menu. There's not currently
+    an easy way to turn off maintenance mode if you log out, so be careful.
+  Added button to attachments system configuration to delete any existing
+    preview images. This is useful when changing the size of preview files, as
+    the previews will not be regenerated in a new size if they already exist.
+  Added check for existing attachments when deleting homeowners, properties for
+    sale, and work requests.
+  Added configuration option for root article ID.
+  Added function HOAM_formGenerateFlag.
+  Added xml_maintenance.php.
+  Added xml_delete_previews.php.
+  Added link to edit existing vendor invoices to the invoice list page.
+  Added several checks to prevent charges from being created if the budget
+    organzation vendor hasn't been set in the configuration first.
+  Added a check in the maintenance script if the install.php file still exists,
+    to delete it.
+  Added functions/upgrade.php script with several functions.
+  Added upgrade/upgrade.php script with specific upgrade tasks.
+  Added scripts/upgrade/xml_changes.php, xml_decompress.php, xml_download.php,
+    xml_export.php, xml_log_update.php, xml_return_info.php.
+  Added returnDateCreated and returnMessage functions to HOAM_log class.
+
+Other changes:
+  Now deleting attachment previews from attachments, homeowners, for-sale
+    properties, vendors, and work_requests when those entries are deleted as
+    well.
+  Created and assigned a default income and expense account.
+  Changed attachments listed on work requests to appear the same as other
+    portions of the site.
+  Removed ul/li tags from several reports to clean up appearance.
+  Removed more deprecated topic code.
+  Renamed diagEmail.js to adminDiag.js.
+  Slight tweaks to xml_attachment_list.php.
+  Minor documentation updates.
+  Another change to HOAM_returnLocalizedString to hopefully not break when a
+    string isn't found.
+  Updated xml_attachment_list.php to link to vendor invoices.
+  Updated attachment list to say there are no attachments if none are in the
+    system.
+  Enabled option to download system configuration (database backup only at this
+    time). Including all attachments will be added in a future release.
+  Changed HOAM_formGenerateFlag to use PHP_INT_MAX.
+
+
+2020/04/30 v0.884
+===================
+  The legacy include/classes/obj_xml.php file is no longer used and can be
+deleted from your system.
+
+Fixes:
+  Fixed (I think) all of the remaining issues caused by MySQL
+    ONLY_FULL_GROUP_BY mode.
+  Fixed Violation History by Month report showing wrong data.
+  Fixed missing $advertising_class in xml_attachment_list.php
+  Fixed missing homeowner_sale and budget_vendor checks in
+    xml_attachment_list.php
+  Fixed server name check in email configuration.
+  Fixed missing image.php include in function HOAM_budgetIncomeStatement.
+  Fixed rental percentage calculation in HOAM_homeownerRentalStreet function.
+  Fixed xml_categories.php not returning all fields.
+  Fixed HOAM_budgetInvoiceEditCategory javascript now that xml_categories.php
+    is returning all fields.
+
+Additions:
+  Added check in HOAM_attachmentAdd() to encapsulate $owners in array if it
+    was called without.
+  Added a housekeeping check for attachments with unknown owners.
+  Added xml_attachment_exist.php script.
+  Added function HOAM_attachmentReturnPreviewPath.
+  Added check for valid id when deleting and editing vendors.
+  Added javascript popup when deleting a vendor that has attachments.
+
+Other changes:
+  Removed unused function listAuthors() from messageboard class.
+  Moved import/export system configuration options under system configuration.
+  Moved php_info() and hoam_info() pages under diagnostic / test pages.
+  Migrated all remaining users of legacy obj_xml class to built-in PHP XML
+    functions.
+  Removed unused scripts xml_delinquent.php and xml_customer.php
+  Removed unused $_HOAM_language ['attachment']['flag'] strings.
+  Commented out attachment/list-old link, it will be removed completely in a
+    future release.
+  HOAM will now delete any associated attachments for vendors when a vendor is
+    deleted. This will be expanded to other components in a future release.
+  Initial changes for making sure attachment previews are also deleted when an
+    attachment is deleted.
+
+
+2020/04/26 v0.883
+===================
+Fixes:
+  Fixed debugging code left enabled in last release that prevents adding &
+    modifying homeowners.
+
+Additions:
+  Added ability to report if there's a new version available (get latest
+    version in during housekeeping routine, display an upgrade message on the
+    website administraton page).
+  Added missing configuration options for homeowner comments, and lot block,
+    lot, plat, latitude, and longitude minimum lengths.
+
+Other changes:
+  Changed homeowner default city, state, and postalcode to use the one
+    specified in the configuration and not the organization's.
+  Removed duplicate database connection attempt in db class.
+
+
+2020/04/25 v0.882
+===================
+  Help popups have changed from Javascript to CSS, which will speed up page
+loads and reduce the amount of data being transferred (by at least 200k per
+page view). Due to the changes in how help is now displayed, there may be a few
+empty popups that had information previously. These will be resolved in a
+future release.
+  You may also delete the now unused 3rdparty/windows_js directory.
+
+! The violaton approval setting was renamed, make sure you go into the system
+  configuration screen and re-enable this if needed.
+! There is a new flag for homeowner_sale attachments, make sure you go into the
+  configuration screen and set one. 
+! Please run the below commands against your HOAM MySQL database:
+
+DROP TABLE topics;
+DELETE FROM configuration WHERE config_option="violation/flags/denied";
+DELETE FROM configuration WHERE config_option="violation/flags/require_approval";
+DELETE FROM configuration WHERE config_option="work_request/flags/denied";
+
+Fixes:
+  Fixed users getting permission denied trying to edit their own message
+    postings.
+  Fixed editing previous violations.
+  Fixed broken root article permissions.
+  Fixed broken path in userResidencePrimary.php.
+  Fixed adminConfig.js so HOAM_configEmailAutomatedEnable runs on page load.
+  Fixed existing css for article notes to appear as intended.
+  Fixed not saving the 'public' flag on budgets.
+  Fixed viewing of public budgets by residents and owners.
+  Fixed remaining (broken) references to the old $_HOAM_language ['history']
+    strings.
+  Fixed edited work requests without a child disappearing -- this appears to
+    be due to a behavior change in how either MySQL or PHP treat empty strings
+    in the last few years. Made a couple other precautionary changes changing
+    empty strings ('') to empty($var) calls.
+  Fixed active work request list not showing requests in planning status.
+  Fixed some more PHP warnings and notices.
+
+Additions:
+  Added Board and Officers to be able to view the data Export options instead
+    of just system admins.
+  Added saving of violation approval status.
+  Added initial work to track change history on violation letters.
+  Added function HOAM_workListAllRequests and pulled duplicate code out of
+    admin template.
+  Added new work request and violation approval flags.
+  Added missing work request config options : minimum_description_length,
+    minimum_notes_length, minimum_title_length
+  Added new attachment flag, homeowner_sale.
+  Added ability to add attachments to homeowner properties for sale (useful for
+    attaching resale certificates and other documentation to the property).
+  Added save icon to tasklist.
+  Added functions HOAM_formDisplayHelp and HOAM_formSelect,
+    HOAM_formSelectDisabled, HOAM_formSelectEnable, HOAM_formSelectHidden,
+    HOAM_formSelectMultiple, and HOAM_formSelectMultipleDisabled.
+  Added [[note:]] and [[noter:]] wiki code formatting (examples in
+    documentation).
+
+Other changes:
+  Updated all articles, violation category & severity, budget category to have
+    been created by the admin account.
+  Removed now unused 3rdparty/windows_js directory and everywhere it was
+    referenced, which should speed up page loads.
+  Removed test news, article, and messageboard posts that were left in the last
+    release accidentally.
+  Removed unused database table topics.
+  Removed css class ".violation_quickinfo abbr", same attributes already exist
+    for default abbr.
+  Removed deprecated css class "col.center".
+  Removed unused function HOAM_budgetInvoiceGenerateOld.
+  Changed history on homeowner payment plan details and comments to use
+    HOAM_diff.
+  Renamed form function HOAM_formGroupEnable to HOAM_formSelectGroupEnable.
+  Removed some more legacy topics code.
+  Several group check additions to admin and website pages (security
+    enhancements).
+  Changed work request description and notes history to use HOAM_diff.
+  Reduced the number of popup alerts when editing and deleting violations.
+  Changed it so new homeowners (that aren't receiving mail at the residence)
+    and vendors default city and state match the association's.
+
+
+2020/04/20 v0.881
+===================
+Fixes:
+  Fixed editing of news articles that was broken last release.
+  Fixed display of advertisements in various page locations (everything except
+    toolbar was broken).
+  Fixed bug saving attachment minimum description length setting.
+  Fixed $_HOAM_language ['field_names']['advertising']['edit'] to correctly
+    say we're editing.
+  Fixed table formatting in $_HOAM_language ['tables']['generic']['history'].
+  Fixed checking for empty advertisement start and end dates.
+  Fixed poststartdate and postenddate issues in article edit_script.
+  Fixed error when updating article history on a blank article.
+  Fixed missing function parameter that prevented modification of user groups
+    when manually editing a user account.
+  Fixed a couple PHP warnings and notices.
+
+Additions:
+  Added missing advertising configuration options to system configuration.
+  Added new function for displaying advertisements. If more than one
+    advertisement is specified for a location we'll display one at random.
+  Added additional group check on messageboard posting.
+  Added help message to messageboard if email validation is required but the
+    user has not done that yet.
+  Added missing system configuration options for vendor invoice due flags (this
+    also fixes the broken option for net 20 on vendors).
+  Added minor logging on advertisements.
+  Added security checks when viewing change history on articles and news.
+  Added validation check on advertisement URL.
+  Re-added validation check on budget vendor URL.
+  Added validation check on website hostname.
+  Added list of groups a user account is a member of when editing or deleting.
+  Added member count to group list administration pages.
+
+Other changes:
+  Minor documentation updates.
+  Renamed advertising class function ListCurrentForSection to
+    ListCurrentForPosition.
+  Removed several unused javascript functions: calculateJD, calculateCD,
+    HOAM_textareaDecreaseRows, HOAM_textareaExpander, HOAM_textareaIncreaseRows,
+    highlightWord, and wordHighlight.
+  Removed broken search word highlighting.
+  Removed unused HOAM_appsPolls and HOAM_appsTasklist functions.
+  Changed messageboard message edit history to use new HOAM_diff function.
+  Changed db -> listSimpleQuery to use mysqli_num_rows instead of
+    mysqli_affected_rows.
+  Got rid of css .old and .new classes, merged into existing <ins> and <del>.
+  Changed user edit_script to send back to the administration pages on cancel
+    if user has necessary permissions.
+  Changed HOAM_diff to use mb_strlen.
+  Updated default articles to fix a couple issues.
+
+2020/04/18 v0.88
+==================
+ARP Realty ceased operations in 2016, so not much has been done with this code
+over the last 4+ years. One upside of being furloughed during the Coronavirus
+pandemic in 2020 is free time to come back and work on HOAM again.
+
+Changes and fixes due to languishing for 4+ years:
+  Updated several dependencies (JQuery, PHPMailer, TCPDF) to their most recent
+    legacy versions; the work necessary to upgrade to the latest versions has
+     not been done yet.
+  Updates for PHP 7.2 compatibility:
+    Add version check to init for php7 extension changes (mysql, mysqli,
+      mbstring).
+    Removed deprecated each() calls throughout.
+    Removed check for mysql extension, no longer being used.
+    Fixed deprecation warnings for obj_xml.php
+    Fixed warnings due to MYSQL_ASSOC constant deprecation.
+  Enhanced error checking and fixes for initial installation script.
+  Changed mysql grant syntax on installation to work with MySQL 8.0.
+  Renamed table 'groups' to 'group_list' because of new keyword reservation in
+    MySQL 8.0.2.
+  Re-verified ability to successfully install and run under:
+    Ubuntu 14.04
+    Ubuntu 16.04
+    Ubuntu 18.04
+    Windows Server 2012
+    Windows Server 2019
+
+A number of small database changes, partly because it should have been that way
+  originally, and partly for compliance with new configuration defaults (eg,
+  NO_ZERO_DATE) in various distributions. You'll need to run the following
+  commands in MySQL (please make sure you perform in order):
+
+ALTER TABLE advertising MODIFY flags BIGINT(20) UNSIGNED NOT NULL DEFAULT 0;
+ALTER TABLE advertising MODIFY datepostend DATE DEFAULT '1970-01-01';
+ALTER TABLE advertising MODIFY datepoststart DATE DEFAULT '1970-01-01';
+ALTER TABLE articles MODIFY datecreated DATETIME NOT NULL DEFAULT '1970-01-01 00:00:01';
+ALTER TABLE articles MODIFY flags BIGINT(20) UNSIGNED NOT NULL DEFAULT 0;
+UPDATE articles SET datepoststart=NULL WHERE datepoststart=0;
+UPDATE articles SET datepostend=NULL WHERE datepostend=0;
+ALTER TABLE articles DROP COLUMN actions;
+ALTER TABLE articles DROP COLUMN scripts;
+ALTER TABLE articles DROP COLUMN sidebar;
+ALTER TABLE articles DROP COLUMN topic_id;
+ALTER TABLE attachments MODIFY flags BIGINT(20) UNSIGNED NOT NULL DEFAULT 0;
+ALTER TABLE budget MODIFY flags BIGINT(20) UNSIGNED NOT NULL DEFAULT 0;
+ALTER TABLE budget_account MODIFY flags BIGINT(20) UNSIGNED NOT NULL DEFAULT 0;
+ALTER TABLE budget_budget MODIFY flags BIGINT(20) UNSIGNED NOT NULL DEFAULT 0;
+ALTER TABLE budget_category MODIFY flags BIGINT(20) UNSIGNED NOT NULL DEFAULT 0;
+ALTER TABLE budget_customer MODIFY flags BIGINT(20) UNSIGNED NOT NULL DEFAULT 0;
+ALTER TABLE budget_invoice MODIFY flags BIGINT(20) UNSIGNED NOT NULL DEFAULT 0;
+ALTER TABLE budget_track MODIFY flags BIGINT(20) UNSIGNED NOT NULL DEFAULT 0;
+ALTER TABLE budget_vendor MODIFY flags BIGINT(20) UNSIGNED NOT NULL DEFAULT 0;
+ALTER TABLE group_members MODIFY flags BIGINT(20) UNSIGNED NOT NULL DEFAULT 0;
+ALTER TABLE groups MODIFY flags BIGINT(20) UNSIGNED NOT NULL DEFAULT 0;
+ALTER TABLE homeowner_sale MODIFY flags BIGINT(20) UNSIGNED NOT NULL DEFAULT 0;
+ALTER TABLE homeowners MODIFY budget_flags BIGINT(20) UNSIGNED NOT NULL DEFAULT 0;
+ALTER TABLE homeowners MODIFY flags BIGINT(20) UNSIGNED NOT NULL DEFAULT 0;
+ALTER TABLE homeowners MODIFY purchasedate DATE DEFAULT '1970-01-01';
+ALTER TABLE homeowners MODIFY saledate DATE DEFAULT '1970-01-01';
+ALTER TABLE homeowners MODIFY bankruptcy_date DATE DEFAULT '1970-01-01';
+ALTER TABLE homeowners MODIFY payment_plan_date DATE DEFAULT '1970-01-01';
+ALTER TABLE homeowners DROP COLUMN datebankruptcy;
+ALTER TABLE insurance ADD COLUMN flags BIGINT(20) UNSIGNED NOT NULL DEFAULT 0;
+ALTER TABLE log MODIFY flags BIGINT(20) UNSIGNED NOT NULL DEFAULT 0;
+ALTER TABLE messageboard MODIFY tree_id VARCHAR(32) NOT NULL DEFAULT 0;
+ALTER TABLE misc_property MODIFY flags BIGINT(20) UNSIGNED NOT NULL DEFAULT 0;
+ALTER TABLE news MODIFY datecreated DATETIME NOT NULL DEFAULT '1970-01-01 00:00:01';
+ALTER TABLE news DROP COLUMN topic_id;
+ALTER TABLE tasks MODIFY flags BIGINT(20) UNSIGNED NOT NULL DEFAULT 0;
+ALTER TABLE users MODIFY flags BIGINT(20) UNSIGNED NOT NULL DEFAULT 0;
+ALTER TABLE violation_severity MODIFY flags BIGINT(20) UNSIGNED NOT NULL DEFAULT 0;
+ALTER TABLE vote MODIFY flags BIGINT(20) UNSIGNED NOT NULL DEFAULT 0;
+ALTER TABLE vote_group_members MODIFY flags BIGINT(20) UNSIGNED NOT NULL DEFAULT 0;
+ALTER TABLE work_requests MODIFY flags BIGINT(20) UNSIGNED NOT NULL DEFAULT 0;
+RENAME TABLE groups TO group_list;
+
+Other fixes:
+  Fixed many PHP warnings and notices throughout: during installation, on help
+    pages, JS help popups, messageboard.
+  Fixed off-by-one count in HOAM_censor.
+  Fixed vendor invoice payment javascript to use existing 'by_check' language
+    string.
+  Don't try to perform maintenance on insurance policies if it's not enabled in
+    the configuration.
+  Updated comparison operator on class db->changeFloat, changeInt, and
+    changeString to avoid an unintentional NULL.
+  Don't allow vendor invoice payments greater than is owed.
+  Don't allow changing vendor invoice fields when deleting.
+  Fixed homeowner check for incorrect budget flag.
+  Fixed misspelling of HOAM_MESSAGE_INFORMATIONAL in log class.
+  Fixed incorrect variable name in article edit_script.
+  Fixed page title when deleting user account.
+  Fixed advertising post start & end date checks in edit_script.
+  Fixed warning messages when adding a new violation.
+  Fixed missing datecreated on lots.
+  Allow Wiki VAR parsing to happen up to 3 times in the event of multiple
+    substitutions.
+  Fixed missing </div> when adding/deleting/editing News articles.
+  Went through and reset all group membership to be correct "out of the box".
+  Went through and reset all flags to be correct "out of the box".
+
+Additions:
+  Added new and changed several language strings.
+  Added change to allow multiple payments on vendor invoices (eg. installment
+    plans).
+  Added article content history changes.
+  Added news content history changes.
+  Added HOAM_diff function.
+  Added HOA board email address to installation recording during maintenance
+    run.
+  Added missing advertising security groups.
+  Added log flag for news.
+
+Other:
+  Removed deprecated leadin, actions, appbar, and scripts options from
+    articles.
+  Removed deprecated function binary_attachments_returnAttachmentHTML.
+  Removed deprecated changeItem function from db class.
+  Removed deprecated changeShortname, returnAuthor, returnHeadline, and
+    returnShortname functions from article class.
+  Removed deprecated returnAuthor function from news class.
+  Removed deprecated call to get_magic_quotes_gpc in db class.
+  Removed deprecated article topic functions and options.
+  Removed deprecated news topic functions and options.
+  Added some sql query debug logging in db class.
+  Updates to Wiki vars.
+  Changed log to record when scripts are being run via CLI.
+  Minor changes for debugging user login problems.
+  Additional documentation updates.
+  Bumped version number slightly.
+  Now actually logging installation queries.
+  Implemented security, performance, and feature changes as recommended by Ilya
+    Ilba, Michael Moore, and others.
+  Updated default website configuration settings.
+  Removed broken link to old administration pages.
+  Added check to install.php if hoam-config.ini exists we assume the
+    installation was successful.
+
+2016/04/30 v0.876
+==================
+* Don't warn on expired insurance policies if they're being replaced
+* Added ability to ignore expiration date when updating an insurance policy
+* Fixed warning on budget invoice list for undefined variable
+* New version of prototype.js
+* New verson of TCPDF
+* Minor change to test report export
+* Minor documentation update
+
+2015/09/24 v0.875
+==================
+* Added group configuration options for all remaining items (advertising,
+  articles, attachments, groups, homeowners, insurance, lots, messageboard,
+  news, users, violations, work requests)
+* Updated default groups for each of the above group IDs
+* Updated descriptions on built-in groups
+* Changed work_request edit script to respect new groups
+
+2015/08/29 v0.874
+==================
+* Started work on a basic installation script; it's still not working yet, but
+  I've held back this release for way too long already trying to get it to a
+  good state. It will eventually be fleshed out, but for now just does the bare
+  minimums to get a working system, essentially does the first part of the
+  initial installaton as described in the documentation
+* Added revenue/expense pie chart on budget net report
+* Don't try to log browser information if browscap hasn't been configured in
+  php.ini
+* Added tracking of insurance policies; alerts will be shown in the
+  maintenance log as well as notices mailed out in advance of policies
+  expiring.
+! Several new configuration options for tracking insurance policies have
+  been created, you will need to enter values for those settings.
+! It's necessary to create a new table to hold insurance records:
+
+CREATE TABLE `insurance` (
+  `id` varchar(32) NOT NULL,
+  `user_id` varchar(32),
+  `vendor_id` varchar(32),
+  `policy_num` varchar (64),
+  `policy_type` smallint unsigned,
+  `lot_id` varchar(32),
+  `datecreated` datetime,
+  `dateexpiration` date,
+  `datemodified` datetime,
+  `daterenewal` date,
+  `comments` text,
+  `flags` bigint unsigned default 0,
+  PRIMARY KEY (`id`) );
+
+! In preparation of changing to using PHP's built-in password_hash and
+  password_verify functions, the size of the password field in the database
+  needs to be increased. You'll need to do the following:
+
+ALTER TABLE users MODIFY password VARCHAR(255);
+
+! Two other database changes need to be applied to fix outstanding issues:
+
+ALTER TABLE budget MODIFY flags BIGINT UNSIGNED DEFAULT 0;
+
+ALTER TABLE budget_invoice MODIFY flags BIGINT UNSIGNED DEFAULT 0;
+
+* Added wiki parsing of the website title
+* Added and fixed configuration option saving for several fields
+* Added budget group configuration options, still need to do the others
+* Add missing change/returnFlags functions to advertising class
+* Add missing delete code in website administration for existing advertising
+* Fixed PHP error in maintenance script delinquent email function
+* Fixes for numerous PHP warnings
+* Fixes for several HTML errors and warnings
+* Fixed formatting issue on monthly report for unpaid invoices
+* Updated HTML on monthly report to display better in email
+* Fixed display of due date on invoices
+* Fixed issue with website administration pages being parsed by the wiki
+* Changed to not display PayPal/online payment information unless enabled in
+  the configuration
+* Minor cleanup of the maintenance and housekeeping report
+* Commented out several budget flags that aren't being used
+* Several documentation updates, primarily around installations on a Windows
+  system
+* Corrected the release date for v0.873
+
+2014/12/21 v0.873
+==================
+* Fixed a duplicate table display on pdf invoices uncovered by TCPDF update
+* Updated version of TCPDF
+* Renamed a few form letters to group better when entering
+* Replaced almost all of the CSS px measurments with ems
+* Removed most CSS specifically for IE, Firefox/Mozilla, and Webkit browsers
+* Removed CSS for contacts, img shadows & newletters, no longer used
+* Minor documentation updates
+! Changed the default lot block size from 1 char to 10; you will want to execute
+  the below in mysql; no data will be lost or other files need to be changed:
+
+  ALTER TABLE lots MODIFY block VARCHAR(10);
+
+* Added / updated a few wiki vars
+* Added form letter with basic association information for resale / refinance
+* Removed "Payment Complete" checkbox from homeowner payment screen, was never
+  implemented and will not be used in future budgeting rewrite
+* Fixed incorrect url link when extensions are not found at startup
+
+2014/12/07 v0.872
+==================
+* Added new default budget categories for loans
+* Fixed several spelling mistakes
+* Updated headers with old contact information
+* Removed all of the hard-coded language strings in invoices
+! You will need to check/re-add the removed language from the hard-coded
+  invoice to the Budget -> Fineprint section in the system configuration
+* Initial work adding system configuration options for messageboards, not
+  yet functional
+* Fixed a couple of bugs with client browser preferred language detection
+* Added translations for French, German, Italian, Portuguese, and Spanish
+  contributed by Alejandro Rios López
+
+2014/11/13 v0.871
+==================
+* Added display of client browser preferences to hoam_info()
+* Separated applying payment credits into separate function, so that
+  there is reduced confusion when reviewing account histories.
+* Updated maintenance script to use new credit function when applying
+  credits rather than old payment function.
+* Changed formatting on two architecture form letters
+* Added management email address to delinquent owner email
+* Fixed yet another typo in the delinquent owner email
+* Added organization name to installation reporting
+* Fixed Management email address parsing on installation reporting
+
+2014/08/31 v0.870
+==================
+* Eliminated separate hoam-index.php and removed duplicate code
+* Started removing some of the hard-coded language strings in invoices
+* Added form letter for architecture change without prior approval
+* Minor language string updates
+
+2014/07/15 v0.869
+==================
+* Added code to report back to ARP existing installations
+* Added configuration option to control installation reporting
+* Updated default database with options configured for several new
+  defaults
+* Fixed typo in budget configuration page
+* Renamed several form letters
+* Tweaks to pdf creation for form letters
+* Deleted duplicate form letter for incorrect address
+* Added four form letters for payment issues
+* Modified form letter for certified payments
+* Added configuration option to control percent +/- different from vendor
+  invoice average
+! You will need to set this invoice average configuration option
+* Added conditional section to monthly report listing those owners in
+  default that should be sent to the attorney for collection
+* Minor cleanup of navigation template
+* Added config option for the Everyone group
+* Force any accounts authenticating with old method to reencrypt their
+  passwords
+* Updated prototype.js to 1.7.2
+* Minor documentation update
+
+2014/07/08 v0.868
+==================
+* Force a trailing slash on the website URL in configuration
+* Added additional logging on password reset requests.
+* Begin actually deleting attachments from the filesystem instead of just
+  the database
+* Log deletion of attachments
+* Added housekeeping check and report for attachments listed in the
+  database but missing from the filesystem.
+* Switched attachment view script to use existing function for generating
+  path
+* Show flag in homeowner & budget listings for owners with defaulted
+  payment plans
+* Fix incorrect language string not displaying description for payment
+  plan flags
+* Delete any prior existing requests when sending password reset email to
+  user
+* Cleanup of budget assessment maintenance code
+* Correctly force the assessment due & late dates in the event the
+  maintenance script is not scheduled to run
+* HTML fixes on budget maintenance report
+* Adding missing text to diagnostic email
+* Updated version of PHPMailer
+* Minor language string updates
+
+2014/06/30 v0.867
+==================
+* Added basic email validation and password resetting
+* Email validation will not be performed unless enabled in the
+  configuration
+! A new user flag has been created, it is necessary to enter a value in
+  the system configuration.
+! It's necessary to create a new table to hold email validation records:
+
+CREATE TABLE `user_validation` (
+  `id` varchar(32) NOT NULL,
+  `user_id` varchar(32),
+  `hash` varchar(32),
+  `datecreated` datetime,
+  PRIMARY KEY (`id`)
+) ;
+
+* Password resetting will fall back to just validating the security
+  question if there is not an email address on file for the user
+* If email validation is enabled new users will not automatically be
+  added to the Registered Users group as before on account creation (they
+  are added after validation)
+* Any unused validation requests will be purged as part of the nightly
+  maintenance routine
+* Enhanced experience for users validating their disabled account
+* Other minor code cleanups on user template page
+* Added function to Group Members class to simplify adding users to
+  groups
+* Fixed strings out of order on delinquent email notices
+* Fixed issue category amounts tracked on a budget being cleared when
+  editing the budget
+* Minor CSS tweaks on form display
+* Purged additional leftover information from the default database
+* Minor documentation updates
+* Minor language string updates
+
+2014/06/18 v0.866
+==================
+* Fixed issue with delinquent account escalation not working
+* Added note about regular assessment amount to delinquent email notice
+* Minor language string updates
+* Consolidated duplicate code into HOAM_returnWebsiteTitle
+* Updated version of TCPDF
+
+2014/05/04 v0.866
+==================
+* Renamed /admin/budget to /admin/financial and adjusted all affected
+  files
+* Fixed issue with generating PDF preview images
+* Finished completely removing all calls to old func.article.php
+* Added back in blink on ajax access using css
+* Minor documentation updates
+
+2014/05/01 v0.865
+==================
+* Initial public release

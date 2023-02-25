@@ -1,0 +1,110 @@
+<?xml version="1.0" ?>
+
+<!--
+ * This file is part of HOAM, copyright (C) 2002-2020 Robert Butler
+ *
+ * HOAM is free software; you can redistribute it and/or modify it under the
+ * terms of the GNU Affero General Public License as published by the Free
+ * Software Foundation; either version 3 of the License, or (at your option)
+ * any later version.
+ *
+ * HOAM is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with HOAM; if not, see http://www.gnu.org/licenses or write to the
+ * Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+ * 02110-1301
+ *
+ * Questions specific to HOAM should be directed to ARP Realty. Please see
+ * the HOAM web site at http://hoam.arprs.com/
+ *
+ * Some portions of HOAM incorporate ideas and/or code from other sources, and
+ * those portions are explicitly mentioned and attributed in the relevant
+ * section of HOAM source code. Questions about that code should be directed to
+ * the original authors.
+ *
+ *-->
+
+<ajax-response>
+  <letter>
+    <name>Payment - Missing Information</name>
+    <require_delivery_confirmation>0</require_delivery_confirmation>
+    <require_delivery_certified>0</require_delivery_certified>
+    <suggest_delivery_confirmation>0</suggest_delivery_confirmation>
+    <suggest_delivery_certified>0</suggest_delivery_certified>
+   	<additional_fields>
+		<field>
+			<description>Reason for Return</description>
+			<id>payment_reason</id>
+			<required>1</required>
+		</field>
+	</additional_fields>
+    <content><![CDATA[
+<div class="letter">
+<div class="letter-head">{{LETTER_HEAD}}</div>
+
+<div class="letter-date">{{DATE}}</div>
+
+<div class="letter-homeowner-address">{{HOMEOWNER_MAILING}}</div>
+
+<div class="letter-tracking"></div>
+
+<div class="letter-residence-address">Property: {{HOMEOWNER_RESIDENCE}}</div>
+
+<div class="letter-topic">Re: {{LETTER_TOPIC}}</div>
+
+<div class="letter-salutation">Dear {{HOMEOWNER_NAME}},</div>
+
+<div class="letter-body">
+
+<p>Please note that we were unable to process your check due to missing information: __<span id="payment_reason"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span>__; the check you previously sent is enclosed.</p>
+<p>Please resolve the issue noted above and resend your payment. Please note that you will be liable for all applicable fees if a suitable payment is not received by the due date.	Accepted forms of payment are cashier and personal checks or money orders, or payments made via PayPal using a credit card. For information on using PayPal, please see [[http://arprs.com/paypal/]]</p>
+<p>If you have any questions, please contact the Association at {{ORG_PHONE}} or {{ORG_EMAIL_MANAGEMENT}}.</p>
+
+<div class="letter-signature">{{LETTER_SIGNATURE}}</div>
+
+<div class="letter-approver">{{LETTER_APPROVER}}</div>
+
+<div class="letter-person">{{LETTER_PERSON}}</div>
+
+<div class="letter-footer">{{LETTER_FOOTER}}</div>
+</div>
+
+]]></content>
+  <pdf><![CDATA[
+<div class="letter">
+<div class="letter-head">{{LETTER_HEAD}}</div>
+
+<div class="letter-date">{{DATE}}</div>
+
+<div class="letter-homeowner-address">{{HOMEOWNER_MAILING}}</div>
+
+<div class="letter-tracking"></div>
+
+<div class="letter-residence-address">Property: {{HOMEOWNER_RESIDENCE}}</div>
+
+<div class="letter-topic">Re: {{LETTER_TOPIC}}</div>
+
+<div class="letter-salutation">Dear {{HOMEOWNER_NAME}},</div>
+
+<div class="letter-body">
+
+<p>Please note that we were unable to process your check due to missing information: __{{PAYMENT_REASON}}__; the check you previously sent is enclosed.</p>
+<p>Please resolve the issue noted above and resend your payment. Please note that you will be liable for all applicable fees if a suitable payment is not received by the due date.	Accepted forms of payment are cashier and personal checks or money orders, or payments made via PayPal using a credit card. For information on using PayPal, please see [[http://arprs.com/paypal/]]</p>
+<p>If you have any questions, please contact the Association at {{ORG_PHONE}} or {{ORG_EMAIL_MANAGEMENT}}.</p>
+
+<div class="letter-signature">{{LETTER_SIGNATURE}}</div>
+
+<div class="letter-approver">{{LETTER_APPROVER}}</div>
+
+<div class="letter-person">{{LETTER_PERSON}}</div>
+
+<div class="letter-footer">{{LETTER_FOOTER}}</div>
+</div>
+
+]]></pdf>
+  </letter>
+</ajax-response>

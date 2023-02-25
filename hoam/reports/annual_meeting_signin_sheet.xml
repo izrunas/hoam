@@ -1,0 +1,79 @@
+<?xml version='1.0' ?>
+
+<!--
+ * This file is part of HOAM, copyright (C) 2002-2020 Robert Butler
+ *
+ * HOAM is free software; you can redistribute it and/or modify it under the
+ * terms of the GNU Affero General Public License as published by the Free
+ * Software Foundation; either version 3 of the License, or (at your option)
+ * any later version.
+ *
+ * HOAM is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with HOAM; if not, see http://www.gnu.org/licenses or write to the
+ * Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+ * 02110-1301
+ *
+ * Questions specific to HOAM should be directed to ARP Realty. Please see
+ * the HOAM web site at http://hoam.arprs.com/
+ *
+ * Some portions of HOAM incorporate ideas and/or code from other sources, and
+ * those portions are explicitly mentioned and attributed in the relevant
+ * section of HOAM source code. Questions about that code should be directed to
+ * the original authors.
+ *
+ *-->
+
+<ajax-response>
+  <style><![CDATA[
+    #fillme h1 { font-weight: bold; font-variant: small-caps; page-break-before: always; text-align: center; text-transform: capitalize; }
+    #fillme .homeowner { font-size: 90%; }
+    #fillme .street_address { font-size: 90%; text-align: center; }
+    #fillme .signature { border-bottom: 2px solid black; }
+  ]]></style>
+  <report>
+    <name>Homeowner Sign-in Sheet For Annual Meeting</name>
+    <php><![CDATA[
+    $budget_class = new HOAM_budget ('budget');
+    $homeowner_class = new HOAM_homeowner ('homeowners');
+    $lot_class = new HOAM_lot ('lots');
+    
+    include (HOAM_PATH_FUNCTION . 'homeowner.php');
+	$street_list = $lot_class -> listStreets ();
+	$HTML = '';
+	foreach ($street_list as $street) {
+	$HTML .= '<h1>' . $street . '</h1>';
+	$HTML .= '<table>';
+	$HTML .= '<caption>Please locate your name and residence on the below list, and sign on the marked line.<br />If you need to make changes to the information listed, please cross out the incorrect portion and write your updates.</caption>';
+	$HTML .= '<colgroup>';
+	$HTML .= '<col width="20%" />';
+	$HTML .= '<col width="30%" />';
+	$HTML .= '<col width="50%" />';
+	$HTML .= '</colgroup>';
+	$HTML .= '<thead>';
+	$HTML .= '<tr><th>Street Address</th><th>Homeowner</th><th>Signature</th></tr>';
+	$HTML .= '</thead>';
+	$HTML .= '<tfoot>';
+	$HTML .= '<tr><th>Street Address</th><th>Homeowner</th><th>Signature</th></tr>';
+	$HTML .= '</tfoot>';
+	$HTML .= '<tbody class="lot_signature_list">';
+	$lot_list = $lot_class -> listByStreet ($street);
+	foreach ($lot_list as $lot) {
+		$HTML .= '<tr>';
+		$HTML .= '<td class="street_address">' . HOAM_returnAddress ($lot) . '</td>';
+        $current_owner = $homeowner_class -> returnCurrentOwner ($lot);
+		$HTML .= '<td class="homeowner">' . HOAM_homeownerReturnMailingAddress ($current_owner) . '</td>';
+		$HTML .= '<td class="signature">&nbsp;</td>';
+		$HTML .= '</tr>';
+	}
+	$HTML .= '</tbody>';
+	$HTML .= '</table>';
+	}
+	echo $HTML;
+    ]]></php>
+  </report>
+</ajax-response>

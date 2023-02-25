@@ -1,0 +1,102 @@
+<?xml version="1.0" ?>
+
+<!--
+ * This file is part of HOAM, copyright (C) 2002-2020 Robert Butler
+ *
+ * HOAM is free software; you can redistribute it and/or modify it under the
+ * terms of the GNU Affero General Public License as published by the Free
+ * Software Foundation; either version 3 of the License, or (at your option)
+ * any later version.
+ *
+ * HOAM is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with HOAM; if not, see http://www.gnu.org/licenses or write to the
+ * Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+ * 02110-1301
+ *
+ * Questions specific to HOAM should be directed to ARP Realty. Please see
+ * the HOAM web site at http://hoam.arprs.com/
+ *
+ * Some portions of HOAM incorporate ideas and/or code from other sources, and
+ * those portions are explicitly mentioned and attributed in the relevant
+ * section of HOAM source code. Questions about that code should be directed to
+ * the original authors.
+ *
+ *-->
+
+<ajax-response>
+  <letter>
+    <name>Architecture Change Request - Received</name>
+    <require_delivery_confirmation>0</require_delivery_confirmation>
+    <require_delivery_certified>0</require_delivery_certified>
+    <suggest_delivery_confirmation>0</suggest_delivery_confirmation>
+    <suggest_delivery_certified>0</suggest_delivery_certified>
+    <content><![CDATA[
+      <table>
+        <tr>
+          <td>{{ORG_ADDRESS}}<br />{{ORG_PHONE}}</td>
+          <td style="text-align: right">{{DATE}}</td>
+        </tr>
+      </table>
+      <br />
+      <br />
+      Property: {{HOMEOWNER_RESIDENCE}}<br />
+      Re: {{LETTER_TOPIC}}<br />
+      <br />
+      <br />
+      {{HOMEOWNER_MAILING}}<br />
+      <br />
+      <br />
+      Dear {{HOMEOWNER_NAME}},<br />
+
+      <p style="text-align: justify">The Association has received your Architecture Change Request Form and will submit it to the Architecture Committee which will convene a meeting for review, which normally takes 10-14 days. After reviewing, the Committee will submit its recommendation to the Board of Directors for final review. You should expect to receive a final answer within 14-21 days.</p>
+      <div class="letter-specific"></div>
+      <p style="text-align: justify">Please note, you may still need to receive approval from the City or County depending on the nature of the work being performed.</p>
+      <p style="text-align: justify">If you have any questions concerning your account, please contact an agent of the Association at the above address.</p>
+
+      <br />
+      <br />
+      {{LETTER_SIGNATURE}}<br />
+      <br />
+      <br />
+      {{LETTER_APPROVER}}<br />
+      {{LETTER_PERSON}}
+ ]]></content>
+    <pdf><![CDATA[
+      <table>
+        <tr>
+          <td>{{ORG_ADDRESS}}<br />{{ORG_PHONE}}</td>
+          <td style="text-align: right">{{DATE}}</td>
+        </tr>
+      </table>
+      <br />
+      <br />
+      Property: {{HOMEOWNER_RESIDENCE}}<br />
+      Re: {{LETTER_TOPIC}}<br />
+      <br />
+      <br />
+      {{HOMEOWNER_MAILING}}<br />
+      <br />
+      <br />
+      Dear {{HOMEOWNER_NAME}},<br />
+
+      <p style="text-align: justify">The Association has received your Architecture Change Request Form and will submit it to the Architecture Committee which will convene a meeting for review, which normally takes 10-14 days. After reviewing, the Committee will submit its recommendation to the Board of Directors for final review. You should expect to receive a final answer within 14-21 days.</p>
+      <div class="letter-specific"></div>
+      <p style="text-align: justify">Please note, you may still need to receive approval from the City or County depending on the nature of the work being performed.</p>
+      <p style="text-align: justify">If you have any questions concerning your account, please contact an agent of the Association at the above address.</p>
+
+      <br />
+      <br />
+      {{LETTER_SIGNATURE}}<br />
+      <br />
+      <br />
+      {{LETTER_APPROVER}}<br />
+      {{LETTER_PERSON}}
+    ]]></pdf>
+  </letter>
+</ajax-response>
+
